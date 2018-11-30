@@ -15,6 +15,11 @@ class CreateAirplanesTable extends Migration
     {
         Schema::create('airplanes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 30);
+            $table->string('code', 10);
+
+            //Llave foranea de vuelo
+
             $table->timestamps();
         });
     }
