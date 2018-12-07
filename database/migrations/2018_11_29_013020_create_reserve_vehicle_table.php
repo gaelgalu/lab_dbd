@@ -16,6 +16,14 @@ class CreateReserveVehicleTable extends Migration
         Schema::create('reserve_vehicle', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+
+            //Foreigns keys from reserve and vehicle
+
+            $table->integer('vehicle_id');
+            $table->integer('reserve_id');
+
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+            $table->foreign('reserve_id')->references('id')->on('reserves')->onDelete('cascade');
         });
     }
 

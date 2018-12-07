@@ -15,6 +15,15 @@ class CreateVehicleSuppliersTable extends Migration
     {
         Schema::create('vehicle_suppliers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 25);
+            $table->string('email', 50);
+            $table->integer('phoneNumber');
+
+            //Foreign key from adresses
+
+            $table->unsignedInteger('adresses_id');
+            $table->foreign('adresses_id')->references('id')->on('adresses')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

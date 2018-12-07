@@ -15,6 +15,14 @@ class CreateReserveRoomTable extends Migration
     {
         Schema::create('reserve_room', function (Blueprint $table) {
             $table->increments('id');
+
+            //Foreign keys from reserve and room
+            $table->unsignedInteger('reserves_id');
+            $table->unsignedInteger('rooms_id');
+
+            $table->foreign('reserves_id')->references('id')->on('reserves')->onDelete('cascade');
+            $table->foreign('rooms_id')->references('id')->on('rooms')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

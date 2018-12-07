@@ -15,6 +15,15 @@ class CreateActivityProvidersTable extends Migration
     {
         Schema::create('activity_providers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 40);
+            $table->string('email', 50);
+            $table->integer('phone');
+
+            // Foreign key from adresses
+
+            $table->unsignedInteger('adresses_id');
+            $table->foreign('adresses_id')->references('id')->on('adresses')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

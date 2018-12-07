@@ -15,6 +15,15 @@ class CreateReserveActivityTable extends Migration
     {
         Schema::create('reserve_activity', function (Blueprint $table) {
             $table->increments('id');
+
+            //Foreign key from reserve and activity tables
+
+            $table->unsignedInteger('reserve_id');
+            $table->unsignedInteger('activity_id');
+
+            $table->foreign('reserve_id')->references('id')->on('reserves')->onDelete('cascade');
+            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

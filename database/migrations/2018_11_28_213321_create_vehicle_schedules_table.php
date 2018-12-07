@@ -15,6 +15,14 @@ class CreateVehicleSchedulesTable extends Migration
     {
         Schema::create('vehicle_schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->timestamp('startDate');
+            $table->timestamp('endDate');
+            
+            //Foreign key from vehicle
+
+            $table->unsignedInteger('vehicle_id');
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

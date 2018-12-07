@@ -15,6 +15,13 @@ class CreateRoomSchedulesTable extends Migration
     {
         Schema::create('room_schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->timestamp('startDate');
+            $table->timestamp('endDate');
+
+            //Foreign key from rooms
+            $table->unsignedInteger('rooms_id');
+            $table->foreign('rooms_id')->references('id')->on('rooms')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
