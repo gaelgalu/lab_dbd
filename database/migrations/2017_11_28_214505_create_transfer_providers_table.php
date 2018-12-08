@@ -19,6 +19,10 @@ class CreateTransferProvidersTable extends Migration
             $table->integer('telephone');
             $table->string('mail', 50);
             $table->timestamps();
+
+            //Foreign key
+            $table->unsignedInteger('adress_id');
+            $table->foreign('adress_id')->references('id')->on('adresses')->onDelete('cascade');
         });
     }
 
