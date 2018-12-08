@@ -15,6 +15,10 @@ class CreateReservesTable extends Migration
     {
         Schema::create('reserves', function (Blueprint $table) {
             $table->increments('id');
+            $table->timestamp('date');
+            $table->string('product', 50);
+            $table->integer('amount');
+            $table->decimal('price',20,2);
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAirportsTable extends Migration
+class CreateTransferScheduleAdressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateAirportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('airports', function (Blueprint $table) {
+        Schema::create('transfer_schedule_adresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50);
-            $table->integer('telephone');
-            $table->string('mail', 50);
+            $table->boolean('type'); // departure or return (true o false)
             $table->timestamps();
 
-            //Foreign key.
-
+            //Foreign keys
             $table->unsignedInteger('adress_id');
             $table->foreign('adress_id')->references('id')->on('adresses')->onDelete('cascade');
+            $table->unsignedInteger('transfer_schedule_id');
+            $table->foreign('transfer_schedule_id')->references('id')->on('transfer_schedules')->onDelete('cascade');
         });
     }
 
@@ -34,6 +33,6 @@ class CreateAirportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('airports');
+        Schema::dropIfExists('transfer_schedule_adresses');
     }
 }

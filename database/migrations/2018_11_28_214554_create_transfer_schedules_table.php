@@ -15,7 +15,13 @@ class CreateTransferSchedulesTable extends Migration
     {
         Schema::create('transfer_schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->timestamp('startDate');
+            $table->timestamp('endDate');
             $table->timestamps();
+
+            //Foreign keys
+            $table->unsignedInteger('transfer_id');
+            $table->foreign('transfer_id')->references('id')->on('transfers')->onDelete('cascade');
         });
     }
 

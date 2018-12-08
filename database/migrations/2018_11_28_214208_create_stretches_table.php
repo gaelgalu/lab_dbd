@@ -15,6 +15,12 @@ class CreateStretchesTable extends Migration
     {
         Schema::create('stretches', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('origin', 60);
+            $table->string('destiny', 60);
+            $table->string('airline', 15);
+            $table->integer('airplane');
+            $table->integer('platform');
+            $table->timestamp('riseTime');
             $table->timestamps();
         });
     }

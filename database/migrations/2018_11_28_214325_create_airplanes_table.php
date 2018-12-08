@@ -17,10 +17,11 @@ class CreateAirplanesTable extends Migration
             $table->increments('id');
             $table->string('name', 30);
             $table->string('code', 10);
-
-            //Llave foranea de vuelo
-
             $table->timestamps();
+
+            //Foreign key.
+            $table->unsignedInteger('flight_id');
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
         });
     }
 

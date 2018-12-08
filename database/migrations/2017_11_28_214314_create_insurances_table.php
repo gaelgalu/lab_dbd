@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePackagesTable extends Migration
+class CreateInsurancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreatePackagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('packages', function (Blueprint $table) {
+        Schema::create('insurances', function (Blueprint $table) {
             $table->increments('id');
+            $table->decimal('price',20,2);
+            $table->text('description');
+            $table->boolean('availability');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreatePackagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('insurances');
     }
 }

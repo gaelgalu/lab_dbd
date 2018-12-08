@@ -15,13 +15,16 @@ class CreateFlightsTable extends Migration
     {
         Schema::create('flights', function (Blueprint $table) {
             $table->increments('id');
-            $table->money('price');
-            $table->timestamps('startDate');
-            $table->timestamps('endDate');
+            $table->decimal('price',20,2);
+            $table->timestamp('startDate');
+            $table->timestamp('endDate');
             $table->boolean('availability');
-
-            //llave foranea de aeropuerto, reserva, seguro y tramo.
             $table->timestamps();
+
+            //Foreign key.
+            $table->unsignedInteger('insurance_id');
+            $table->foreign('insurance_id')->references('id')->on('insurances')->onDelete('cascade');
+
         });
     }
 

@@ -15,6 +15,9 @@ class CreateTransferProvidersTable extends Migration
     {
         Schema::create('transfer_providers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 30);
+            $table->integer('telephone');
+            $table->string('mail', 50);
             $table->timestamps();
         });
     }
