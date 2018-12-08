@@ -15,7 +15,7 @@ class CreateFlightsTable extends Migration
     {
         Schema::create('flights', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('price',20,2);
+            $table->decimal('price', 20, 2);
             $table->timestamp('startDate');
             $table->timestamp('endDate');
             $table->boolean('availability');

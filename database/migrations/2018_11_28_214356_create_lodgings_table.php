@@ -15,6 +15,18 @@ class CreateLodgingsTable extends Migration
     {
         Schema::create('lodgings', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 30);
+            $table->string('email', 50);
+            $table->integer('phoneNumber');
+            $table->smallInteger('evaluation');
+            $table->smallInteger('numberOfRooms');
+            $table->text('description');
+
+            //Foreign key from adresses
+
+            $table->unsignedInteger('adresses_id');
+            $table->foreign('adresses_id')->references('id')->on('adresses')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
