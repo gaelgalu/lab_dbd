@@ -11,6 +11,6 @@ class TransferProviderTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\TransferProvider', 5)->create();
     }
 }

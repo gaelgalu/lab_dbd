@@ -11,6 +11,6 @@ class VehicleSupplierTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\VehicleSupplier', 5)->create();
     }
 }

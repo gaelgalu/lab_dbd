@@ -15,7 +15,7 @@ class CreateVehicleSuppliersTable extends Migration
     {
         Schema::create('vehicle_suppliers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 25);
+            $table->string('name');
             $table->string('email', 50);
             $table->integer('phoneNumber');
 
