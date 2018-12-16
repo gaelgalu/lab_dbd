@@ -11,6 +11,6 @@ class AirportTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+		factory('App\Airport', 5)->create();
     }
 }

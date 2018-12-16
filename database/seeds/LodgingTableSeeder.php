@@ -11,6 +11,6 @@ class LodgingTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\Lodging', 5)->create();
     }
 }

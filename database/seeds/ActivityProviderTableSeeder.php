@@ -11,6 +11,6 @@ class ActivityProviderTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\ActivityProvider', 5)->create();
     }
 }

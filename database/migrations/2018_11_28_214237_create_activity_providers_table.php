@@ -15,7 +15,7 @@ class CreateActivityProvidersTable extends Migration
     {
         Schema::create('activity_providers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 40);
+            $table->string('name');
             $table->string('email', 50);
             $table->integer('phone');
 

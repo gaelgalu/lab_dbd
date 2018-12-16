@@ -15,7 +15,7 @@ class CreateLodgingsTable extends Migration
     {
         Schema::create('lodgings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 30);
+            $table->string('name', 50);
             $table->string('email', 50);
             $table->integer('phoneNumber');
             $table->smallInteger('evaluation');

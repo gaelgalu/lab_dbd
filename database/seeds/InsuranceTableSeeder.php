@@ -11,6 +11,6 @@ class InsuranceTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+    	factory('App\Insurance', 5)->create();
     }
 }

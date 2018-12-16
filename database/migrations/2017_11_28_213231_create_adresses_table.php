@@ -15,16 +15,17 @@ class CreateAdressesTable extends Migration
     {
         Schema::create('adresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('country', 30);
-            $table->string('city', 20);
+            $table->string('country', 50);
+            $table->string('city', 50);
             $table->string('street', 25);
             $table->integer('number');
-            $table->timestamps();
 
             //Foreign key from transfer providers table
 
             $table->unsignedInteger('transferProviders_id');
             $table->foreign('transferProviders_id')->references('id')->on('transfer_providers')->onDelete('cascade');
+            
+            $table->timestamps();
         });
     }
 

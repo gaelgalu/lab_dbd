@@ -16,6 +16,14 @@ class CreatePackageTransferTable extends Migration
         Schema::create('package_transfer', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+
+            //Foreign keys from package and transfer
+
+            $table->unsignedInteger('package_id');
+            $table->unsignedInteger('transfer_id');
+
+            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+            $table->foreign('transfer_id')->references('id')->on('transfers')->onDelete('cascade');
         });
     }
 

@@ -11,7 +11,7 @@ $factory->define(Vehicle::class, function (Faker $faker) {
     return [
         'price' => rand(5000, 15000),
         'date' => $faker->dateTime($max = 'now'),
-        'availability' => $value = (bool)random_int(0, 1),
+        'availability' => (bool)random_int(0, 1),
         'capacity' => rand(1,10),
         'patent' =>  str_random(4) . rand(10, 99),
         'brand' => $brands[array_rand($brands)],

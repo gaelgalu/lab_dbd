@@ -16,6 +16,14 @@ class CreatePackageFlightTable extends Migration
         Schema::create('package_flight', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+
+            //Foreign keys from package and flights
+
+            $table->unsignedInteger('package_id');
+            $table->unsignedInteger('flight_id');
+
+            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
         });
     }
 
