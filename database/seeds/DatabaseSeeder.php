@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AirportTableSeeder::class);
         $this->call(LodgingTableSeeder::class);
         $this->call(PackageTableSeeder::class);
-
+        $this->call(RoomTableSeeder::class);
+        $this->call(SeatTableSeeder::class);
+        $this->call(StretchTableSeeder::class);
     }
 }

@@ -11,6 +11,6 @@ class StretchTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\Stretch', 5)->create();
     }
 }

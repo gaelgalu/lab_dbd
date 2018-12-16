@@ -15,16 +15,16 @@ class CreateSeatsTable extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code', 10);
+            $table->integer('seatNumber');
             $table->boolean('availability');
             $table->boolean('checkIn');
-            $table->integer('type');
-            $table->timestamps();
+            $table->string('type');
 
             //Foreign key.
             $table->unsignedInteger('airplane_id');
             $table->foreign('airplane_id')->references('id')->on('airplanes')->onDelete('cascade');
 
+            $table->timestamps();
 
             
         });
