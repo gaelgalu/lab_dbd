@@ -20,11 +20,6 @@ class CreateFlightsTable extends Migration
             $table->timestamp('endDate');
             $table->boolean('availability');
             $table->timestamps();
-
-            //Foreign key.
-            $table->unsignedInteger('insurance_id');
-            $table->foreign('insurance_id')->references('id')->on('insurances')->onDelete('cascade');
-
         });
     }
 
