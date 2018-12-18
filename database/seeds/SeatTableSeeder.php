@@ -11,6 +11,6 @@ class SeatTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\Seat', 5)->create();
     }
 }

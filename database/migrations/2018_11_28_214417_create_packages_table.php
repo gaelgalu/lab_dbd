@@ -22,16 +22,16 @@ class CreatePackagesTable extends Migration
             $table->timestamps();
 
             //Foregin keys
-            $table->unsignedInteger('vehicle_id');
-            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
-            $table->unsignedInteger('room_id');
-            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
-            $table->unsignedInteger('activity_id');
-            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
-            $table->unsignedInteger('flight_id');
-            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
-            $table->unsignedInteger('transfer_id');
-            $table->foreign('transfer_id')->references('id')->on('transfers')->onDelete('cascade');
+            // $table->unsignedInteger('vehicle_id');
+            // $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
+            // $table->unsignedInteger('room_id');
+            // $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            // $table->unsignedInteger('activity_id');
+            // $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
+            // $table->unsignedInteger('flight_id');
+            // $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
+            // $table->unsignedInteger('transfer_id');
+            // $table->foreign('transfer_id')->references('id')->on('transfers')->onDelete('cascade');
         });
     }
 

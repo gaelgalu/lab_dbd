@@ -16,6 +16,14 @@ class CreateReservePackageTable extends Migration
         Schema::create('reserve_package', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+
+            //Foreign keys from reserve and package
+
+            $table->unsignedInteger('reserve_id');
+            $table->unsignedInteger('package_id');
+
+            $table->foreign('reserve_id')->references('id')->on('reserves')->onDelete('cascade');
+            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
         });
     }
 

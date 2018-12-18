@@ -11,6 +11,6 @@ class AirplaneTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\Airplane', 5)->create();
     }
 }

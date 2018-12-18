@@ -16,6 +16,14 @@ class CreateReserveTransferTable extends Migration
         Schema::create('reserve_transfer', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+
+            //Foreign keys from reserve and transfer
+
+            $table->unsignedInteger('reserve_id');
+            $table->unsignedInteger('transfer_id');
+
+            $table->foreign('reserve_id')->references('id')->on('reserves')->onDelete('cascade');
+            $table->foreign('transfer_id')->references('id')->on('transfers')->onDelete('cascade');
         });
     }
 

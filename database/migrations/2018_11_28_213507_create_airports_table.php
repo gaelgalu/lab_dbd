@@ -18,12 +18,13 @@ class CreateAirportsTable extends Migration
             $table->string('name', 50);
             $table->integer('telephone');
             $table->string('mail', 50);
-            $table->timestamps();
 
             //Foreign key.
 
             $table->unsignedInteger('adress_id');
             $table->foreign('adress_id')->references('id')->on('adresses')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
