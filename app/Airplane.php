@@ -13,8 +13,8 @@ class Airplane extends Model
         return $this->hasMany(Seat::class);
     }
 
-    public function flight()
+    public function stretch()
     {
-        return $this->belongsTo(Flight::class);
+        return $this->belongsTo(Stretch::class);
     }
 }

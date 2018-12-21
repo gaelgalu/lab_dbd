@@ -17,11 +17,11 @@ class CreateAirplanesTable extends Migration
             $table->increments('id');
             $table->string('name', 30);
             $table->string('code', 10);
-            $table->timestamps();
 
-            //Foreign key.
-            $table->unsignedInteger('flight_id');
-            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
+            //Foreign key from stretches
+            $table->unsignedInteger('stretches_id');
+            $table->foreign('stretches_id')->references('id')->on('stretches')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 use App\Seat;
 
 $factory->define(Seat::class, function (Faker $faker) {
-	$airplanes = DB::table('vehicle_suppliers')->select('id')->get();
+	$airplanes = DB::table('airplanes')->select('id')->get();
 	$typesOfSeats = ['Economy', 'Premium Economy', 'Premium Business'];
 
     return [

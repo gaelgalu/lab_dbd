@@ -17,10 +17,10 @@ class CreateStretchesTable extends Migration
             $table->increments('id');
             $table->string('origin', 60);
             $table->string('destiny', 60);
-            $table->string('airline', 15);
-            $table->integer('airplane');
+            $table->string('airline'); //Maybe it doesn't need to be, because it depends of the airplane.
             $table->integer('platform');
             $table->timestamp('riseTime');
+
             $table->timestamps();
         });
     }

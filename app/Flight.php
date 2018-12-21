@@ -8,11 +8,6 @@ class Flight extends Model
 {
     protected $fillable = ['price', 'startDate', 'endDate', 'availability'];
 
-    public function airplanes()
-    {
-        return $this->hasMany(Airplane::class);
-    }
-
     public function airports()
     {
         return $this->belongsToMany(Airport::class);
