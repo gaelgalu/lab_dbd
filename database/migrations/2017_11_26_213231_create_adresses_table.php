@@ -19,11 +19,6 @@ class CreateAdressesTable extends Migration
             $table->string('city', 80);
             $table->string('street', 25);
             $table->integer('number');
-
-            //Foreign key from transfer providers table
-
-            $table->unsignedInteger('transferProviders_id');
-            $table->foreign('transferProviders_id')->references('id')->on('transfer_providers')->onDelete('cascade');
             
             $table->timestamps();
         });

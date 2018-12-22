@@ -15,6 +15,6 @@ class Stretch extends Model
 
     public function airplanes()
     {
-    	return $this->hasMany(Airplane::class);
+    	return $this->belongsToMany(Airplane::class);
     }
 }

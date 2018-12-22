@@ -11,6 +11,6 @@ class VehicleScheduleTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\VehicleSchedule', 5)->create();
     }
 }

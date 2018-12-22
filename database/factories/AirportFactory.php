@@ -8,7 +8,7 @@ $factory->define(Airport::class, function (Faker $faker) {
 
     return [
     	'name' => $faker->unique()->company,
-    	'telephone' => rand(11111111, 99999999),
+    	'telephone' => $faker->tollFreePhoneNumber,
     	'mail' => $faker->unique()->safeEmail,
     	'adress_id' => $adresses->random()->id
     ];

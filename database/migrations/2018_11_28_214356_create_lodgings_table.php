@@ -17,7 +17,7 @@ class CreateLodgingsTable extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->string('email', 50);
-            $table->integer('phoneNumber');
+            $table->string('phoneNumber');
             $table->smallInteger('evaluation');
             $table->smallInteger('numberOfRooms');
             $table->text('description');

@@ -19,6 +19,12 @@ class CreateReservesTable extends Migration
             $table->string('product', 50);
             $table->integer('amount');
             $table->decimal('price',20,2);
+
+            //Foreign key from user
+
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

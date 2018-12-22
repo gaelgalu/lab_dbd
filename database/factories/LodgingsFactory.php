@@ -9,7 +9,7 @@ $factory->define(Lodging::class, function (Faker $faker) {
     return [
     	'name' => $faker->unique()->company,
     	'email' => $faker->unique()->safeEmail,
-    	'phoneNumber' => rand(11111111, 99999999),
+    	'phoneNumber' => $faker->tollFreePhoneNumber,
     	'evaluation' => rand(1, 5),
     	'numberOfRooms' => rand(10, 50),
     	'description' => $faker->realText($faker->numberBetween(10,20)),

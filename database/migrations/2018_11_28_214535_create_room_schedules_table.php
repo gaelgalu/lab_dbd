@@ -19,8 +19,8 @@ class CreateRoomSchedulesTable extends Migration
             $table->timestamp('endDate');
 
             //Foreign key from rooms
-            $table->unsignedInteger('rooms_id');
-            $table->foreign('rooms_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->unsignedInteger('room_id');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
 
             $table->timestamps();
         });

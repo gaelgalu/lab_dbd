@@ -16,7 +16,7 @@ class CreateAirportsTable extends Migration
         Schema::create('airports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->integer('telephone');
+            $table->string('telephone');
             $table->string('mail', 50);
 
             //Foreign key.

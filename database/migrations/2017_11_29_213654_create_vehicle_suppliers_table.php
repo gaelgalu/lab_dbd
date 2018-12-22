@@ -17,7 +17,7 @@ class CreateVehicleSuppliersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email', 50);
-            $table->integer('phoneNumber');
+            $table->string('phoneNumber');
 
             //Foreign key from adresses
 

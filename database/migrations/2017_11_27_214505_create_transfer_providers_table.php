@@ -16,8 +16,13 @@ class CreateTransferProvidersTable extends Migration
         Schema::create('transfer_providers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('telephone');
+            $table->string('telephone');
             $table->string('mail', 50);
+
+            //Foreign key from adress 
+            $table->unsignedInteger('adresses_id');
+            $table->foreign('adresses_id')->references('id')->on('adresses')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

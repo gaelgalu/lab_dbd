@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ReserveTableSeeder extends Seeder
+class RoomScheduleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class ReserveTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Reserve', 5)->create();
+        factory('App\RoomSchedule', 5)->create();
     }
 }

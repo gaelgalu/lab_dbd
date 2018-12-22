@@ -11,6 +11,6 @@ class TransferScheduleTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('App\TransferSchedule', 5)->create();
     }
 }

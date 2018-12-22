@@ -9,7 +9,7 @@ $factory->define(ActivityProvider::class, function (Faker $faker) {
     return [
     	'name' => $faker->unique()->company,
     	'email' => $faker->unique()->safeEmail,
-    	'phone' => rand(11111111, 99999999),
+    	'phone' => $faker->tollFreePhoneNumber,
     	'adresses_id' => $adresses->random()->id
     ];
 });

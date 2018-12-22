@@ -4,10 +4,12 @@ use Faker\Generator as Faker;
 use App\TransferProvider;
 
 $factory->define(TransferProvider::class, function (Faker $faker) {
-
+	$adresses = DB::table('adresses')->select('id')->get();
+	
     return [
         'name' => $faker->unique()->company,
+        'telephone' => $faker->tollFreePhoneNumber,
         'mail' => $faker->unique()->safeEmail,
-        'telephone' => rand(11111111, 99999999)
+        'adresses_id' => $adresses->random()->id
     ];
 });
