@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Activity;
 
 class ActivityController extends Controller
 {
@@ -13,7 +14,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        return Activity::all();
     }
 
     /**
@@ -23,7 +24,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +35,9 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new = Activity::create($request->all());
+
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +48,7 @@ class ActivityController extends Controller
      */
     public function show($id)
     {
-        //
+        return Activity::find($id);
     }
 
     /**
@@ -56,7 +59,7 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +71,10 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Activity::findOrFail($id);
+        $old->update($request->all());
+
+        return $old;
     }
 
     /**
@@ -79,6 +85,9 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = Article::findOrFail($id);
+        $old->delete();
+
+        return 204;
     }
 }
