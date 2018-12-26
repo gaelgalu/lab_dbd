@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Adress;
 
 class AdressController extends Controller
 {
@@ -13,7 +14,7 @@ class AdressController extends Controller
      */
     public function index()
     {
-        //
+        return Adress::all();
     }
 
     /**
@@ -34,7 +35,19 @@ class AdressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $adress = new Adress();
+        // $adress->country = $request->country;
+        // $adress->city = $request->city;
+        // $adress->street = $request->street;
+        // $adress->number = $request->number;
+
+        // $adress->save();
+
+        // return 201;
+
+        $new = Adress::create($request->all());
+
+        return response()->json($new, 201);
     }
 
     /**
@@ -68,7 +81,11 @@ class AdressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Adress::findOrFail($id);
+        $update = $request->all();
+        $old->update($update);
+
+        return $old;
     }
 
     /**
@@ -79,6 +96,9 @@ class AdressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = Adress::findOrFail($id);
+        $old->delete();
+
+        return 204;
     }
 }
