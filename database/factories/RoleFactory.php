@@ -4,9 +4,11 @@ use Faker\Generator as Faker;
 use App\Role;
 
 $factory->define(Role::class, function (Faker $faker) {
-	$roles = ['User', 'Admin'];
+	
+	$faker = app('Faker');
+
     return [
-        'name' => $roles[array_rand($roles)],
+        'name' => $faker->unique()->role,
         'description' => $faker->realText($faker->numberBetween(10,20))
     ];
 });
