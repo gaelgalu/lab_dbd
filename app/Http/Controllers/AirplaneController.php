@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Airplane;
 
 class AirplaneController extends Controller
 {
@@ -13,7 +14,7 @@ class AirplaneController extends Controller
      */
     public function index()
     {
-        //
+        return Airplane::all();
     }
 
     /**
@@ -34,7 +35,9 @@ class AirplaneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new = Airplane::create($request->all());
+
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +48,7 @@ class AirplaneController extends Controller
      */
     public function show($id)
     {
-        //
+        return Airplane::findOrFail($id);
     }
 
     /**
@@ -68,7 +71,11 @@ class AirplaneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Airplane::findOrFail($id);
+        $update = $request->all();
+        $old->update($update);
+
+        return $old;
     }
 
     /**
@@ -79,6 +86,9 @@ class AirplaneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = findOrFail($id);
+        $old->delete();
+
+        return 204;
     }
 }

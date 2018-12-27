@@ -58,7 +58,7 @@ class AdressController extends Controller
      */
     public function show($id)
     {
-        //
+        return Adress::findOrFail($id);
     }
 
     /**
