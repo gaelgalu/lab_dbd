@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS Roles (
     id int  NOT NULL,
     name varchar(15)  NOT NULL,
     description text  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT Roles_pk PRIMARY KEY (id)
 );
 
@@ -56,6 +58,8 @@ CREATE TABLE IF NOT EXISTS User_role (
     id int  NOT NULL,
     role_id int  NOT NULL,
     user_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,  
     CONSTRAINT User_role_pk PRIMARY KEY (id)
 );
 
@@ -74,6 +78,10 @@ CREATE TABLE IF NOT EXISTS Users (
     numberOfDocument int  NOT NULL,
     points int  NOT NULL,
     money decimal(20,2)  NOT NULL,
+    email_verified_at timestamp,
+    remember_token varchar(255),
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT id PRIMARY KEY (id)
 );
 
@@ -90,6 +98,8 @@ CREATE TABLE IF NOT EXISTS activities (
     kidsCapacity int  NOT NULL,
     availability boolean  NOT NULL,
     activity_providers_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT activities_pk PRIMARY KEY (id)
 );
 
@@ -100,6 +110,8 @@ CREATE TABLE IF NOT EXISTS activity_providers (
     email varchar(50)  NOT NULL,
     phone varchar(80)  NOT NULL,
     adresses_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT activity_providers_pk PRIMARY KEY (id)
 );
 
@@ -109,6 +121,10 @@ CREATE TABLE IF NOT EXISTS adresses (
     country varchar(80)  NOT NULL,
     city varchar(50)  NOT NULL,
     street varchar(80)  NOT NULL,
+    number int NOT NULL,
+
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT adresses_pk PRIMARY KEY (id)
 );
 
@@ -117,6 +133,8 @@ CREATE TABLE IF NOT EXISTS airplane_stretch (
     id int  NOT NULL,
     stretches_id int  NOT NULL,
     airplanes_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT airplane_stretch_pk PRIMARY KEY (id)
 );
 
@@ -125,6 +143,8 @@ CREATE TABLE IF NOT EXISTS airplanes (
     id int  NOT NULL,
     name varchar(30)  NOT NULL,
     code varchar(10)  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT airplanes_pk PRIMARY KEY (id)
 );
 
@@ -135,6 +155,8 @@ CREATE TABLE IF NOT EXISTS airports (
     telephone varchar(20)  NOT NULL,
     mail varchar(50)  NOT NULL,
     adresses_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT airports_pk PRIMARY KEY (id)
 );
 
@@ -143,6 +165,8 @@ CREATE TABLE IF NOT EXISTS flight_airport (
     id int  NOT NULL,
     airports_id int  NOT NULL,
     flights_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT flight_airport_pk PRIMARY KEY (id)
 );
 
@@ -151,6 +175,8 @@ CREATE TABLE IF NOT EXISTS flight_stretch (
     id int  NOT NULL,
     flights_id int  NOT NULL,
     stretches_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT flight_stretch_pk PRIMARY KEY (id)
 );
 
@@ -161,6 +187,8 @@ CREATE TABLE IF NOT EXISTS flights (
     startDate timestamp  NOT NULL,
     endDate timestamp  NOT NULL,
     availability boolean  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT flights_pk PRIMARY KEY (id)
 );
 
@@ -171,6 +199,8 @@ CREATE TABLE IF NOT EXISTS insurances (
     description text  NOT NULL,
     availability boolean  NOT NULL,
     flight_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT insurances_pk PRIMARY KEY (id)
 );
 
@@ -184,6 +214,8 @@ CREATE TABLE IF NOT EXISTS lodgings (
     numberOfRooms smallint  NOT NULL,
     description text  NOT NULL,
     adresses_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT lodgings_pk PRIMARY KEY (id)
 );
 
@@ -192,6 +224,8 @@ CREATE TABLE IF NOT EXISTS package_activity (
     id int  NOT NULL,
     packages_id int  NOT NULL,
     activities_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT package_activity_pk PRIMARY KEY (id)
 );
 
@@ -200,6 +234,8 @@ CREATE TABLE IF NOT EXISTS package_flight (
     id int  NOT NULL,
     packages_id int  NOT NULL,
     flights_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT package_flight_pk PRIMARY KEY (id)
 );
 
@@ -208,6 +244,8 @@ CREATE TABLE IF NOT EXISTS package_room (
     id int  NOT NULL,
     rooms_id int  NOT NULL,
     packages_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT package_room_pk PRIMARY KEY (id)
 );
 
@@ -216,6 +254,8 @@ CREATE TABLE IF NOT EXISTS package_transfer (
     id int  NOT NULL,
     packages_id int  NOT NULL,
     transfers_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT package_transfer_pk PRIMARY KEY (id)
 );
 
@@ -224,6 +264,8 @@ CREATE TABLE IF NOT EXISTS package_vehicle (
     id int  NOT NULL,
     packages_id int  NOT NULL,
     vehicles_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT package_vehicle_pk PRIMARY KEY (id)
 );
 
@@ -234,6 +276,8 @@ CREATE TABLE IF NOT EXISTS packages (
     name varchar(50)  NOT NULL,
     discount decimal(20,2)  NOT NULL,
     description text  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT packages_pk PRIMARY KEY (id)
 );
 
@@ -244,6 +288,8 @@ CREATE TABLE IF NOT EXISTS payment_methods (
     typeOfAccount varchar(20)  NOT NULL,
     bank varchar(80)  NOT NULL,
     reserves_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT payment_methods_pk PRIMARY KEY (id)
 );
 
@@ -252,6 +298,8 @@ CREATE TABLE IF NOT EXISTS reserve_activity (
     id int  NOT NULL,
     reserves_id int  NOT NULL,
     activities_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT reserve_activity_pk PRIMARY KEY (id)
 );
 
@@ -260,6 +308,8 @@ CREATE TABLE IF NOT EXISTS reserve_flight (
     id int  NOT NULL,
     reserves_id int  NOT NULL,
     flight_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT reserve_flight_pk PRIMARY KEY (id)
 );
 
@@ -268,6 +318,8 @@ CREATE TABLE IF NOT EXISTS reserve_package (
     id int  NOT NULL,
     reserves_id int  NOT NULL,
     packages_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT reserve_package_pk PRIMARY KEY (id)
 );
 
@@ -276,6 +328,8 @@ CREATE TABLE IF NOT EXISTS reserve_room (
     id int  NOT NULL,
     reserves_id int  NOT NULL,
     rooms_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT reserve_room_pk PRIMARY KEY (id)
 );
 
@@ -284,6 +338,8 @@ CREATE TABLE IF NOT EXISTS reserve_transfer (
     id int  NOT NULL,
     reserves_id int  NOT NULL,
     transfers_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT reserve_transfer_pk PRIMARY KEY (id)
 );
 
@@ -292,6 +348,8 @@ CREATE TABLE IF NOT EXISTS reserve_vehicle (
     id int  NOT NULL,
     reserves_id int  NOT NULL,
     vehicles_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT reserve_vehicle_pk PRIMARY KEY (id)
 );
 
@@ -303,6 +361,8 @@ CREATE TABLE IF NOT EXISTS reserves (
     amount int  NOT NULL,
     price decimal(20,2)  NOT NULL,
     users_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT reserves_pk PRIMARY KEY (id)
 );
 
@@ -312,6 +372,8 @@ CREATE TABLE IF NOT EXISTS room_schedules (
     startDate timestamp  NOT NULL,
     endDate timestamp  NOT NULL,
     rooms_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT room_schedules_pk PRIMARY KEY (id)
 );
 
@@ -326,6 +388,8 @@ CREATE TABLE IF NOT EXISTS rooms (
     description text  NOT NULL,
     availability boolean  NOT NULL,
     lodgings_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT rooms_pk PRIMARY KEY (id)
 );
 
@@ -337,6 +401,8 @@ CREATE TABLE IF NOT EXISTS seats (
     checkIn boolean  NOT NULL,
     type varchar(20)  NOT NULL,
     airplanes_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT seats_pk PRIMARY KEY (id)
 );
 
@@ -347,6 +413,9 @@ CREATE TABLE IF NOT EXISTS stretches (
     destiny varchar(60)  NOT NULL,
     airline varchar(60)  NOT NULL,
     platform int  NOT NULL,
+    risetime timestamp NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT stretches_pk PRIMARY KEY (id)
 );
 
@@ -357,6 +426,8 @@ CREATE TABLE IF NOT EXISTS transfer_providers (
     telephone varchar(80)  NOT NULL,
     mail varchar(50)  NOT NULL,
     adresses_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT transfer_providers_pk PRIMARY KEY (id)
 );
 
@@ -366,6 +437,8 @@ CREATE TABLE IF NOT EXISTS transfer_schedules (
     startDate timestamp  NOT NULL,
     endDate timestamp  NOT NULL,
     transfers_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT transfer_schedules_pk PRIMARY KEY (id)
 );
 
@@ -375,6 +448,8 @@ CREATE TABLE IF NOT EXISTS transfer_schedules_adresses (
     type boolean  NOT NULL,
     transfer_schedules_id int  NOT NULL,
     adresses_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT transfer_schedules_adresses_pk PRIMARY KEY (id)
 );
 
@@ -389,6 +464,8 @@ CREATE TABLE IF NOT EXISTS transfers (
     type int  NOT NULL,
     availability boolean  NOT NULL,
     transfer_providers_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT transfers_pk PRIMARY KEY (id)
 );
 
@@ -398,6 +475,8 @@ CREATE TABLE IF NOT EXISTS vehicle_schedules (
     startDate timestamp  NOT NULL,
     endDate timestamp  NOT NULL,
     vehicles_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT vehicle_schedules_pk PRIMARY KEY (id)
 );
 
@@ -408,6 +487,8 @@ CREATE TABLE IF NOT EXISTS vehicle_suppliers (
     email varchar(50)  NOT NULL,
     phoneNumber varchar(80)  NOT NULL,
     adresses_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT vehicle_suppliers_pk PRIMARY KEY (id)
 );
 
@@ -423,6 +504,8 @@ CREATE TABLE IF NOT EXISTS vehicles (
     model varchar(25)  NOT NULL,
     description text  NOT NULL,
     vehicle_suppliers_id int  NOT NULL,
+    created_at timestamp,
+    updated_at timestamp,
     CONSTRAINT vehicles_pk PRIMARY KEY (id)
 );
 
