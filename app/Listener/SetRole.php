@@ -27,12 +27,7 @@ class SetRole
      */
     public function handle(NewUser $event)
     {
-        $user_id = $event->user->id;
-        $role_id = 1;
-
-        DB::table('user_role')->insert([
-            'user_id' => $user_id,
-            'role_id' => $role_id
-        ]);
+        $role = Role::where('name', 'User')->first();
+        $event->user->roles()->attach($role);
     }
 }

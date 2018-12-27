@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Events\NewUser;
 
 class User extends Authenticatable
 {
@@ -29,6 +30,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function($user){
+            event(new NewUser($user));
+        });
+    }
+
     public function reserves()
     {
         return $this->hasMany(Reserve::class);
@@ -36,6 +45,6 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'user_role')->withTimestamps();
     }
 }

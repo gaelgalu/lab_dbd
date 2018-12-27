@@ -15,6 +15,15 @@ class CreateAirplaneStretchTable extends Migration
     {
         Schema::create('airplane_stretch', function (Blueprint $table) {
             $table->increments('id');
+
+            //Foreigns keys from airplane and stretches
+
+            $table->unsignedInteger('airplane_id');
+            $table->unsignedInteger('stretch_id');
+
+            $table->foreign('airplane_id')->references('id')->on('airplanes')->onDelete('cascade');
+            $table->foreign('stretch_id')->references('id')->on('stretches')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
