@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ActivityProvider;
 
 class ActivityProviderController extends Controller
 {
@@ -13,7 +14,7 @@ class ActivityProviderController extends Controller
      */
     public function index()
     {
-        //
+        return ActivityProvider::all();
     }
 
     /**
@@ -23,7 +24,7 @@ class ActivityProviderController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +35,9 @@ class ActivityProviderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new = ActivityProvider::create($request->all());
+
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +48,7 @@ class ActivityProviderController extends Controller
      */
     public function show($id)
     {
-        //
+        return ActivityProvider::find($id);
     }
 
     /**
@@ -56,7 +59,7 @@ class ActivityProviderController extends Controller
      */
     public function edit($id)
     {
-        //
+        // return view
     }
 
     /**
@@ -68,7 +71,10 @@ class ActivityProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = ActivityProvider::findOrFail($id);
+        $old->update($request->all());
+
+        return $old;
     }
 
     /**
@@ -79,6 +85,9 @@ class ActivityProviderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = ActivityProvider::findOrFail($id);
+        $old->delete();
+
+        return 204;
     }
 }
