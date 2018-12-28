@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ActivityProviderTableSeeder::class);
         $this->call(ActivityTableSeeder::class);
         $this->call(FlightTableSeeder::class);
-        $this->call(InsuranceTableSeeder::class);
+        // $this->call(InsuranceTableSeeder::class);
         $this->call(StretchTableSeeder::class);
         $this->call(AirplaneTableSeeder::class);
         $this->call(AirportTableSeeder::class);

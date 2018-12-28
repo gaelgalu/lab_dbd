@@ -3,10 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Events\NewFlight;
 
 class Flight extends Model
 {
     protected $fillable = ['price', 'startDate', 'endDate', 'availability'];
+
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function($flight){
+            event(new NewFlight($flight));
+        });
+    }
 
     public function airports()
     {
