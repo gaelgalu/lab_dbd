@@ -20,8 +20,8 @@ class TransferProviderController extends Controller
     public function rulesUpdate(){
         return[
         'name' => 'string|max:30',
+        'telephone' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
         'email' => 'email|max:50',
-        'phone' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
         'adress_id' => 'numeric|min:0'
         ];
     }
