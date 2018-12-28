@@ -2,6 +2,7 @@
 
 return [
 
+    'log_max_files' => 30
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -175,6 +176,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Application Error Log views...
+         */
+        Arcanedev\LogViewer\LogViewerServiceProvider::class
 
     ],
 

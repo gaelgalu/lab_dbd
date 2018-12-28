@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Activity;
 use Validator;
+use Log;
 
 class ActivityController extends Controller
 {
@@ -44,6 +45,8 @@ class ActivityController extends Controller
      */
     public function index()
     {
+        $all = Activity::all();
+        Log::info('Index request: '.$all);
         return Activity::all();
     }
 
