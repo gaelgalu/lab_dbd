@@ -139,7 +139,7 @@ INSERT INTO "public"."airplane_stretch" ("id", "airplane_id", "stretch_id", "cre
 ('4', '4', '4', '2018-12-28 04:45:33', '2018-12-28 04:45:33'),
 ('5', '3', '5', '2018-12-28 04:45:33', '2018-12-28 04:45:33');
 
-INSERT INTO "public"."transfer_schedules_adresses" ("id", "type", "created_at", "updated_at", "adress_id", "transfer_schedule_id") VALUES ('1', 'f', '2018-12-28 04:45:33', '2018-12-28 04:45:33', '1', '4'),
+INSERT INTO "public"."transfer_schedule_adresses" ("id", "type", "created_at", "updated_at", "adress_id", "transfer_schedule_id") VALUES ('1', 'f', '2018-12-28 04:45:33', '2018-12-28 04:45:33', '1', '4'),
 ('2', 'f', '2018-12-28 04:45:33', '2018-12-28 04:45:33', '4', '2'),
 ('3', 't', '2018-12-28 04:45:33', '2018-12-28 04:45:33', '2', '1'),
 ('4', 't', '2018-12-28 04:45:33', '2018-12-28 04:45:33', '3', '3'),

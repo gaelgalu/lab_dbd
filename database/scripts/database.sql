@@ -36,7 +36,7 @@ DROP TABLE IF EXISTS seats CASCADE;
 DROP TABLE IF EXISTS stretches CASCADE;
 DROP TABLE IF EXISTS transfer_providers CASCADE;
 DROP TABLE IF EXISTS transfer_schedules CASCADE;
-DROP TABLE IF EXISTS transfer_schedules_adresses CASCADE;
+DROP TABLE IF EXISTS transfer_schedule_adresses CASCADE;
 DROP TABLE IF EXISTS transfers CASCADE;
 DROP TABLE IF EXISTS vehicle_schedules CASCADE;
 DROP TABLE IF EXISTS vehicle_suppliers CASCADE;
@@ -441,15 +441,15 @@ CREATE TABLE IF NOT EXISTS transfer_schedules (
     CONSTRAINT transfer_schedules_pk PRIMARY KEY (id)
 );
 
--- Table: transfer_schedules_adresses
-CREATE TABLE IF NOT EXISTS transfer_schedules_adresses (
+-- Table: transfer_schedule_adresses
+CREATE TABLE IF NOT EXISTS transfer_schedule_adresses (
     id int  NOT NULL,
     type boolean  NOT NULL,
     transfer_schedule_id int  NOT NULL,
     adress_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
-    CONSTRAINT transfer_schedules_adresses_pk PRIMARY KEY (id)
+    CONSTRAINT transfer_schedule_adresses_pk PRIMARY KEY (id)
 );
 
 -- Table: transfers
@@ -837,16 +837,16 @@ ALTER TABLE transfer_providers ADD CONSTRAINT transfer_providers_adresses
     INITIALLY IMMEDIATE
 ;
 
--- Reference: transfer_schedules_adresses_adresses (table: transfer_schedules_adresses)
-ALTER TABLE transfer_schedules_adresses ADD CONSTRAINT transfer_schedules_adresses_adresses
+-- Reference: transfer_schedule_adresses_adresses (table: transfer_schedule_adresses)
+ALTER TABLE transfer_schedule_adresses ADD CONSTRAINT transfer_schedule_adresses_adresses
     FOREIGN KEY (adress_id)
     REFERENCES adresses (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
--- Reference: transfer_schedules_adresses_transfer_schedules (table: transfer_schedules_adresses)
-ALTER TABLE transfer_schedules_adresses ADD CONSTRAINT transfer_schedules_adresses_transfer_schedules
+-- Reference: transfer_schedule_adresses_transfer_schedules (table: transfer_schedule_adresses)
+ALTER TABLE transfer_schedule_adresses ADD CONSTRAINT transfer_schedule_adresses_transfer_schedules
     FOREIGN KEY (transfer_schedule_id)
     REFERENCES transfer_schedules (id)  
     NOT DEFERRABLE 
