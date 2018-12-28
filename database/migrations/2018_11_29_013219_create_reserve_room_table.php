@@ -17,11 +17,11 @@ class CreateReserveRoomTable extends Migration
             $table->increments('id');
 
             //Foreign keys from reserve and room
-            $table->unsignedInteger('reserves_id');
-            $table->unsignedInteger('rooms_id');
+            $table->unsignedInteger('reserve_id');
+            $table->unsignedInteger('room_id');
 
-            $table->foreign('reserves_id')->references('id')->on('reserves')->onDelete('cascade');
-            $table->foreign('rooms_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreign('reserve_id')->references('id')->on('reserves')->onDelete('cascade');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
 
             $table->timestamps();
         });

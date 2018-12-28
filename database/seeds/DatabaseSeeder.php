@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ActivityProviderTableSeeder::class);
         $this->call(ActivityTableSeeder::class);
         $this->call(FlightTableSeeder::class);
-        $this->call(InsuranceTableSeeder::class);
+        // $this->call(InsuranceTableSeeder::class);
         $this->call(StretchTableSeeder::class);
         $this->call(AirplaneTableSeeder::class);
         $this->call(AirportTableSeeder::class);
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PackageTableSeeder::class);
         $this->call(RoomTableSeeder::class);
         $this->call(RoomScheduleTableSeeder::class);
-        $this->call(SeatTableSeeder::class);
+        // $this->call(SeatTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(ReserveTableSeeder::class);
@@ -40,5 +40,14 @@ class DatabaseSeeder extends Seeder
         $this->call(PackageFlightTableSeeder::class);
         $this->call(PackageActivityTableSeeder::class);
         $this->call(PackageRoomTableSeeder::class);
+        $this->call(PackageVehicleTableSeeder::class);
+        $this->call(ReserveRoomTableSeeder::class);
+        $this->call(ReservePackageTableSeeder::class);
+        $this->call(ReserveActivityTableSeeder::class);
+        $this->call(ReserveVehicleTableSeeder::class);
+        $this->call(ReserveTransferTableSeeder::class);
+        $this->call(FlightReserveTableSeeder::class);
+        $this->call(FlightStretchTableSeeder::class);
+        $this->call(AirportFlightTableSeeder::class);
     }
 }

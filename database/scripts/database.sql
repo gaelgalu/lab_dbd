@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS adresses CASCADE;
 DROP TABLE IF EXISTS airplane_stretch CASCADE;
 DROP TABLE IF EXISTS airplanes CASCADE;
 DROP TABLE IF EXISTS airports CASCADE;
-DROP TABLE IF EXISTS flight_airport CASCADE;
+DROP TABLE IF EXISTS airport_flight CASCADE;
 DROP TABLE IF EXISTS flight_stretch CASCADE;
 DROP TABLE IF EXISTS flights CASCADE;
 DROP TABLE IF EXISTS insurances CASCADE;
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS package_vehicle CASCADE;
 DROP TABLE IF EXISTS packages CASCADE;
 DROP TABLE IF EXISTS payment_methods CASCADE;
 DROP TABLE IF EXISTS reserve_activity CASCADE;
-DROP TABLE IF EXISTS reserve_flight CASCADE;
+DROP TABLE IF EXISTS flight_reserve CASCADE;
 DROP TABLE IF EXISTS reserve_package CASCADE;
 DROP TABLE IF EXISTS reserve_room CASCADE;
 DROP TABLE IF EXISTS reserve_transfer CASCADE;
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS User_role (
     role_id int  NOT NULL,
     user_id int  NOT NULL,
     created_at timestamp,
-    updated_at timestamp,  
+    updated_at timestamp,
     CONSTRAINT User_role_pk PRIMARY KEY (id)
 );
 
@@ -70,16 +70,16 @@ CREATE TABLE IF NOT EXISTS Users (
     email varchar(80)  NOT NULL,
     password varchar(80)  NOT NULL,
     name varchar(80)  NOT NULL,
-    lastName varchar(80)  NOT NULL,
-    bornDate timestamp  NOT NULL,
+    lastname varchar(80)  NOT NULL,
+    borndate timestamp  NOT NULL,
     phone varchar(80)  NOT NULL,
-    documentOriginCountry varchar(80)  NOT NULL,
-    typeOfDocument varchar(80)  NOT NULL,
-    numberOfDocument int  NOT NULL,
+    documentorigincountry varchar(80)  NOT NULL,
+    typeofdocument varchar(80)  NOT NULL,
+    numberofdocument int  NOT NULL,
     points int  NOT NULL,
     money decimal(20,2)  NOT NULL,
     email_verified_at timestamp,
-    remember_token varchar(255),
+    remember_token varchar(80),
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT id PRIMARY KEY (id)
@@ -88,16 +88,16 @@ CREATE TABLE IF NOT EXISTS Users (
 -- Table: activities
 CREATE TABLE IF NOT EXISTS activities (
     id int  NOT NULL,
-    adultPrice decimal(20,2)  NOT NULL,
-    kidPrice decimal(20,2)  NOT NULL,
-    startDate timestamp  NOT NULL,
-    endDate timestamp  NOT NULL,
+    adultprice decimal(20,2)  NOT NULL,
+    kidprice decimal(20,2)  NOT NULL,
+    startdate timestamp  NOT NULL,
+    enddate timestamp  NOT NULL,
     name varchar(30)  NOT NULL,
     description text  NOT NULL,
-    adultsCapacity int  NOT NULL,
-    kidsCapacity int  NOT NULL,
+    adultscapacity int  NOT NULL,
+    kidscapacity int  NOT NULL,
     availability boolean  NOT NULL,
-    activity_providers_id int  NOT NULL,
+    activity_provider_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT activities_pk PRIMARY KEY (id)
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS activity_providers (
     name varchar(80)  NOT NULL,
     email varchar(50)  NOT NULL,
     phone varchar(80)  NOT NULL,
-    adresses_id int  NOT NULL,
+    adress_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT activity_providers_pk PRIMARY KEY (id)
@@ -122,7 +122,6 @@ CREATE TABLE IF NOT EXISTS adresses (
     city varchar(50)  NOT NULL,
     street varchar(80)  NOT NULL,
     number int NOT NULL,
-
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT adresses_pk PRIMARY KEY (id)
@@ -131,8 +130,8 @@ CREATE TABLE IF NOT EXISTS adresses (
 -- Table: airplane_stretch
 CREATE TABLE IF NOT EXISTS airplane_stretch (
     id int  NOT NULL,
-    stretches_id int  NOT NULL,
-    airplanes_id int  NOT NULL,
+    stretch_id int  NOT NULL,
+    airplane_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT airplane_stretch_pk PRIMARY KEY (id)
@@ -154,27 +153,27 @@ CREATE TABLE IF NOT EXISTS airports (
     name varchar(50)  NOT NULL,
     telephone varchar(20)  NOT NULL,
     mail varchar(50)  NOT NULL,
-    adresses_id int  NOT NULL,
+    adress_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT airports_pk PRIMARY KEY (id)
 );
 
--- Table: flight_airport
-CREATE TABLE IF NOT EXISTS flight_airport (
+-- Table: airport_flight
+CREATE TABLE IF NOT EXISTS airport_flight (
     id int  NOT NULL,
-    airports_id int  NOT NULL,
-    flights_id int  NOT NULL,
+    airport_id int  NOT NULL,
+    flight_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
-    CONSTRAINT flight_airport_pk PRIMARY KEY (id)
+    CONSTRAINT airport_flight_pk PRIMARY KEY (id)
 );
 
 -- Table: flight_stretch
 CREATE TABLE IF NOT EXISTS flight_stretch (
     id int  NOT NULL,
-    flights_id int  NOT NULL,
-    stretches_id int  NOT NULL,
+    flight_id int  NOT NULL,
+    stretch_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT flight_stretch_pk PRIMARY KEY (id)
@@ -184,8 +183,8 @@ CREATE TABLE IF NOT EXISTS flight_stretch (
 CREATE TABLE IF NOT EXISTS flights (
     id int  NOT NULL,
     price decimal(20,2)  NOT NULL,
-    startDate timestamp  NOT NULL,
-    endDate timestamp  NOT NULL,
+    startdate timestamp  NOT NULL,
+    enddate timestamp  NOT NULL,
     availability boolean  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
@@ -209,11 +208,11 @@ CREATE TABLE IF NOT EXISTS lodgings (
     id int  NOT NULL,
     name varchar(50)  NOT NULL,
     email varchar(50)  NOT NULL,
-    phoneNumber varchar(80)  NOT NULL,
+    phonenumber varchar(80)  NOT NULL,
     evaluation smallint  NOT NULL,
-    numberOfRooms smallint  NOT NULL,
+    numberofrooms smallint  NOT NULL,
     description text  NOT NULL,
-    adresses_id int  NOT NULL,
+    adress_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT lodgings_pk PRIMARY KEY (id)
@@ -222,8 +221,8 @@ CREATE TABLE IF NOT EXISTS lodgings (
 -- Table: package_activity
 CREATE TABLE IF NOT EXISTS package_activity (
     id int  NOT NULL,
-    packages_id int  NOT NULL,
-    activities_id int  NOT NULL,
+    package_id int  NOT NULL,
+    activity_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT package_activity_pk PRIMARY KEY (id)
@@ -232,8 +231,8 @@ CREATE TABLE IF NOT EXISTS package_activity (
 -- Table: package_flight
 CREATE TABLE IF NOT EXISTS package_flight (
     id int  NOT NULL,
-    packages_id int  NOT NULL,
-    flights_id int  NOT NULL,
+    package_id int  NOT NULL,
+    flight_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT package_flight_pk PRIMARY KEY (id)
@@ -242,8 +241,8 @@ CREATE TABLE IF NOT EXISTS package_flight (
 -- Table: package_room
 CREATE TABLE IF NOT EXISTS package_room (
     id int  NOT NULL,
-    rooms_id int  NOT NULL,
-    packages_id int  NOT NULL,
+    room_id int  NOT NULL,
+    package_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT package_room_pk PRIMARY KEY (id)
@@ -252,8 +251,8 @@ CREATE TABLE IF NOT EXISTS package_room (
 -- Table: package_transfer
 CREATE TABLE IF NOT EXISTS package_transfer (
     id int  NOT NULL,
-    packages_id int  NOT NULL,
-    transfers_id int  NOT NULL,
+    package_id int  NOT NULL,
+    transfer_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT package_transfer_pk PRIMARY KEY (id)
@@ -262,8 +261,8 @@ CREATE TABLE IF NOT EXISTS package_transfer (
 -- Table: package_vehicle
 CREATE TABLE IF NOT EXISTS package_vehicle (
     id int  NOT NULL,
-    packages_id int  NOT NULL,
-    vehicles_id int  NOT NULL,
+    package_id int  NOT NULL,
+    vehicle_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT package_vehicle_pk PRIMARY KEY (id)
@@ -284,10 +283,10 @@ CREATE TABLE IF NOT EXISTS packages (
 -- Table: payment_methods
 CREATE TABLE IF NOT EXISTS payment_methods (
     id int  NOT NULL,
-    bankAccountNumber varchar(40)  NOT NULL,
-    typeOfAccount varchar(20)  NOT NULL,
+    bankaccountnumber varchar(40)  NOT NULL,
+    typeofaccount varchar(20)  NOT NULL,
     bank varchar(80)  NOT NULL,
-    reserves_id int  NOT NULL,
+    reserve_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT payment_methods_pk PRIMARY KEY (id)
@@ -296,28 +295,28 @@ CREATE TABLE IF NOT EXISTS payment_methods (
 -- Table: reserve_activity
 CREATE TABLE IF NOT EXISTS reserve_activity (
     id int  NOT NULL,
-    reserves_id int  NOT NULL,
-    activities_id int  NOT NULL,
+    reserve_id int  NOT NULL,
+    activity_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT reserve_activity_pk PRIMARY KEY (id)
 );
 
--- Table: reserve_flight
-CREATE TABLE IF NOT EXISTS reserve_flight (
+-- Table: flight_reserve
+CREATE TABLE IF NOT EXISTS flight_reserve (
     id int  NOT NULL,
-    reserves_id int  NOT NULL,
+    reserve_id int  NOT NULL,
     flight_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
-    CONSTRAINT reserve_flight_pk PRIMARY KEY (id)
+    CONSTRAINT flight_reserve_pk PRIMARY KEY (id)
 );
 
 -- Table: reserve_package
 CREATE TABLE IF NOT EXISTS reserve_package (
     id int  NOT NULL,
-    reserves_id int  NOT NULL,
-    packages_id int  NOT NULL,
+    reserve_id int  NOT NULL,
+    package_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT reserve_package_pk PRIMARY KEY (id)
@@ -326,8 +325,8 @@ CREATE TABLE IF NOT EXISTS reserve_package (
 -- Table: reserve_room
 CREATE TABLE IF NOT EXISTS reserve_room (
     id int  NOT NULL,
-    reserves_id int  NOT NULL,
-    rooms_id int  NOT NULL,
+    reserve_id int  NOT NULL,
+    room_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT reserve_room_pk PRIMARY KEY (id)
@@ -336,8 +335,8 @@ CREATE TABLE IF NOT EXISTS reserve_room (
 -- Table: reserve_transfer
 CREATE TABLE IF NOT EXISTS reserve_transfer (
     id int  NOT NULL,
-    reserves_id int  NOT NULL,
-    transfers_id int  NOT NULL,
+    reserve_id int  NOT NULL,
+    transfer_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT reserve_transfer_pk PRIMARY KEY (id)
@@ -346,8 +345,8 @@ CREATE TABLE IF NOT EXISTS reserve_transfer (
 -- Table: reserve_vehicle
 CREATE TABLE IF NOT EXISTS reserve_vehicle (
     id int  NOT NULL,
-    reserves_id int  NOT NULL,
-    vehicles_id int  NOT NULL,
+    reserve_id int  NOT NULL,
+    vehicle_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT reserve_vehicle_pk PRIMARY KEY (id)
@@ -360,7 +359,7 @@ CREATE TABLE IF NOT EXISTS reserves (
     product varchar(50)  NOT NULL,
     amount int  NOT NULL,
     price decimal(20,2)  NOT NULL,
-    users_id int  NOT NULL,
+    user_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT reserves_pk PRIMARY KEY (id)
@@ -369,9 +368,9 @@ CREATE TABLE IF NOT EXISTS reserves (
 -- Table: room_schedules
 CREATE TABLE IF NOT EXISTS room_schedules (
     id int  NOT NULL,
-    startDate timestamp  NOT NULL,
-    endDate timestamp  NOT NULL,
-    rooms_id int  NOT NULL,
+    startdate timestamp  NOT NULL,
+    enddate timestamp  NOT NULL,
+    room_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT room_schedules_pk PRIMARY KEY (id)
@@ -381,13 +380,13 @@ CREATE TABLE IF NOT EXISTS room_schedules (
 CREATE TABLE IF NOT EXISTS rooms (
     id int  NOT NULL,
     price decimal(20,2)  NOT NULL,
-    doorNumber int  NOT NULL,
-    kidsCapacity int  NOT NULL,
-    adultsCapacity int  NOT NULL,
+    doornumber int  NOT NULL,
+    kidscapacity int  NOT NULL,
+    adultscapacity int  NOT NULL,
     type int  NOT NULL,
     description text  NOT NULL,
     availability boolean  NOT NULL,
-    lodgings_id int  NOT NULL,
+    lodging_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT rooms_pk PRIMARY KEY (id)
@@ -396,11 +395,11 @@ CREATE TABLE IF NOT EXISTS rooms (
 -- Table: seats
 CREATE TABLE IF NOT EXISTS seats (
     id int  NOT NULL,
-    seatNumber int  NOT NULL,
+    seatnumber int  NOT NULL,
     availability boolean  NOT NULL,
-    checkIn boolean  NOT NULL,
+    checkin boolean  NOT NULL,
     type varchar(20)  NOT NULL,
-    airplanes_id int  NOT NULL,
+    airplane_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT seats_pk PRIMARY KEY (id)
@@ -413,7 +412,7 @@ CREATE TABLE IF NOT EXISTS stretches (
     destiny varchar(60)  NOT NULL,
     airline varchar(60)  NOT NULL,
     platform int  NOT NULL,
-    risetime timestamp NOT NULL,
+    risetime timestamp,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT stretches_pk PRIMARY KEY (id)
@@ -425,7 +424,7 @@ CREATE TABLE IF NOT EXISTS transfer_providers (
     name varchar(60)  NOT NULL,
     telephone varchar(80)  NOT NULL,
     mail varchar(50)  NOT NULL,
-    adresses_id int  NOT NULL,
+    adress_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT transfer_providers_pk PRIMARY KEY (id)
@@ -434,9 +433,9 @@ CREATE TABLE IF NOT EXISTS transfer_providers (
 -- Table: transfer_schedules
 CREATE TABLE IF NOT EXISTS transfer_schedules (
     id int  NOT NULL,
-    startDate timestamp  NOT NULL,
-    endDate timestamp  NOT NULL,
-    transfers_id int  NOT NULL,
+    startdate timestamp  NOT NULL,
+    enddate timestamp  NOT NULL,
+    transfer_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT transfer_schedules_pk PRIMARY KEY (id)
@@ -446,8 +445,8 @@ CREATE TABLE IF NOT EXISTS transfer_schedules (
 CREATE TABLE IF NOT EXISTS transfer_schedules_adresses (
     id int  NOT NULL,
     type boolean  NOT NULL,
-    transfer_schedules_id int  NOT NULL,
-    adresses_id int  NOT NULL,
+    transfer_schedule_id int  NOT NULL,
+    adress_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT transfer_schedules_adresses_pk PRIMARY KEY (id)
@@ -463,7 +462,7 @@ CREATE TABLE IF NOT EXISTS transfers (
     model varchar(30)  NOT NULL,
     type int  NOT NULL,
     availability boolean  NOT NULL,
-    transfer_providers_id int  NOT NULL,
+    transfer_provider_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT transfers_pk PRIMARY KEY (id)
@@ -472,9 +471,9 @@ CREATE TABLE IF NOT EXISTS transfers (
 -- Table: vehicle_schedules
 CREATE TABLE IF NOT EXISTS vehicle_schedules (
     id int  NOT NULL,
-    startDate timestamp  NOT NULL,
-    endDate timestamp  NOT NULL,
-    vehicles_id int  NOT NULL,
+    startdate timestamp  NOT NULL,
+    enddate timestamp  NOT NULL,
+    vehicle_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT vehicle_schedules_pk PRIMARY KEY (id)
@@ -485,8 +484,8 @@ CREATE TABLE IF NOT EXISTS vehicle_suppliers (
     id int  NOT NULL,
     name varchar(80)  NOT NULL,
     email varchar(50)  NOT NULL,
-    phoneNumber varchar(80)  NOT NULL,
-    adresses_id int  NOT NULL,
+    phonenumber varchar(80)  NOT NULL,
+    adress_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT vehicle_suppliers_pk PRIMARY KEY (id)
@@ -503,7 +502,7 @@ CREATE TABLE IF NOT EXISTS vehicles (
     brand varchar(25)  NOT NULL,
     model varchar(25)  NOT NULL,
     description text  NOT NULL,
-    vehicle_suppliers_id int  NOT NULL,
+    vehicle_supplier_id int  NOT NULL,
     created_at timestamp,
     updated_at timestamp,
     CONSTRAINT vehicles_pk PRIMARY KEY (id)
@@ -512,7 +511,7 @@ CREATE TABLE IF NOT EXISTS vehicles (
 -- foreign keys
 -- Reference: Reserves_Users (table: reserves)
 ALTER TABLE reserves ADD CONSTRAINT Reserves_Users
-    FOREIGN KEY (users_id)
+    FOREIGN KEY (user_id)
     REFERENCES Users (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -536,7 +535,7 @@ ALTER TABLE User_role ADD CONSTRAINT User_role_Users
 
 -- Reference: activities_activity_providers (table: activities)
 ALTER TABLE activities ADD CONSTRAINT activities_activity_providers
-    FOREIGN KEY (activity_providers_id)
+    FOREIGN KEY (activity_provider_id)
     REFERENCES activity_providers (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -544,7 +543,7 @@ ALTER TABLE activities ADD CONSTRAINT activities_activity_providers
 
 -- Reference: activity_providers_adresses (table: activity_providers)
 ALTER TABLE activity_providers ADD CONSTRAINT activity_providers_adresses
-    FOREIGN KEY (adresses_id)
+    FOREIGN KEY (adress_id)
     REFERENCES adresses (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -552,7 +551,7 @@ ALTER TABLE activity_providers ADD CONSTRAINT activity_providers_adresses
 
 -- Reference: airplane_stretch_airplanes (table: airplane_stretch)
 ALTER TABLE airplane_stretch ADD CONSTRAINT airplane_stretch_airplanes
-    FOREIGN KEY (airplanes_id)
+    FOREIGN KEY (airplane_id)
     REFERENCES airplanes (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -560,7 +559,7 @@ ALTER TABLE airplane_stretch ADD CONSTRAINT airplane_stretch_airplanes
 
 -- Reference: airplane_stretch_stretches (table: airplane_stretch)
 ALTER TABLE airplane_stretch ADD CONSTRAINT airplane_stretch_stretches
-    FOREIGN KEY (stretches_id)
+    FOREIGN KEY (stretch_id)
     REFERENCES stretches (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -568,23 +567,23 @@ ALTER TABLE airplane_stretch ADD CONSTRAINT airplane_stretch_stretches
 
 -- Reference: airports_adresses (table: airports)
 ALTER TABLE airports ADD CONSTRAINT airports_adresses
-    FOREIGN KEY (adresses_id)
+    FOREIGN KEY (adress_id)
     REFERENCES adresses (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
--- Reference: flight_airport_airports (table: flight_airport)
-ALTER TABLE flight_airport ADD CONSTRAINT flight_airport_airports
-    FOREIGN KEY (airports_id)
+-- Reference: airport_flight_airports (table: airport_flight)
+ALTER TABLE airport_flight ADD CONSTRAINT airport_flight_airports
+    FOREIGN KEY (airport_id)
     REFERENCES airports (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
--- Reference: flight_airport_flights (table: flight_airport)
-ALTER TABLE flight_airport ADD CONSTRAINT flight_airport_flights
-    FOREIGN KEY (flights_id)
+-- Reference: airport_flight_flights (table: airport_flight)
+ALTER TABLE airport_flight ADD CONSTRAINT airport_flight_flights
+    FOREIGN KEY (flight_id)
     REFERENCES flights (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -592,7 +591,7 @@ ALTER TABLE flight_airport ADD CONSTRAINT flight_airport_flights
 
 -- Reference: flight_stretch_flights (table: flight_stretch)
 ALTER TABLE flight_stretch ADD CONSTRAINT flight_stretch_flights
-    FOREIGN KEY (flights_id)
+    FOREIGN KEY (flight_id)
     REFERENCES flights (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -600,7 +599,7 @@ ALTER TABLE flight_stretch ADD CONSTRAINT flight_stretch_flights
 
 -- Reference: flight_stretch_stretches (table: flight_stretch)
 ALTER TABLE flight_stretch ADD CONSTRAINT flight_stretch_stretches
-    FOREIGN KEY (stretches_id)
+    FOREIGN KEY (stretch_id)
     REFERENCES stretches (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -616,7 +615,7 @@ ALTER TABLE insurances ADD CONSTRAINT insurances_flights
 
 -- Reference: lodgings_adresses (table: lodgings)
 ALTER TABLE lodgings ADD CONSTRAINT lodgings_adresses
-    FOREIGN KEY (adresses_id)
+    FOREIGN KEY (adress_id)
     REFERENCES adresses (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -624,7 +623,7 @@ ALTER TABLE lodgings ADD CONSTRAINT lodgings_adresses
 
 -- Reference: package_activity_activities (table: package_activity)
 ALTER TABLE package_activity ADD CONSTRAINT package_activity_activities
-    FOREIGN KEY (activities_id)
+    FOREIGN KEY (activity_id)
     REFERENCES activities (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -632,7 +631,7 @@ ALTER TABLE package_activity ADD CONSTRAINT package_activity_activities
 
 -- Reference: package_activity_packages (table: package_activity)
 ALTER TABLE package_activity ADD CONSTRAINT package_activity_packages
-    FOREIGN KEY (packages_id)
+    FOREIGN KEY (package_id)
     REFERENCES packages (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -640,7 +639,7 @@ ALTER TABLE package_activity ADD CONSTRAINT package_activity_packages
 
 -- Reference: package_flight_flights (table: package_flight)
 ALTER TABLE package_flight ADD CONSTRAINT package_flight_flights
-    FOREIGN KEY (flights_id)
+    FOREIGN KEY (flight_id)
     REFERENCES flights (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -648,7 +647,7 @@ ALTER TABLE package_flight ADD CONSTRAINT package_flight_flights
 
 -- Reference: package_flight_packages (table: package_flight)
 ALTER TABLE package_flight ADD CONSTRAINT package_flight_packages
-    FOREIGN KEY (packages_id)
+    FOREIGN KEY (package_id)
     REFERENCES packages (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -656,7 +655,7 @@ ALTER TABLE package_flight ADD CONSTRAINT package_flight_packages
 
 -- Reference: package_room_packages (table: package_room)
 ALTER TABLE package_room ADD CONSTRAINT package_room_packages
-    FOREIGN KEY (packages_id)
+    FOREIGN KEY (package_id)
     REFERENCES packages (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -664,7 +663,7 @@ ALTER TABLE package_room ADD CONSTRAINT package_room_packages
 
 -- Reference: package_room_rooms (table: package_room)
 ALTER TABLE package_room ADD CONSTRAINT package_room_rooms
-    FOREIGN KEY (rooms_id)
+    FOREIGN KEY (room_id)
     REFERENCES rooms (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -672,7 +671,7 @@ ALTER TABLE package_room ADD CONSTRAINT package_room_rooms
 
 -- Reference: package_transfer_packages (table: package_transfer)
 ALTER TABLE package_transfer ADD CONSTRAINT package_transfer_packages
-    FOREIGN KEY (packages_id)
+    FOREIGN KEY (package_id)
     REFERENCES packages (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -680,7 +679,7 @@ ALTER TABLE package_transfer ADD CONSTRAINT package_transfer_packages
 
 -- Reference: package_transfer_transfers (table: package_transfer)
 ALTER TABLE package_transfer ADD CONSTRAINT package_transfer_transfers
-    FOREIGN KEY (transfers_id)
+    FOREIGN KEY (transfer_id)
     REFERENCES transfers (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -688,7 +687,7 @@ ALTER TABLE package_transfer ADD CONSTRAINT package_transfer_transfers
 
 -- Reference: package_vehicle_packages (table: package_vehicle)
 ALTER TABLE package_vehicle ADD CONSTRAINT package_vehicle_packages
-    FOREIGN KEY (packages_id)
+    FOREIGN KEY (package_id)
     REFERENCES packages (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -696,7 +695,7 @@ ALTER TABLE package_vehicle ADD CONSTRAINT package_vehicle_packages
 
 -- Reference: package_vehicle_vehicles (table: package_vehicle)
 ALTER TABLE package_vehicle ADD CONSTRAINT package_vehicle_vehicles
-    FOREIGN KEY (vehicles_id)
+    FOREIGN KEY (vehicle_id)
     REFERENCES vehicles (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -704,7 +703,7 @@ ALTER TABLE package_vehicle ADD CONSTRAINT package_vehicle_vehicles
 
 -- Reference: payment_methods_Reserves (table: payment_methods)
 ALTER TABLE payment_methods ADD CONSTRAINT payment_methods_Reserves
-    FOREIGN KEY (reserves_id)
+    FOREIGN KEY (reserve_id)
     REFERENCES reserves (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -712,7 +711,7 @@ ALTER TABLE payment_methods ADD CONSTRAINT payment_methods_Reserves
 
 -- Reference: reserve_activity_Reserves (table: reserve_activity)
 ALTER TABLE reserve_activity ADD CONSTRAINT reserve_activity_Reserves
-    FOREIGN KEY (reserves_id)
+    FOREIGN KEY (reserve_id)
     REFERENCES reserves (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -720,22 +719,22 @@ ALTER TABLE reserve_activity ADD CONSTRAINT reserve_activity_Reserves
 
 -- Reference: reserve_activity_activities (table: reserve_activity)
 ALTER TABLE reserve_activity ADD CONSTRAINT reserve_activity_activities
-    FOREIGN KEY (activities_id)
+    FOREIGN KEY (activity_id)
     REFERENCES activities (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
--- Reference: reserve_flight_Reserves (table: reserve_flight)
-ALTER TABLE reserve_flight ADD CONSTRAINT reserve_flight_Reserves
-    FOREIGN KEY (reserves_id)
+-- Reference: flight_reserve_Reserves (table: flight_reserve)
+ALTER TABLE flight_reserve ADD CONSTRAINT flight_reserve_Reserves
+    FOREIGN KEY (reserve_id)
     REFERENCES reserves (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
--- Reference: reserve_flight_flights (table: reserve_flight)
-ALTER TABLE reserve_flight ADD CONSTRAINT reserve_flight_flights
+-- Reference: flight_reserve_flights (table: flight_reserve)
+ALTER TABLE flight_reserve ADD CONSTRAINT flight_reserve_flights
     FOREIGN KEY (flight_id)
     REFERENCES flights (id)  
     NOT DEFERRABLE 
@@ -744,7 +743,7 @@ ALTER TABLE reserve_flight ADD CONSTRAINT reserve_flight_flights
 
 -- Reference: reserve_package_packages (table: reserve_package)
 ALTER TABLE reserve_package ADD CONSTRAINT reserve_package_packages
-    FOREIGN KEY (packages_id)
+    FOREIGN KEY (package_id)
     REFERENCES packages (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -752,7 +751,7 @@ ALTER TABLE reserve_package ADD CONSTRAINT reserve_package_packages
 
 -- Reference: reserve_package_reserves (table: reserve_package)
 ALTER TABLE reserve_package ADD CONSTRAINT reserve_package_reserves
-    FOREIGN KEY (reserves_id)
+    FOREIGN KEY (reserve_id)
     REFERENCES reserves (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -760,7 +759,7 @@ ALTER TABLE reserve_package ADD CONSTRAINT reserve_package_reserves
 
 -- Reference: reserve_room_Reserves (table: reserve_room)
 ALTER TABLE reserve_room ADD CONSTRAINT reserve_room_Reserves
-    FOREIGN KEY (reserves_id)
+    FOREIGN KEY (reserve_id)
     REFERENCES reserves (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -768,7 +767,7 @@ ALTER TABLE reserve_room ADD CONSTRAINT reserve_room_Reserves
 
 -- Reference: reserve_room_rooms (table: reserve_room)
 ALTER TABLE reserve_room ADD CONSTRAINT reserve_room_rooms
-    FOREIGN KEY (rooms_id)
+    FOREIGN KEY (room_id)
     REFERENCES rooms (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -776,7 +775,7 @@ ALTER TABLE reserve_room ADD CONSTRAINT reserve_room_rooms
 
 -- Reference: reserve_transfer_Reserves (table: reserve_transfer)
 ALTER TABLE reserve_transfer ADD CONSTRAINT reserve_transfer_Reserves
-    FOREIGN KEY (reserves_id)
+    FOREIGN KEY (reserve_id)
     REFERENCES reserves (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -784,7 +783,7 @@ ALTER TABLE reserve_transfer ADD CONSTRAINT reserve_transfer_Reserves
 
 -- Reference: reserve_transfer_transfers (table: reserve_transfer)
 ALTER TABLE reserve_transfer ADD CONSTRAINT reserve_transfer_transfers
-    FOREIGN KEY (transfers_id)
+    FOREIGN KEY (transfer_id)
     REFERENCES transfers (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -792,7 +791,7 @@ ALTER TABLE reserve_transfer ADD CONSTRAINT reserve_transfer_transfers
 
 -- Reference: reserve_vehicle_Reserves (table: reserve_vehicle)
 ALTER TABLE reserve_vehicle ADD CONSTRAINT reserve_vehicle_Reserves
-    FOREIGN KEY (reserves_id)
+    FOREIGN KEY (reserve_id)
     REFERENCES reserves (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -800,7 +799,7 @@ ALTER TABLE reserve_vehicle ADD CONSTRAINT reserve_vehicle_Reserves
 
 -- Reference: reserve_vehicle_vehicles (table: reserve_vehicle)
 ALTER TABLE reserve_vehicle ADD CONSTRAINT reserve_vehicle_vehicles
-    FOREIGN KEY (vehicles_id)
+    FOREIGN KEY (vehicle_id)
     REFERENCES vehicles (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -808,7 +807,7 @@ ALTER TABLE reserve_vehicle ADD CONSTRAINT reserve_vehicle_vehicles
 
 -- Reference: room_schedules_rooms (table: room_schedules)
 ALTER TABLE room_schedules ADD CONSTRAINT room_schedules_rooms
-    FOREIGN KEY (rooms_id)
+    FOREIGN KEY (room_id)
     REFERENCES rooms (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -816,7 +815,7 @@ ALTER TABLE room_schedules ADD CONSTRAINT room_schedules_rooms
 
 -- Reference: rooms_lodgings (table: rooms)
 ALTER TABLE rooms ADD CONSTRAINT rooms_lodgings
-    FOREIGN KEY (lodgings_id)
+    FOREIGN KEY (lodging_id)
     REFERENCES lodgings (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -824,7 +823,7 @@ ALTER TABLE rooms ADD CONSTRAINT rooms_lodgings
 
 -- Reference: seats_airplanes (table: seats)
 ALTER TABLE seats ADD CONSTRAINT seats_airplanes
-    FOREIGN KEY (airplanes_id)
+    FOREIGN KEY (airplane_id)
     REFERENCES airplanes (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -832,7 +831,7 @@ ALTER TABLE seats ADD CONSTRAINT seats_airplanes
 
 -- Reference: transfer_providers_adresses (table: transfer_providers)
 ALTER TABLE transfer_providers ADD CONSTRAINT transfer_providers_adresses
-    FOREIGN KEY (adresses_id)
+    FOREIGN KEY (adress_id)
     REFERENCES adresses (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -840,7 +839,7 @@ ALTER TABLE transfer_providers ADD CONSTRAINT transfer_providers_adresses
 
 -- Reference: transfer_schedules_adresses_adresses (table: transfer_schedules_adresses)
 ALTER TABLE transfer_schedules_adresses ADD CONSTRAINT transfer_schedules_adresses_adresses
-    FOREIGN KEY (adresses_id)
+    FOREIGN KEY (adress_id)
     REFERENCES adresses (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -848,7 +847,7 @@ ALTER TABLE transfer_schedules_adresses ADD CONSTRAINT transfer_schedules_adress
 
 -- Reference: transfer_schedules_adresses_transfer_schedules (table: transfer_schedules_adresses)
 ALTER TABLE transfer_schedules_adresses ADD CONSTRAINT transfer_schedules_adresses_transfer_schedules
-    FOREIGN KEY (transfer_schedules_id)
+    FOREIGN KEY (transfer_schedule_id)
     REFERENCES transfer_schedules (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -856,7 +855,7 @@ ALTER TABLE transfer_schedules_adresses ADD CONSTRAINT transfer_schedules_adress
 
 -- Reference: transfer_schedules_transfers (table: transfer_schedules)
 ALTER TABLE transfer_schedules ADD CONSTRAINT transfer_schedules_transfers
-    FOREIGN KEY (transfers_id)
+    FOREIGN KEY (transfer_id)
     REFERENCES transfers (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -864,7 +863,7 @@ ALTER TABLE transfer_schedules ADD CONSTRAINT transfer_schedules_transfers
 
 -- Reference: transfers_transfer_providers (table: transfers)
 ALTER TABLE transfers ADD CONSTRAINT transfers_transfer_providers
-    FOREIGN KEY (transfer_providers_id)
+    FOREIGN KEY (transfer_provider_id)
     REFERENCES transfer_providers (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -872,7 +871,7 @@ ALTER TABLE transfers ADD CONSTRAINT transfers_transfer_providers
 
 -- Reference: vehicle_schedules_vehicles (table: vehicle_schedules)
 ALTER TABLE vehicle_schedules ADD CONSTRAINT vehicle_schedules_vehicles
-    FOREIGN KEY (vehicles_id)
+    FOREIGN KEY (vehicle_id)
     REFERENCES vehicles (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -880,7 +879,7 @@ ALTER TABLE vehicle_schedules ADD CONSTRAINT vehicle_schedules_vehicles
 
 -- Reference: vehicle_suppliers_adresses (table: vehicle_suppliers)
 ALTER TABLE vehicle_suppliers ADD CONSTRAINT vehicle_suppliers_adresses
-    FOREIGN KEY (adresses_id)
+    FOREIGN KEY (adress_id)
     REFERENCES adresses (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
@@ -888,7 +887,7 @@ ALTER TABLE vehicle_suppliers ADD CONSTRAINT vehicle_suppliers_adresses
 
 -- Reference: vehicles_vehicle_suppliers (table: vehicles)
 ALTER TABLE vehicles ADD CONSTRAINT vehicles_vehicle_suppliers
-    FOREIGN KEY (vehicle_suppliers_id)
+    FOREIGN KEY (vehicle_supplier_id)
     REFERENCES vehicle_suppliers (id)  
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
