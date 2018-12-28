@@ -23,7 +23,6 @@ class AirportController extends Controller
         'telephone' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
         'mail' => 'email|max:50',
         'adress_id' => 'numeric|min:0'
-
         ];
     }
     /**

@@ -16,7 +16,8 @@ class RoomController extends Controller
         'adultsCapacity' => 'required|numeric|min:0',
         'type' => 'required|numeric|min:0',
         'description' => 'required|string',
-        'lodging_id' => 'required|numeric|min:0'
+        'lodging_id' => 'required|numeric|min:0',
+        'availability' => 'required|boolean'
         ];
     }
 
@@ -28,7 +29,8 @@ class RoomController extends Controller
         'adultsCapacity' => 'numeric|min:0',
         'type' => 'numeric|min:0',
         'description' => 'string',
-        'lodging_id' => 'numeric|min:0'
+        'lodging_id' => 'numeric|min:0',
+        'availability' => 'boolean'
         ];
     }
     /**
