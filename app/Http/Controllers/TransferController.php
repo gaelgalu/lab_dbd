@@ -17,7 +17,7 @@ class TransferController extends Controller
         'model' => 'required|string|max:30',
         'type' => 'required|numeric|min:0',
         'availability' => 'required|boolean',
-        'transferProvider_id' => 'required|numeric|min:0'
+        'transfer_provider_id' => 'required|numeric|min:0'
         ];
     }
 
@@ -30,7 +30,7 @@ class TransferController extends Controller
         'model' => 'string|max:30',
         'type' => 'numeric|min:0',
         'availability' => 'boolean',
-        'transferProvider_id' => 'numeric|min:0'
+        'transfer_provider_id' => 'numeric|min:0'
         ];
     }
     /**

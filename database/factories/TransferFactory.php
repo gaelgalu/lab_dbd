@@ -16,6 +16,6 @@ $factory->define(Transfer::class, function (Faker $faker) {
         'model' => $models[array_rand($models)],
         'type' => rand(1, 5), //What's the meaning of this?
         'availability' => (bool)random_int(0, 1),
-        'transferProvider_id' => $transfer_providers->random()->id
+        'transfer_provider_id' => $transfer_providers->random()->id
     ];
 });

@@ -25,8 +25,8 @@ class CreateTransfersTable extends Migration
             $table->timestamps();
 
             //Foreign keys
-            $table->unsignedInteger('transferProvider_id');
-            $table->foreign('transferProvider_id')->references('id')->on('transfer_providers')->onDelete('cascade');
+            $table->unsignedInteger('transfer_provider_id');
+            $table->foreign('transfer_provider_id')->references('id')->on('transfer_providers')->onDelete('cascade');
         });
     }
 
