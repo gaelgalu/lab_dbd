@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransferSchedule extends Model
 {
-    protected $fillable = ['startDate', 'endDate'];
+    protected $fillable = ['startDate', 'endDate', 'transfer_id'];
 
     public function adress()
     {

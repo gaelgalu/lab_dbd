@@ -16,12 +16,12 @@ class PackageTransferTableSeeder extends Seeder
     public function run()
     {
         $package_id = Package::inRandomOrder()->select('id')->get();
-        $trnasfers_id = Transfer::inRandomOrder()->select('id')->get();
+        $trnasfer_id = Transfer::inRandomOrder()->select('id')->get();
 
         for ($i=0; $i < count($package_id); $i++){
         	DB::table('package_transfer')->insert([
         		'package_id' => $package_id[$i]->id,
-        		'transfer_id' => $trnasfers_id[$i]->id,
+        		'transfer_id' => $trnasfer_id[$i]->id,
         		'created_at' => Carbon::now(),
         		'updated_at' => Carbon::now()
         	]);

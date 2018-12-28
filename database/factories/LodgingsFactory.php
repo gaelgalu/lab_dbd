@@ -13,6 +13,6 @@ $factory->define(Lodging::class, function (Faker $faker) {
     	'evaluation' => rand(1, 5),
     	'numberOfRooms' => rand(10, 50),
     	'description' => $faker->realText($faker->numberBetween(10,20)),
-    	'adresses_id' => $adresses->random()->id
+    	'adress_id' => $adresses->random()->id
     ];
 });

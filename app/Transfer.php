@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transfer extends Model
 {
-    protected $fillable = ['price', 'capacity', 'description', 'brand', 'model', 'type', 'availability'];
+    protected $fillable = ['price', 'capacity', 'description', 'brand', 'model', 'type', 'availability', 'transferProvider_id'];
 
     public function reserves()
     {

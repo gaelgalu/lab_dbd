@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
 {
-    protected $fillable = ['name', 'price', 'date', 'availability', 'capacity', 'patent', 'brand', 'model', 'description'];
+    protected $fillable = ['name', 'price', 'date', 'availability', 'capacity', 'patent', 'brand', 'model', 'description', 'vehicle_supplier_id'];
 
     public function reserves()
     {

@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 use App\Vehicle;
 
 $factory->define(Vehicle::class, function (Faker $faker) {
-	$suppliers_id = DB::table('vehicle_suppliers')->select('id')->get();
+	$supplier_id = DB::table('vehicle_suppliers')->select('id')->get();
     $brands = ['Audi', 'Alfa romeo', 'BMW', 'Bugatti', 'Chevrolet', 'Ford', 'Nissan', 'Opel', 'Pagani', 'Peugeot', 'Subaru', 'Tesla', 'Toyota', 'Volvo'];
     $models = ['Modelo1', 'Modelo2', 'Modelo3'];
 
@@ -18,6 +18,6 @@ $factory->define(Vehicle::class, function (Faker $faker) {
         'model' => $models[array_rand($models)],
         'description' => $faker->realText($faker->numberBetween(10,20)),
         
-        'vehicle_suppliers_id' => $suppliers_id->random()->id
+        'vehicle_supplier_id' => $supplier_id->random()->id
     ];
 });

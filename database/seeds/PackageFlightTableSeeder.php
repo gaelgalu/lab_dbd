@@ -16,12 +16,12 @@ class PackageFlightTableSeeder extends Seeder
     public function run()
     {
         $package_id = Package::inRandomOrder()->select('id')->get();
-        $flights_id = Flight::inRandomOrder()->select('id')->get();
+        $flight_id = Flight::inRandomOrder()->select('id')->get();
 
         for ($i=0; $i < count($package_id); $i++){
         	DB::table('package_flight')->insert([
         		'package_id' => $package_id[$i]->id,
-        		'flight_id' => $flights_id[$i]->id,
+        		'flight_id' => $flight_id[$i]->id,
         		'created_at' => Carbon::now(),
         		'updated_at' => Carbon::now()
         	]);

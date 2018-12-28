@@ -16,6 +16,6 @@ $factory->define(Activity::class, function (Faker $faker) {
     	'adultsCapacity' => rand(10, 100),
     	'kidsCapacity' => rand(10, 50),
     	'availability' => (bool)random_int(0, 1),
-    	'activity_providers_id' => $activity_providers->random()->id
+    	'activity_provider_id' => $activity_providers->random()->id
     ];
 });

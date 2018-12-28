@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransferProvider extends Model
 {
-    protected $fillable = ['name', 'telephone', 'mail'];
+    protected $fillable = ['name', 'telephone', 'mail', 'adress_id'];
 
     public function adress()
     {

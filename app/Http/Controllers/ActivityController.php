@@ -85,8 +85,7 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        $old = Article::findOrFail($id);
-        // $old = Activity::findOrFail($id);
+        $old = Activity::findOrFail($id);
         $old->delete();
 
         return 204;

@@ -10,6 +10,6 @@ $factory->define(ActivityProvider::class, function (Faker $faker) {
     	'name' => $faker->unique()->company,
     	'email' => $faker->unique()->safeEmail,
     	'phone' => $faker->tollFreePhoneNumber,
-    	'adresses_id' => $adresses->random()->id
+    	'adress_id' => $adresses->random()->id
     ];
 });

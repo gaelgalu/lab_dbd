@@ -28,8 +28,8 @@ class CreateActivitiesTable extends Migration
 
             //Foreign key from activity_providers table
 
-            $table->unsignedInteger('activity_providers_id');
-            $table->foreign('activity_providers_id')->references('id')->on('activity_providers')->onDelete('cascade');
+            $table->unsignedInteger('activity_provider_id');
+            $table->foreign('activity_provider_id')->references('id')->on('activity_providers')->onDelete('cascade');
 
             $table->timestamps();
         });

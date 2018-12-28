@@ -16,13 +16,13 @@ class AirplaneStretchTableSeeder extends Seeder
      */
     public function run()
     {
-        $airplanes_id = Airplane::inRandomOrder()->select('id')->get();
-        $stretches_id = Stretch::inRandomOrder()->select('id')->get();
+        $airplane_id = Airplane::inRandomOrder()->select('id')->get();
+        $stretch_id = Stretch::inRandomOrder()->select('id')->get();
 
-        for ($i=0; $i < count($airplanes_id); $i++){
+        for ($i=0; $i < count($airplane_id); $i++){
         	DB::table('airplane_stretch')->insert([
-        		'airplane_id' => $airplanes_id[$i]->id,
-        		'stretch_id' => $stretches_id[$i]->id,
+        		'airplane_id' => $airplane_id[$i]->id,
+        		'stretch_id' => $stretch_id[$i]->id,
         		'created_at' => Carbon::now(),
         		'updated_at' => Carbon::now()
         	]);

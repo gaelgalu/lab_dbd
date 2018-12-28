@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaymentMethod extends Model
 {
-    protected $fillable = ['rut', 'paymentMethod'];
+    protected $fillable = ['rut', 'paymentMethod', 'reserve_id'];
 
     public function reserve()
     {

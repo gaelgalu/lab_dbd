@@ -10,6 +10,6 @@ $factory->define(TransferProvider::class, function (Faker $faker) {
         'name' => $faker->unique()->company,
         'telephone' => $faker->tollFreePhoneNumber,
         'mail' => $faker->unique()->safeEmail,
-        'adresses_id' => $adresses->random()->id
+        'adress_id' => $adresses->random()->id
     ];
 });

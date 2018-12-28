@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomSchedule extends Model
 {
-    protected $fillable = ['startDate', 'endDate'];
+    protected $fillable = ['startDate', 'endDate', 'room_id'];
 
     public function room()
     {

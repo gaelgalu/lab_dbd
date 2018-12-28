@@ -26,8 +26,8 @@ class CreateVehiclesTable extends Migration
 
             //Foreing key from vehicle_suppliers
 
-            $table->unsignedInteger('vehicle_suppliers_id');
-            $table->foreign('vehicle_suppliers_id')->references('id')->on('vehicle_suppliers')->onDelete('cascade');
+            $table->unsignedInteger('vehicle_supplier_id');
+            $table->foreign('vehicle_supplier_id')->references('id')->on('vehicle_suppliers')->onDelete('cascade');
 
 
             $table->timestamps();

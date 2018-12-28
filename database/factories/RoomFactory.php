@@ -14,6 +14,6 @@ $factory->define(Room::class, function (Faker $faker) {
         'type' => rand(1, 5), //What's the meaning of this?
         'description' => $faker->realText($faker->numberBetween(10,20)),
     	'availability' => (bool)random_int(0, 1),
-    	'lodgings_id' => $lodgings->random()->id
+    	'lodging_id' => $lodgings->random()->id
     ];
 });

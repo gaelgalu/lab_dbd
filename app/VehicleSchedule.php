@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VehicleSchedule extends Model
 {
-    protected $fillable = ['startDate', 'endDate'];
+    protected $fillable = ['startDate', 'endDate', 'vehicle_id'];
 
     public function vehicle()
     {

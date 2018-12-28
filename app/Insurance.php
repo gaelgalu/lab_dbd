@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Insurance extends Model
 {
-    protected $fillable = ['id', 'price', 'description', 'availability'];
+    protected $fillable = ['id', 'price', 'description', 'availability', 'flight_id'];
 
     public function flight()
     {

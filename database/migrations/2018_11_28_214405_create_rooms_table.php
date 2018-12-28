@@ -25,8 +25,8 @@ class CreateRoomsTable extends Migration
 
             //Foreign key from lodgins
 
-            $table->unsignedInteger('lodgings_id');
-            $table->foreign('lodgings_id')->references('id')->on('lodgings')->onDelete('cascade');
+            $table->unsignedInteger('lodging_id');
+            $table->foreign('lodging_id')->references('id')->on('lodgings')->onDelete('cascade');
 
             $table->timestamps();
         });
