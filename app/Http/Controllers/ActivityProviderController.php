@@ -4,9 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ActivityProvider;
+use Validator;
 
 class ActivityProviderController extends Controller
 {
+    public function rules(){
+        return [
+        'name' => 'required|string|max:30',
+        'email' => 'required|email|max:50',
+        'phone' => 'required|regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'adress_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return[
+        'name' => 'string|max:30',
+        'email' => 'email|max:50',
+        'phone' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'adress_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,8 +53,12 @@ class ActivityProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $new = ActivityProvider::create($request->all());
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
 
+        $new = ActivityProvider::create($request->all());
         return response()->json($new, 201);
     }
 
@@ -48,7 +70,7 @@ class ActivityProviderController extends Controller
      */
     public function show($id)
     {
-        return ActivityProvider::find($id);
+        return ActivityProvider::findOrFail($id);
     }
 
     /**
@@ -59,7 +81,7 @@ class ActivityProviderController extends Controller
      */
     public function edit($id)
     {
-        // return view
+        //return view
     }
 
     /**
@@ -72,9 +94,14 @@ class ActivityProviderController extends Controller
     public function update(Request $request, $id)
     {
         $old = ActivityProvider::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
         $old->update($request->all());
 
-        return $old;
+        return response()->json($old,200);
     }
 
     /**
@@ -88,6 +115,6 @@ class ActivityProviderController extends Controller
         $old = ActivityProvider::findOrFail($id);
         $old->delete();
 
-        return 204;
+        return ActivityProvider::all();
     }
 }

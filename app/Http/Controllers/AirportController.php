@@ -3,9 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Airport;
+use Validator;
 
 class AirportController extends Controller
 {
+    public function rules(){
+        return [
+        'name' => 'required|string|max:50',
+        'telephone' => 'required|regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'mail' => 'required|email|max:50',
+        'adress_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'name' => 'string|max:50',
+        'telephone' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'email' => 'email|max:50',
+        'adress_id' => 'numeric|min:0'
+
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +33,7 @@ class AirportController extends Controller
      */
     public function index()
     {
-        //
+        return Airport::all();
     }
 
     /**
@@ -23,7 +43,7 @@ class AirportController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +54,13 @@ class AirportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = Airport::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +71,7 @@ class AirportController extends Controller
      */
     public function show($id)
     {
-        //
+        return Airport::findOrFail($id);
     }
 
     /**
@@ -56,7 +82,7 @@ class AirportController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +94,15 @@ class AirportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Airport::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +113,9 @@ class AirportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = Airport::findOrFail($id);
+        $old->delete();
+
+        return Airport::all();
     }
 }

@@ -3,9 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Transfer;
+use Validator;
 
 class TransferController extends Controller
 {
+    public function rules(){
+        return [
+        'price' => 'required|numeric|regex:/^\d{0,18}(\.\d{1,2})?$/',
+        'capacity' => 'required|numeric|min:0',
+        'description' => 'required|string',
+        'brand' => 'required|string|max:30',
+        'model' => 'required|string|max:30',
+        'type' => 'required|numeric|min:0',
+        'availability' => 'required|boolean',
+        'transferProvider_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'price' => 'numeric|regex:/^\d{0,18}(\.\d{1,2})?$/',
+        'capacity' => 'numeric|min:0',
+        'description' => 'string',
+        'brand' => 'string|max:30',
+        'model' => 'string|max:30',
+        'type' => 'numeric|min:0',
+        'availability' => 'boolean',
+        'transferProvider_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +40,7 @@ class TransferController extends Controller
      */
     public function index()
     {
-        //
+        return Transfer::all();
     }
 
     /**
@@ -23,7 +50,7 @@ class TransferController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +61,13 @@ class TransferController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = Transfer::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +78,7 @@ class TransferController extends Controller
      */
     public function show($id)
     {
-        //
+        return Transfer::findOrFail($id);
     }
 
     /**
@@ -56,7 +89,7 @@ class TransferController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +101,15 @@ class TransferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Transfer::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +120,9 @@ class TransferController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = Transfer::findOrFail($id);
+        $old->delete();
+
+        return Transfer::all();
     }
 }

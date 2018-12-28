@@ -3,9 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Insurance;
+use Validator;
 
 class InsuranceController extends Controller
 {
+    public function rules(){
+        return [
+        'price' => 'required|numeric|regex:/^\d{0,18}(\.\d{1,2})?$/',
+        'description' => 'required|string',
+        'availability' => 'required|boolean',
+        'flight_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'price' => 'numeric|regex:/^\d{0,18}(\.\d{1,2})?$/',
+        'description' => 'string',
+        'availability' => 'boolean',
+        'flight_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +32,7 @@ class InsuranceController extends Controller
      */
     public function index()
     {
-        //
+        return Insurance::all();
     }
 
     /**
@@ -23,7 +42,7 @@ class InsuranceController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +53,13 @@ class InsuranceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = Insurance::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +70,7 @@ class InsuranceController extends Controller
      */
     public function show($id)
     {
-        //
+        return Insurance::findOrFail($id);
     }
 
     /**
@@ -56,7 +81,7 @@ class InsuranceController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +93,15 @@ class InsuranceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Insurance::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +112,9 @@ class InsuranceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = Insurance::findOrFail($id);
+        $old->delete();
+
+        return Insurance::all();
     }
 }

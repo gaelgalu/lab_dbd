@@ -3,9 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\VehicleSchedule;
+use Validator;
 
 class VehicleScheduleController extends Controller
 {
+    public function rules(){
+        return [
+        'startDate' => 'required|date_format:Y-m-d H:i:s',
+        'endDate' => 'required|date_format:Y-m-d H:i:s',
+        'vehicle_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'startDate' => 'date_format:Y-m-d H:i:s',
+        'endDate' => 'date_format:Y-m-d H:i:s',
+        'vehicle_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +30,7 @@ class VehicleScheduleController extends Controller
      */
     public function index()
     {
-        //
+        return VehicleSchedule::all();
     }
 
     /**
@@ -23,7 +40,7 @@ class VehicleScheduleController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +51,13 @@ class VehicleScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = VehicleSchedule::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +68,7 @@ class VehicleScheduleController extends Controller
      */
     public function show($id)
     {
-        //
+        return VehicleSchedule::findOrFail($id);
     }
 
     /**
@@ -56,7 +79,7 @@ class VehicleScheduleController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +91,15 @@ class VehicleScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = VehicleSchedule::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +110,9 @@ class VehicleScheduleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = VehicleSchedule::findOrFail($id);
+        $old->delete();
+
+        return VehicleSchedule::all();
     }
 }

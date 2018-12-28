@@ -3,9 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Lodging;
+use Validator;
 
 class LodgingController extends Controller
 {
+    public function rules(){
+        return [
+        'name' => 'required|string|max:50',
+        'email' => 'required|email|max:50',
+        'phoneNumber' => 'required|regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'evaluation' => 'required|numeric|max:32767|min:0',
+        'numberOfRooms' => 'required|numeric|max:32767|min:0',
+        'description' => 'required|string',
+        'adress_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'name' => 'string|max:50',
+        'email' => 'email|max:50',
+        'phoneNumber' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'evaluation' => 'numeric|max:32767|min:0',
+        'numberOfRooms' => 'numeric|max:32767|min:0',
+        'description' => 'string',
+        'adress_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +38,7 @@ class LodgingController extends Controller
      */
     public function index()
     {
-        //
+        return Lodging::all();
     }
 
     /**
@@ -23,7 +48,7 @@ class LodgingController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +59,13 @@ class LodgingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = Lodging::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +76,7 @@ class LodgingController extends Controller
      */
     public function show($id)
     {
-        //
+        return Lodging::findOrFail($id);
     }
 
     /**
@@ -56,7 +87,7 @@ class LodgingController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +99,15 @@ class LodgingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Lodging::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +118,9 @@ class LodgingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = Lodging::findOrFail($id);
+        $old->delete();
+
+        return Lodging::all();
     }
 }

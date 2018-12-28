@@ -3,9 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
+use Validator;
 
 class RoleController extends Controller
 {
+    public function rules(){
+        return [
+        'name' => 'required|string|max:15',
+        'description' => 'required|string'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'name' => 'string|max:15',
+        'description' => 'string'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +28,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return Role::all();
     }
 
     /**
@@ -23,7 +38,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +49,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = Role::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +66,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        return Role::findOrFail($id);
     }
 
     /**
@@ -56,7 +77,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +89,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Role::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +108,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = Role::findOrFail($id);
+        $old->delete();
+
+        return Role::all();
     }
 }

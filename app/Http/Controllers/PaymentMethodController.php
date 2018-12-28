@@ -3,9 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PaymentMethod;
+use Validator;
 
 class PaymentMethodController extends Controller
 {
+    public function rules(){
+        return [
+        'bankAccountNumber' => 'required|string',
+        'typeOfAccount' => 'required|string',
+        'bank' => 'required|string',
+        'reserve_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'bankAccountNumber' => 'string',
+        'typeOfAccount' => 'string',
+        'bank' => 'string',
+        'reserve_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +32,7 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        //
+        return PaymentMethod::all();
     }
 
     /**
@@ -23,7 +42,7 @@ class PaymentMethodController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +53,13 @@ class PaymentMethodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = PaymentMethod::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +70,7 @@ class PaymentMethodController extends Controller
      */
     public function show($id)
     {
-        //
+        return PaymentMethod::findOrFail($id);
     }
 
     /**
@@ -56,7 +81,7 @@ class PaymentMethodController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +93,15 @@ class PaymentMethodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = PaymentMethod::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +112,9 @@ class PaymentMethodController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = PaymentMethod::findOrFail($id);
+        $old->delete();
+
+        return PaymentMethod::all();
     }
 }

@@ -4,9 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Adress;
+use Validator;
 
 class AdressController extends Controller
 {
+    public function rules(){
+        return [
+        'country' => 'required|string|max:80',
+        'city' => 'required|string|max:80',
+        'street' => 'required|string|max:25',
+        'number' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'country' => 'string|max:80',
+        'city' => 'string|max:80',
+        'street' => 'string|max:25',
+        'number' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +42,7 @@ class AdressController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -35,18 +53,12 @@ class AdressController extends Controller
      */
     public function store(Request $request)
     {
-        // $adress = new Adress();
-        // $adress->country = $request->country;
-        // $adress->city = $request->city;
-        // $adress->street = $request->street;
-        // $adress->number = $request->number;
-
-        // $adress->save();
-
-        // return 201;
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
 
         $new = Adress::create($request->all());
-
         return response()->json($new, 201);
     }
 
@@ -69,7 +81,7 @@ class AdressController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -82,10 +94,14 @@ class AdressController extends Controller
     public function update(Request $request, $id)
     {
         $old = Adress::findOrFail($id);
-        $update = $request->all();
-        $old->update($update);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
 
-        return $old;
+        return response()->json($old,200);
     }
 
     /**
@@ -99,6 +115,6 @@ class AdressController extends Controller
         $old = Adress::findOrFail($id);
         $old->delete();
 
-        return 204;
+        return Adress::all();
     }
 }

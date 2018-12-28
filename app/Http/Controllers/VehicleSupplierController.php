@@ -3,9 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\VehicleSupplier;
+use Validator;
 
 class VehicleSupplierController extends Controller
 {
+    public function rules(){
+        return [
+        'name' => 'required|string|max:30',
+        'email' => 'required|email|max:50',
+        'phoneNumber' => 'required|regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'adress_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return[
+        'name' => 'string|max:30',
+        'email' => 'email|max:50',
+        'phoneNumber' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'adress_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +32,7 @@ class VehicleSupplierController extends Controller
      */
     public function index()
     {
-        //
+        return VehicleSupplier::all();
     }
 
     /**
@@ -23,7 +42,7 @@ class VehicleSupplierController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +53,13 @@ class VehicleSupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = VehicleSupplier::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +70,7 @@ class VehicleSupplierController extends Controller
      */
     public function show($id)
     {
-        //
+        return VehicleSupplier::findOrFail($id);
     }
 
     /**
@@ -56,7 +81,7 @@ class VehicleSupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +93,15 @@ class VehicleSupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = VehicleSupplier::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +112,9 @@ class VehicleSupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = VehicleSupplier::findOrFail($id);
+        $old->delete();
+
+        return VehicleSupplier::all();
     }
 }

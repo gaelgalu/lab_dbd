@@ -4,9 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Airplane;
+use Validator;
 
 class AirplaneController extends Controller
 {
+    public function rules(){
+        return [
+        'name' => 'required|string|max:30',
+        'code' => 'required|string|max:10'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'name' => 'string|max:30',
+        'code' => 'string|max:10'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +38,7 @@ class AirplaneController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -35,8 +49,12 @@ class AirplaneController extends Controller
      */
     public function store(Request $request)
     {
-        $new = Airplane::create($request->all());
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
 
+        $new = Airplane::create($request->all());
         return response()->json($new, 201);
     }
 
@@ -59,7 +77,7 @@ class AirplaneController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -72,10 +90,14 @@ class AirplaneController extends Controller
     public function update(Request $request, $id)
     {
         $old = Airplane::findOrFail($id);
-        $update = $request->all();
-        $old->update($update);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
 
-        return $old;
+        return response()->json($old,200);
     }
 
     /**
@@ -86,9 +108,9 @@ class AirplaneController extends Controller
      */
     public function destroy($id)
     {
-        $old = findOrFail($id);
+        $old = Airplane::findOrFail($id);
         $old->delete();
 
-        return 204;
+        return Airplane::all();
     }
 }

@@ -3,9 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Seat;
+use Validator;
 
 class SeatController extends Controller
 {
+    public function rules(){
+        return [
+        'seatNumber' => 'required|numeric|min:0',
+        'availability' => 'required|boolean',
+        'checkIn' => 'required|boolean',
+        'type' => 'required|string',
+        'airplane_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return [
+        'seatNumber' => 'numeric|min:0',
+        'availability' => 'boolean',
+        'checkIn' => 'boolean',
+        'type' => 'string',
+        'airplane_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +34,7 @@ class SeatController extends Controller
      */
     public function index()
     {
-        //
+        return Seat::all();
     }
 
     /**
@@ -23,7 +44,7 @@ class SeatController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +55,13 @@ class SeatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = Seat::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +72,7 @@ class SeatController extends Controller
      */
     public function show($id)
     {
-        //
+        return Seat::findOrFail($id);
     }
 
     /**
@@ -56,7 +83,7 @@ class SeatController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +95,15 @@ class SeatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = Seat::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +114,9 @@ class SeatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = Seat::findOrFail($id);
+        $old->delete();
+
+        return Seat::all();
     }
 }

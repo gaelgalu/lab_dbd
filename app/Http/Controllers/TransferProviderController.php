@@ -3,9 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TransferProvider;
+use Validator;
 
 class TransferProviderController extends Controller
 {
+    public function rules(){
+        return [
+        'name' => 'required|string|max:30',
+        'telephone' => 'required|regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'mail' => 'required|email|max:50',
+        'adress_id' => 'required|numeric|min:0'
+        ];
+    }
+
+    public function rulesUpdate(){
+        return[
+        'name' => 'string|max:30',
+        'email' => 'email|max:50',
+        'phone' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
+        'adress_id' => 'numeric|min:0'
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +32,7 @@ class TransferProviderController extends Controller
      */
     public function index()
     {
-        //
+        return TransferProvider::all();
     }
 
     /**
@@ -23,7 +42,7 @@ class TransferProviderController extends Controller
      */
     public function create()
     {
-        //
+        // return view
     }
 
     /**
@@ -34,7 +53,13 @@ class TransferProviderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if($validator->fails()){
+            return response()->json([], 400);
+        }
+
+        $new = TransferProvider::create($request->all());
+        return response()->json($new, 201);
     }
 
     /**
@@ -45,7 +70,7 @@ class TransferProviderController extends Controller
      */
     public function show($id)
     {
-        //
+        return TransferProvider::findOrFail($id);
     }
 
     /**
@@ -56,7 +81,7 @@ class TransferProviderController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view
     }
 
     /**
@@ -68,7 +93,15 @@ class TransferProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $old = TransferProvider::findOrFail($id);
+        $validator = Validator::make($request->all(), $this->rulesUpdate());
+        if($validator->fails()){
+            return response()->json($old, 400);
+        }
+        
+        $old->update($request->all());
+
+        return response()->json($old,200);
     }
 
     /**
@@ -79,6 +112,9 @@ class TransferProviderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $old = TransferProvider::findOrFail($id);
+        $old->delete();
+
+        return TransferProvider::all();
     }
 }

@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'country', 'lastName', 'bornDate', 'phone', 'documentOriginCountry',
-        'typeOfDocument', 'numberOfDocument' //points and money must be fillable?
+        'typeOfDocument', 'numberOfDocument','points', 'money' //points and money must be fillable?
     ];
 
     /**
