@@ -21,7 +21,7 @@ class TransferProviderController extends Controller
         return[
         'name' => 'string|max:30',
         'telephone' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
-        'email' => 'email|max:50',
+        'mail' => 'email|max:50',
         'adress_id' => 'numeric|min:0'
         ];
     }
