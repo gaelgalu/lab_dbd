@@ -21,7 +21,7 @@ class AirportController extends Controller
         return [
         'name' => 'string|max:50',
         'telephone' => 'regex:/^(\+[0-9]{3})[0-9]{1,11}$/',
-        'email' => 'email|max:50',
+        'mail' => 'email|max:50',
         'adress_id' => 'numeric|min:0'
 
         ];
@@ -56,7 +56,7 @@ class AirportController extends Controller
     {
         $validator = Validator::make($request->all(), $this->rules());
         if($validator->fails()){
-            return response()->json([], 400);
+            return response()->json(['errors'=>$validator->errors()], 400);
         }
 
         $new = Airport::create($request->all());

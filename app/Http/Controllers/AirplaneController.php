@@ -51,7 +51,7 @@ class AirplaneController extends Controller
     {
         $validator = Validator::make($request->all(), $this->rules());
         if($validator->fails()){
-            return response()->json([], 400);
+            return response()->json(['errors'=>$validator->errors()], 400);
         }
 
         $new = Airplane::create($request->all());
