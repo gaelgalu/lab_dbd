@@ -21,13 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('name');
             $table->string('lastName');
-            $table->timestamp('bornDate');
+            $table->date('bornDate');
             $table->string('phone');
             $table->string('documentOriginCountry');
             $table->string('typeOfDocument');
             $table->integer('numberOfDocument');
-            $table->integer('points');
-            $table->decimal('money', 20, 2);
+            $table->integer('points')->nulable();
+            $table->decimal('money', 20, 2)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
