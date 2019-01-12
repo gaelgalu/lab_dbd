@@ -47,4 +47,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'user_role')->withTimestamps();
     }
+
+    public function isAdmin(){
+        $role = $this->roles()->filter(function ($role) {
+            return $role->id == 1;
+        })->first();
+
+        return $role && $role->id == 1;
+    }
 }
