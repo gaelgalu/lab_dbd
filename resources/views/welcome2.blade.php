@@ -1,3 +1,4 @@
+	
 	<!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
@@ -20,14 +21,14 @@
 			<!--
 			CSS
 			============================================= -->
-			<link rel="stylesheet" href="css/linearicons.css">
-			<link rel="stylesheet" href="css/owl.carousel.css">
-			<link rel="stylesheet" href="css/font-awesome.min.css">
-			<link rel="stylesheet" href="css/nice-select.css">
-			<link rel="stylesheet" href="css/magnific-popup.css">
+			<link rel="stylesheet" href="../../css/linearicons.css">
+			<link rel="stylesheet" href="../../css/owl.carousel.css">
+			<link rel="stylesheet" href="../../css/font-awesome.min.css">
+			<link rel="stylesheet" href="../../css/nice-select.css">
+			<link rel="stylesheet" href="../../css/magnific-popup.css">
 			<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-			<link rel="stylesheet" href="css/bootstrap.css">
-			<link rel="stylesheet" href="css/main.css">
+			<link rel="stylesheet" href="../../css/bootstrap.css">
+			<link rel="stylesheet" href="../../css/main.css">
 		</head>
 		<body>
 
@@ -57,6 +58,7 @@
 						</div>
 					</div>
 				</div>
+
 			</header>
 			<!-- End Header Area -->
 
@@ -68,23 +70,29 @@
 					<div class="active-banner-carousel">
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>
-								Enjoy Holidays <br>
-								with affordable Hotels
+								Disfruta tu viaje <br>
+								en los mejores hoteles
 							</h1>
-							<a href="#" class="head-btn btn text-uppercase">Start Searching</a>
+							<a href="#" class="head-btn btn text-uppercase">Buscar hotel</a>
 						</div>
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>
 								Enjoy Holidays <br>
 								with affordable Hotels
 							</h1>
-							<a href="#" class="head-btn btn text-uppercase">Start Searching</a>
+							<a href="#" class="head-btn btn text-uppercase">Buscar vuelo</a>
 						</div>
 					</div>
-											<div class="carousel-trigger">
-							<div class="next-trigger"><span class="lnr lnr-arrow-up"></span></span></div>
-							<div class="prev-trigger"><span class="lnr lnr-arrow-down"></span></span></div>
+					<div class= "left-arrow">
+						<div class="carousel-trigger">
+							<div class="prev-trigger"><span class="lnr lnr-arrow-left"></span></span></div>
 						</div>
+					</div>
+					<div class= "right-arrow">
+						<div class="carousel-trigger">
+							<div class="next-trigger" ;><span class="lnr lnr-arrow-right"></span></span></div>
+						</div>
+					</div>
 				</div>
 				</div>
 			</section>

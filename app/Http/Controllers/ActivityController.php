@@ -57,7 +57,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        // return view
+        return view('activities.create');
     }
 
     /**
