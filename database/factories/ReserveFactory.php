@@ -8,8 +8,9 @@ $factory->define(Reserve::class, function (Faker $faker) {
 
     return [
     	'date' => $faker->dateTimeBetween($startDate = '-1 month', $endDate = 'now', $timezone = null),
-    	'product' => str_random(50),
+    	// 'product' => str_random(50),
     	'amount' => rand(1, 5),
+    	'completed' => (bool)random_int(0, 1),
     	'price' => rand(50000, 2000000),
     	'user_id' => $users->random()->id
     ];

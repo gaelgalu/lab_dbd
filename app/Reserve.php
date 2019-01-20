@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserve extends Model
 {
-    protected $fillable = ['date', 'product', 'amount', 'price', 'user_id'];
+    protected $fillable = ['date', /*'product'*/ 'completed', 'amount', 'price', 'user_id'];
 
     public function activities()
     {
