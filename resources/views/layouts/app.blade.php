@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <title>Latravel</title>
     <title>{{ config('app.name', 'Latravel') }}</title>
 
     <!-- Scripts -->
@@ -43,44 +43,18 @@
         <!--
         CSS
         ============================================= -->
-    <link rel="stylesheet" href="../../css/linearicons.css">
-    <link rel="stylesheet" href="../../css/owl.carousel.css">
-    <link rel="stylesheet" href="../../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../css/nice-select.css">
-    <link rel="stylesheet" href="../../css/magnific-popup.css">
+    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
 
 
 <!-- Start Header Area -->
-    <header class="default-header">
-        <div class="container">
-            <div class="header-wrap">
-                <div class="header-top d-flex justify-content-between align-items-center">
-                    <div class="logo">
-                        <a href="http://192.168.10.10"><img src="img/logo.png" alt=""></a>
-                    </div>
-                    <div class="main-menubar d-flex align-items-center">
-                        <nav>
-                            @if (Route::has('login'))
-                                @auth
-                                    <a href="{{ url('/home') }}">Home</a>
-                                @else
-                                    <a href="{{ route('login') }}">Login</a>
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}">  Register</a>
-                                        @endif
-                                    @endauth
-                            @endif
-                        </nav>
-                        <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </header>
+    
 
 
 
@@ -88,57 +62,50 @@
 
 </head>
 <body>
+
+    
+
+
+
+
+
+
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+
+        <header class="default-header">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Latravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                <div class="header-wrap">
+                    <div class="header-top d-flex justify-content-between align-items-center">
+                        <div class="logo">
+                            <a href="http://192.168.10.10"><img src="img/logo.png" alt=""></a>
+                        </div>
+                        <div class="main-menubar d-flex align-items-center">
+                            <nav>
+                                @if (Route::has('login'))
+                                    @auth
+                                        <a href="{{ url('/home') }}">Home</a>
+                                    @else
+                                        <a href="{{ route('login') }}">Login</a>
+                                            @if (Route::has('register'))
+                                                <a href="{{ route('register') }}">  Register</a>
+                                            @endif
+                                        @endauth
                                 @endif
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                            </nav>
+                            <div class="menu-bar"><span class="lnr lnr-menu"></span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
+
+        </header>
+
+
+
+
+
+        
+        
 
         <main class="py-4">
             @yield('content')
@@ -226,15 +193,15 @@
             </div>
         </footer>
         <!-- End footer Area -->
+        <script src="public/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="public/js/jquery.nice-select.min.js"></script>
+    <script src="public/js/jquery.sticky.js"></script>
+    <script src="public/js/main.js"></script>
 
 
 
 
 
     </div>
-    <script src="js/vendor/jquery-2.2.4.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery.sticky.js"></script>
-    <script src="js/main.js"></script>
 </body>
 </html>

@@ -362,9 +362,42 @@
 }
 .lnr-cross:before {
 	content: "\e870";
+	background-color: #fff;
+	border-radius: 20px;
+	border: 1px solid rgba(21,22,22,0.05);
+	padding: 10px 10px;
+	background: #fff;
+	-webkit-transition: all 0.3s ease 0s;
+  	-moz-transition: all 0.3s ease 0s;
+  	-o-transition: all 0.3s ease 0s;
+  	transition: all 0.3s ease 0s;
 }
+.lnr-cross:hover:before {
+	background: #fa8d62;
+	color: #fff;
+	cursor: pointer;
+	border: 1px solid transparent;
+	cursor: pointer;
+}
+
 .lnr-menu:before {
 	content: "\e871";
+	background-color: #fff;
+	border-radius: 20px;
+	border: 1px solid rgba(21,22,22,0.05);
+	padding: 10px 10px;
+	background: #fff;
+	-webkit-transition: all 0.3s ease 0s;
+  	-moz-transition: all 0.3s ease 0s;
+  	-o-transition: all 0.3s ease 0s;
+  	transition: all 0.3s ease 0s;
+}
+.lnr-menu:hover:before {
+	background: #fa8d62;
+	color: #fff;
+	cursor: pointer;
+	border: 1px solid transparent;
+	cursor: pointer;
 }
 .lnr-list:before {
 	content: "\e872";

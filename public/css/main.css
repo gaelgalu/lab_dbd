@@ -1929,6 +1929,9 @@ nav a {
   text-transform: uppercase;
   margin: 0 25px;
   display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(21,22,22,0.05);
 }
 
 @media (max-width: 767px) {
@@ -1938,7 +1941,9 @@ nav a {
 }
 
 nav a:hover {
-  color: #f7427f;
+  color: #fff;
+  background-color: #fa8d62;
+  border: 1px transparent rgba(21,22,22,0.05);
 }
 
 .section-gap {
@@ -2210,7 +2215,7 @@ nav a:hover {
   font-weight: 500;
   background: #fff;
   text-transform: uppercase;
-  border: 1px solid transparent;
+  border: 1px solid rgba(21,22,22,0.05);
   font-size: 14px;
   border-radius: 20px;
   padding: 12px 28px;
@@ -2246,13 +2251,14 @@ nav a:hover {
 .carousel-trigger .next-trigger, .carousel-trigger .prev-trigger {
   width: 40px;
   background: #fff;
-  border: 1px solid #b2dbd5;
+  border: 1px solid rgba(21,22,22,0.05);;
   text-align: center;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   cursor: pointer;
+  border-radius: 20px;
 }
 
 .carousel-trigger .next-trigger span, .carousel-trigger .prev-trigger span {
@@ -2266,7 +2272,7 @@ nav a:hover {
 
 .carousel-trigger .next-trigger:hover, .carousel-trigger .prev-trigger:hover {
   background: #fa8d62;
-  border: 1px solid #f7427f;
+  border: 1px solid transparent;
 }
 
 .carousel-trigger .next-trigger:hover span, .carousel-trigger .prev-trigger:hover span {
