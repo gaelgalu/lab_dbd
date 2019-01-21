@@ -108,7 +108,7 @@
 								Lorem <br>
 								ipsum
 							</h1>
-							<a href="#" class="head-btn btn text-uppercase">Buscar actividades</a>
+							<a href="{{ route('activities.create') }}" class="head-btn btn text-uppercase">Buscar actividades</a>
 						</div>
 					</div>
 					<div class= "left-arrow">
