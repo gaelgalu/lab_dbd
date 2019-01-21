@@ -7,7 +7,7 @@ use App\Reserve;
 use App\Vehicle;
 use App\PaymentMethod;
 use App\VehicleSchedule;
-use App\Flight;
+use App\Seat;
 use Auth;
 use Validator;
 
@@ -15,7 +15,7 @@ class ReserveController extends Controller
 {
     public function rules(){
         return [
-            // 'user_id' => 'required|numeric|min:0',
+            'user_id' => 'required|numeric|min:0',
             // 'payment_method_id' => 'required|numeric|min:0',
             // 'product' => 'required|string|max:50',
             'date' => 'required|date_format:Y-m-d H:i:s',
@@ -23,12 +23,14 @@ class ReserveController extends Controller
             'amount' => 'required|numeric|min:0',
             'price' => 'required|numeric|regex:/^\d{0,18}(\.\d{1,2})?$/',
             'payment_method_id' => 'required|numeric',
-            'vehicleStartDate' => 'date_format:Y-m-d H:i:s',
-            'vehicleEndDate' => 'date_format:Y-m-d H:i:s',
-            'vehicle_id' => 'numeric',
-            'flight_id' => 'numeric',
-            'flight_id2' => 'numeric',
-            'user_id' => 'numeric'
+            'seat_id' => 'numeric',
+            'seat_id2' => 'numeric'
+            // 'vehicleStartDate' => 'date_format:Y-m-d H:i:s',
+            // 'vehicleEndDate' => 'date_format:Y-m-d H:i:s',
+            // 'vehicle_id' => 'numeric',
+            // 'flight_id' => 'numeric',
+            // 'flight_id2' => 'numeric',
+            // 'user_id' => 'required|numeric'
         ];
     }
 
@@ -76,34 +78,40 @@ class ReserveController extends Controller
             return response()->json(['errors'=>$validator->errors()], 400);
         }
 
-        $new = Reserve::create([
-            'date' => $request->date,
-            'completed' => $request->completed,
-            'amount' => $request->amount,
-            'price' => $request->price,
-            'user_id' => /*Auth::id()*/ $request->user_id,
-            'payment_method_id' => $request->payment_method_id
-        ]);
-
-        if ($request->vehicle_id && Vehicle::findOrFail($request->vehicle_id)){
-            $new->vehicles()->attach($request->vehicle_id);
-
-            VehicleSchedule::create([
-                'startDate' => $request->vehicleStartDate,
-                'endDate' => $request->vehicleEndDate,
-                'vehicle_id' => $request->vehicle_id
+        // if (Auth::check()){
+            $new = Reserve::create([
+                'date' => $request->date, //A qué se refiere esto? debiese ser now? timestamp?
+                'completed' => $request->completed, //debiese ser false? o true porque ya pagó?
+                'amount' => $request->amount,
+                'price' => $request->price,
+                'user_id' => /*Auth::id()*/ $request->user_id,
+                'payment_method_id' => $request->payment_method_id
             ]);
-        }  
 
-        //En caso de que exista viaje de ida
-        if ($request->flight_id && Flight::findOrFail($request->flight_id)){
-            $new->flights()->attach($request->flight_id);
-
-            //En caso de que exista un viaje de ida y vuelta
-            if ($request->flight_id2 && Flight::findOrFail($request->flight_id2)){
-                $new->flights()->attach($request->flight_id2);
+            if ($request->seat_id && Seat::findOrFail($request->seat_id)){
+                $new->seats()->attach($request->seat_id);
             }
-        }
+        // }
+
+        // if ($request->vehicle_id && Vehicle::findOrFail($request->vehicle_id)){
+        //     $new->vehicles()->attach($request->vehicle_id);
+
+        //     VehicleSchedule::create([
+        //         'startDate' => $request->vehicleStartDate,
+        //         'endDate' => $request->vehicleEndDate,
+        //         'vehicle_id' => $request->vehicle_id
+        //     ]);
+        // }  
+
+        // //En caso de que exista viaje de ida
+        // if ($request->flight_id && Flight::findOrFail($request->flight_id)){
+        //     $new->flights()->attach($request->flight_id);
+
+        //     //En caso de que exista un viaje de ida y vuelta
+        //     if ($request->flight_id2 && Flight::findOrFail($request->flight_id2)){
+        //         $new->flights()->attach($request->flight_id2);
+        //     }
+        // }
 
         return response()->json($new, 201);
     }
