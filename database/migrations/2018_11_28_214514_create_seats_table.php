@@ -18,6 +18,8 @@ class CreateSeatsTable extends Migration
             $table->integer('seatNumber');
             $table->boolean('availability');
             $table->boolean('checkIn');
+            $table->decimal('price', 20, 2);
+
             $table->string('type');
 
             //Foreign key from flight

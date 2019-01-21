@@ -18,11 +18,12 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('bankAccountNumber')->unique();
             $table->string('typeOfAccount');
             $table->string('bank');
-            $table->timestamps();
 
-            //Foregin keys
-            // $table->unsignedInteger('reserve_id');
-            // $table->foreign('reserve_id')->references('id')->on('reserves')->onDelete('cascade');
+            //Foreign keys
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+            $table->timestamps();
         });
     }
 

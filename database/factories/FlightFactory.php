@@ -19,7 +19,7 @@ $factory->define(Flight::class, function (Faker $faker) {
 	}
 
     return [
-    	'price' => rand(100000, 1500000),
+    	// 'price' => rand(100000, 1500000),
     	'arrivalDate' => $faker->dateTimeBetween($startDate = '+1 weeks', $endDate = '+2 weeks', $timezone = null)->format('d-m-Y'),
     	'arrivalTime' => $faker->time($format = 'H:i', $max = 'now'),
     	'departureDate' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+1 weeks', $timezone = null)->format('d-m-Y'),
