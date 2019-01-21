@@ -20,9 +20,10 @@ class CreateSeatsTable extends Migration
             $table->boolean('checkIn');
             $table->string('type');
 
-            //Foreign key.
-            $table->unsignedInteger('airplane_id');
-            $table->foreign('airplane_id')->references('id')->on('airplanes')->onDelete('cascade');
+            //Foreign key from flight
+
+            $table->unsignedInteger('flight_id');
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
 
             $table->timestamps();
 

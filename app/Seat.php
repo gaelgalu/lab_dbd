@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seat extends Model
 {
-    protected $fillable = ['seatNumber', 'availability', 'checkIn', 'type', 'airplane_id'];
+    protected $fillable = ['seatNumber', 'availability', 'checkIn', 'type', 'flight_id'];
 
-    public function airplane()
+    public function reserves()
     {
-        return $this->belongsTo(Airplane::class);
+        return $this->belongsToMany(Reserve::class);
+    }
+
+    public function flight()
+    {
+    	return $this->belongsTo(Flight::class);
     }
 }

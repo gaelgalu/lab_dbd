@@ -4,17 +4,19 @@ namespace App\Http\Controllers\Reserve;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Reserve;
+use App\PaymentMethod;
 
-class PaymentMethod extends Controller
+class PaymentMethodController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($reserve)
     {
-        return "ashda";
+        return Reserve::findOrFail($reserve)->paymentMethod;
     }
 
     /**
@@ -44,9 +46,12 @@ class PaymentMethod extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($reserve_id, $paymentMethod_id)
     {
-        //
+        $reserve = Reserve::findOrFail($reserve_id);
+        $paymentMethod = PaymentMethod::findOrFail($paymentMethod_id);
+
+        return ($reserve->payment_method_id == $paymentMethod->id) ? $paymentMethod : abort(403);
     }
 
     /**

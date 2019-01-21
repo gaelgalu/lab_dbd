@@ -26,6 +26,11 @@ class CreateReservesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
+            //Foreign key from PaymentMethod
+
+            $table->unsignedInteger('payment_method_id');
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

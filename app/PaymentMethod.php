@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaymentMethod extends Model
 {
-    protected $fillable = ['bankAccountNumber', 'typeOfAccount', 'bank', 'reserve_id'];
+    protected $fillable = ['bankAccountNumber', 'typeOfAccount', 'bank'/*, 'reserve_id'*/];
 
     public function reserve()
     {
-        return $this->belongsTo(Reserve::class);
+        return $this->hasMany(Reserve::class);
     }
 }

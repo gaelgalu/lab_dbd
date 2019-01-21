@@ -30,7 +30,7 @@ Route::resources([
     // 'lodgings' => 'LodgingController',
     // 'packages' => 'PackageController',
     // 'paymentMethods' => 'PaymentMethodController',
-    // 'reserves' => 'ReserveController',
+    'reserves' => 'ReserveController',
     // 'roles' => 'RoleController',
     // 'rooms' => 'RoomController',
     // 'roomSchedules' => 'RoomScheduleController',
@@ -47,6 +47,7 @@ Route::resources([
     //Nested weás
 
     'users.reserves' => 'User\ReserveController',
-    'reserves.paymentMethods' => "Reserve\PaymentMethod"
+    'reserves.paymentMethods' => 'Reserve\PaymentMethodController',
+
 ]);
 

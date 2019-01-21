@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Reserve;
+use App\Stretch;
 
 class ReserveController extends Controller
 {
@@ -47,7 +48,7 @@ class ReserveController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, $reserve_id)
+    public function show(User $user, $reserve_id, $params)
     {
         $reserve = Reserve::findOrFail($reserve_id);
 

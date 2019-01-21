@@ -23,10 +23,6 @@ class EventServiceProvider extends ServiceProvider
             'App\Listener\SetRole',
         ],
 
-        'App\Events\NewAirplane' => [
-            'App\Listener\SetSeats',
-        ],
-
         'App\Events\NewFlight' => [
             'App\Listener\SetInsurance',
         ],
