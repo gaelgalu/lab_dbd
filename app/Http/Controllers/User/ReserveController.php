@@ -1,34 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
-use App\Airplane;
-use Validator;
+use App\Http\Controllers\Controller;
 
-class AirplaneController extends Controller
+use App\User;
+use App\Reserve;
+use App\Stretch;
+
+class ReserveController extends Controller
 {
-    public function rules(){
-        return [
-        'name' => 'required|string|max:30',
-        'code' => 'required|string|max:10'
-        ];
-    }
-
-    public function rulesUpdate(){
-        return [
-        'name' => 'string|max:30',
-        'code' => 'string|max:10'
-        ];
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        return Airplane::all();
+        return $user->reserves;
     }
 
     /**
@@ -38,7 +28,7 @@ class AirplaneController extends Controller
      */
     public function create()
     {
-        // return view
+        //
     }
 
     /**
@@ -49,13 +39,7 @@ class AirplaneController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), $this->rules());
-        if($validator->fails()){
-            return response()->json(['errors'=>$validator->errors()], 400);
-        }
-
-        $new = Airplane::create($request->all());
-        return response()->json($new, 201);
+        //
     }
 
     /**
@@ -64,9 +48,11 @@ class AirplaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user, $reserve_id, $params)
     {
-        return Airplane::findOrFail($id);
+        $reserve = Reserve::findOrFail($reserve_id);
+
+        return ($reserve->user_id == $user->id) ? $reserve : abort(403);
     }
 
     /**
@@ -77,7 +63,7 @@ class AirplaneController extends Controller
      */
     public function edit($id)
     {
-        //return view
+        //
     }
 
     /**
@@ -89,15 +75,7 @@ class AirplaneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $old = Airplane::findOrFail($id);
-        $validator = Validator::make($request->all(), $this->rulesUpdate());
-        if($validator->fails()){
-            return response()->json($old, 400);
-        }
-        
-        $old->update($request->all());
-
-        return response()->json($old,200);
+        //
     }
 
     /**
@@ -108,9 +86,6 @@ class AirplaneController extends Controller
      */
     public function destroy($id)
     {
-        $old = Airplane::findOrFail($id);
-        $old->delete();
-
-        return Airplane::all();
+        //
     }
 }

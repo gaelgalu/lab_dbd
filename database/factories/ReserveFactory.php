@@ -5,6 +5,7 @@ use App\Reserve;
 
 $factory->define(Reserve::class, function (Faker $faker) {
 	$users = DB::table('users')->select('id')->get();
+	$payment_methods = DB::table('payment_methods')->select('id')->get();
 
     return [
     	'date' => $faker->dateTimeBetween($startDate = '-1 month', $endDate = 'now', $timezone = null),
@@ -12,6 +13,7 @@ $factory->define(Reserve::class, function (Faker $faker) {
     	'amount' => rand(1, 5),
     	'completed' => (bool)random_int(0, 1),
     	'price' => rand(50000, 2000000),
-    	'user_id' => $users->random()->id
+    	'user_id' => $users->random()->id,
+    	'payment_method_id' => $payment_methods->random()->id
     ];
 });

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaymentMethodsTable extends Migration
+class CreateReserveSeatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreatePaymentMethodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_methods', function (Blueprint $table) {
+        Schema::create('reserve_seat', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('bankAccountNumber')->unique();
-            $table->string('typeOfAccount');
-            $table->string('bank');
-            $table->timestamps();
 
-            //Foregin keys
+            //Foreign keys from reserve and seat
+
             $table->unsignedInteger('reserve_id');
+            $table->unsignedInteger('seat_id');
+
             $table->foreign('reserve_id')->references('id')->on('reserves')->onDelete('cascade');
+            $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
@@ -33,6 +35,6 @@ class CreatePaymentMethodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('reserve_seat');
     }
 }

@@ -47,6 +47,7 @@ Route::resources([
     //Nested weás
 
     'users.reserves' => 'User\ReserveController',
-    'reserves.paymentMethods' => "Reserve\PaymentMethod"
+    'reserves.paymentMethods' => 'Reserve\PaymentMethodController',
+
 ]);
 

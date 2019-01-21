@@ -77,7 +77,7 @@
                 <div class="header-wrap">
                     <div class="header-top d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="http://192.168.10.10"><img src="img/logo.png" alt=""></a>
+                            <a href="/"><img src="img/logo.png" alt=""></a>
                         </div>
                         <div class="main-menubar d-flex align-items-center">
                             <nav>

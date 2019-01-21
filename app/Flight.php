@@ -27,14 +27,9 @@ class Flight extends Model
         return $this->hasOne(Insurance::class);
     }
 
-    public function stretches()
+    public function seats()
     {
-        return $this->belongsToMany(Stretch::class);
-    }
-
-    public function reserves()
-    {
-        return $this->belongsToMany(Reserve::class);
+        return $this->hasMany(Seat::class);
     }
 
     public function packages()
