@@ -70,17 +70,45 @@
 					<div class="active-banner-carousel">
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>
-								Disfruta tu viaje <br>
-								en los mejores hoteles
+								Planifica tu viaje <br>
+								con los mejores vuelos
 							</h1>
-							<a href="#" class="head-btn btn text-uppercase">Buscar hotel</a>
+							<a href="#" class="head-btn btn text-uppercase">Buscar vuelos</a>
 						</div>
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>
-								Enjoy Holidays <br>
-								with affordable Hotels
+								Disfruta tu viaje <br>
+								en los mejores hoteles
 							</h1>
-							<a href="#" class="head-btn btn text-uppercase">Buscar vuelo</a>
+							<a href="#" class="head-btn btn text-uppercase">Buscar hoteles</a>
+						</div>
+						<div class="banner-content col-lg-12 col-md-12">
+							<h1>
+								Lorem <br>
+								ipsum
+							</h1>
+							<a href="#" class="head-btn btn text-uppercase">Buscar paquetes</a>
+						</div>
+						<div class="banner-content col-lg-12 col-md-12">
+							<h1>
+								Lorem <br>
+								ipsum
+							</h1>
+							<a href="#" class="head-btn btn text-uppercase">Buscar vehículos</a>
+						</div>
+						<div class="banner-content col-lg-12 col-md-12">
+							<h1>
+								Lorem <br>
+								ipsum
+							</h1>
+							<a href="#" class="head-btn btn text-uppercase">Buscar traslados</a>
+						</div>
+						<div class="banner-content col-lg-12 col-md-12">
+							<h1>
+								Lorem <br>
+								ipsum
+							</h1>
+							<a href="#" class="head-btn btn text-uppercase">Buscar actividades</a>
 						</div>
 					</div>
 					<div class= "left-arrow">

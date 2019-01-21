@@ -602,6 +602,14 @@ pre code {
   width: 100%;
 }
 
+
+.background {
+  opacity: .9;
+  background-image: -webkit-linear-gradient(bottom, #b2dbd5 10%, #ffffff 90%);
+  background-image: -o-linear-gradient(bottom, #b2dbd5 10%, #ffffff 90%);
+  background-image: linear-gradient(to top, #ffffff 50%, #b2dbd5 90%);
+}
+
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
@@ -1431,17 +1439,17 @@ pre code {
 .form-control:focus {
   color: #495057;
   background-color: #fff;
-  border-color: #80bdff;
+  border-color: #fa8d62;
   outline: none;
 }
 
 .form-control::placeholder {
-  color: #868e96;
+  color: #d4dde1;
   opacity: 1;
 }
 
 .form-control:disabled, .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: #d4dde1;
   opacity: 1;
 }
 
@@ -1534,6 +1542,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 
 .form-group {
   margin-bottom: 1rem;
+  color: #222;
 }
 
 .form-text {
@@ -2289,6 +2298,7 @@ fieldset[disabled] a.btn {
 }
 
 .btn-link:hover {
+  color: #fa8d62;
   border-color: transparent;
 }
 
@@ -3415,13 +3425,14 @@ tbody.collapse.show {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 1px solid #2b616d;
   border-radius: 0.25rem;
 }
 
 .card-body {
   flex: 1 1 auto;
   padding: 1.25rem;
+
 }
 
 .card-title {
@@ -3458,8 +3469,9 @@ tbody.collapse.show {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #2b616d;
+  border-bottom: 1px solid #2b616d;
+  color: #fff;
 }
 
 .card-header:first-child {
@@ -4999,6 +5011,7 @@ a.bg-dark:focus, a.bg-dark:hover {
 
 .bg-transparent {
   background-color: transparent !important;
+  color: #222;
 }
 
 .border {
