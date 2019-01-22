@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ActivityProvider;
 use Validator;
+use Log;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityProviderController extends Controller
 {
@@ -32,6 +34,9 @@ class ActivityProviderController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $all = ActivityProvider::all();
+        Log::info('User: '.$user.';'.' Index request: '.$all);
         return ActivityProvider::all();
     }
 

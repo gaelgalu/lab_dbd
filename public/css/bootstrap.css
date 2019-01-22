@@ -1564,24 +1564,28 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 }
 
 .form-check {
+  align-items: center;
   position: relative;
   display: block;
   margin-bottom: 0.5rem;
+  color: #222;
+
 }
 
 .form-check.disabled .form-check-label {
-  color: #868e96;
+  color: #fa8d62;
 }
 
 .form-check-label {
-  padding-left: 1.25rem;
+  margin-left: 43%;
+  margin-top: 1rem;
   margin-bottom: 0;
 }
 
 .form-check-input {
   position: absolute;
-  margin-top: 0.25rem;
-  margin-left: -1.25rem;
+  margin-top: 1.25rem;
+  margin-left: 38%;
 }
 
 .form-check-input:only-child {

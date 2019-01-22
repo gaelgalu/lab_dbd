@@ -16,15 +16,15 @@ class CreateActivitiesTable extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->decimal('adultPrice', 20, 2);
-            $table->decimal('kidPrice', 20, 2);
-            $table->timestamp('startDate');
-            $table->timestamp('endDate');
-            $table->string('name', 30);
-            $table->text('description');
-            $table->integer('adultsCapacity');
-            $table->integer('kidsCapacity');
-            $table->boolean('availability');
+            $table->decimal('adultPrice', 20, 2);//
+            $table->decimal('kidPrice', 20, 2);//
+            $table->timestamp('startDate');//
+            $table->timestamp('endDate');//
+            $table->string('name', 30);//
+            $table->text('description');//
+            $table->integer('adultsCapacity');//
+            $table->integer('kidsCapacity');//
+            $table->boolean('availability');//
 
             //Foreign key from activity_providers table
 

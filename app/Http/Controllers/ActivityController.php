@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Activity;
 use Validator;
 use Log;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
 {
@@ -45,8 +46,10 @@ class ActivityController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $all = Activity::all();
-        Log::info('Index request: '.$all);
+        Log::info(' Index request: '.$all.'
+            User: '.$user);
         return Activity::all();
     }
 
@@ -68,12 +71,14 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $validator = Validator::make($request->all(), $this->rules());
         if($validator->fails()){
             return response()->json(['errors'=>$validator->errors()], 400);
         }
-
         $new = Activity::create($request->all());
+        Log::info('Store request: '.$new.'
+            User: '.$user);
         return response()->json($new, 201);
     }
 
