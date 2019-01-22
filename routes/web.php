@@ -59,3 +59,11 @@ Route::resources([
 
 ]);
 
+Route::get('/hola', function() {
+    return view('activities.create');
+});
+
+Route::get('/vuelos', function() {
+    return view('salvacion.flights.search');
+});
+

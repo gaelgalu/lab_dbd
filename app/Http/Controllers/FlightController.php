@@ -139,7 +139,7 @@ class FlightController extends Controller
 
     public function search()
     {
-        return view('dynamicdependant')->with('adress_list', Adress::All());
+        return view('searchtravel')->with('adress_list', Adress::All());
     }
 
     public function testing(Request $request){

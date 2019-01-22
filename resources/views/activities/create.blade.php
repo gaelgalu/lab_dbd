@@ -177,7 +177,7 @@ function handleOnClickAvailability(x){
                                     <select id="activity_provider_id" type="activity_provider_id" class="form-control{{ $errors->has('activity_provider_id') ? ' is-invalid' : '' }}" name="activity_provider_id" value="{{ old('activity_provider_id') }}" onchange="handleOnChangeActivityProviderId()" required>
                                         <?php
                                             
-                                            $db = pg_connect("host=127.0.0.1 port=5432 dbname=proyectodbd user=homestead password=secret");
+                                            $db = pg_connect("host=127.0.0.1 port=5432 dbname=latam user=testuser");
                                             
                                             $result = pg_query($db, "SELECT id, name FROM activity_providers");
                                             
