@@ -19,9 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Route::post('/DynamicDependent/fetch', 'DynamicDependentController@fetch')->name('dynamicdependent.fetch');
-Route::post('DynamicDependent/testing', 'DynamicDependentController@testing')->name('testing');
-
+Route::post('/DynamicDependent/fetch', 'FlightController@fetch')->name('dynamicdependent.fetch');
+Route::post('DynamicDependent/testing', 'FlightController@testing')->name('testing');
+Route::get('/searchflight', 'FlightController@search');
 //Route::post('/DependenciaDinamica/')
 
 
@@ -51,7 +51,7 @@ Route::resources([
     // 'vehicles' => 'VehicleController',
     // 'vehicleSchedules' => 'VehicleScheduleController',
     // 'vehicleSuppliers' => 'VehicleSupplierController',
-    'DynamicDependent' => 'DynamicDependentController',
+    // 'DynamicDependent' => 'DynamicDependentController',
 
     //Nested weás
 

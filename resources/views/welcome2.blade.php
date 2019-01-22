@@ -74,7 +74,7 @@
 								Planifica tu viaje <br>
 								con los mejores vuelos
 							</h1>
-							<a href="DynamicDependent/" class="head-btn btn text-uppercase">Buscar vuelos</a>
+							<a href="searchflight" class="head-btn btn text-uppercase">Buscar vuelos</a>
 						</div>
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>

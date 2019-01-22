@@ -32,8 +32,6 @@ class DynamicDependentController extends Controller
 
 	}
 
-	function testing(Request $request){
-		return $request;
-	}
+
 
 }
