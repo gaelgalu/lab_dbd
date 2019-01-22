@@ -43,6 +43,7 @@
 									@if (Route::has('login'))
 					                    @auth
 					                        <a href="{{ url('/home') }}">Home</a>
+					                        <a href="{{ url('/logout')}}"> Logout </a>
 					               	    @else
 					           	            <a href="{{ route('login') }}">Login</a>
 					           	            	@if (Route::has('register'))
@@ -71,7 +72,7 @@
 								Planifica tu viaje <br>
 								con los mejores vuelos
 							</h1>
-							<a href="#" class="head-btn btn text-uppercase">Buscar vuelos</a>
+							<a href="searchflight" class="head-btn btn text-uppercase">Buscar vuelos</a>
 						</div>
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>

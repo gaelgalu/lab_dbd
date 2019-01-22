@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Flight;
 use Validator;
+use DB;
+use App\Adress;
 
 class FlightController extends Controller
 {
@@ -103,6 +105,23 @@ class FlightController extends Controller
 
         return response()->json($old,200);
     }
+    public function fetch(Request $request)
+    {
+        $select = $request->get('select');
+        $value = $request->get('value');
+        $dependent = "city";
+
+        $data = DB::table('adresses')->select('city')->where('city', '!=', $value)->get();
+
+        $output = '<option value="">Select Destiny City</option>';
+         foreach($data as $row)
+         {
+          $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
+         }
+         echo $output;
+    }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -116,5 +135,14 @@ class FlightController extends Controller
         $old->delete();
 
         return Flight::all();
+    }
+
+    public function search()
+    {
+        return view('dynamicdependant')->with('adress_list', Adress::All());
+    }
+
+    public function testing(Request $request){
+        return $request;
     }
 }
