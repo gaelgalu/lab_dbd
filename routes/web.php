@@ -18,6 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::post('/DynamicDependent/fetch', 'DynamicDependentController@fetch')->name('dynamicdependent.fetch');
+Route::post('DynamicDependent/testing', 'DynamicDependentController@testing')->name('testing');
+
+//Route::post('/DependenciaDinamica/')
+
+
+
 
 Route::resources([
     // 'activities' => 'ActivityController',
@@ -43,6 +51,7 @@ Route::resources([
     // 'vehicles' => 'VehicleController',
     // 'vehicleSchedules' => 'VehicleScheduleController',
     // 'vehicleSuppliers' => 'VehicleSupplierController',
+    'DynamicDependent' => 'DynamicDependentController',
 
     //Nested weás
 

@@ -24,7 +24,12 @@ class ReserveController extends Controller
             'price' => 'required|numeric|regex:/^\d{0,18}(\.\d{1,2})?$/',
             'payment_method_id' => 'required|numeric',
             'seat_id' => 'numeric',
-            'seat_id2' => 'numeric'
+            'seat_id2' => 'numeric',
+            'seat_id3' => 'numeric',
+            'seat_id4' => 'numeric',
+            'seat_id5' => 'numeric',
+            'seat_id6' => 'numeric',
+            'seat_id7' => 'numeric'
             // 'vehicleStartDate' => 'date_format:Y-m-d H:i:s',
             // 'vehicleEndDate' => 'date_format:Y-m-d H:i:s',
             // 'vehicle_id' => 'numeric',
