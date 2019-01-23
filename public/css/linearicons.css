@@ -77,7 +77,15 @@
 }
 .lnr-trash:before {
 	content: "\e811";
+	color: #222;
 }
+.lnr-trash:hover:before {
+	background: #fa8d62;
+	color: #fff;
+	cursor: pointer;
+	cursor: pointer;
+}
+
 .lnr-dice:before {
 	content: "\e812";
 }

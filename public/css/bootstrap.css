@@ -1196,10 +1196,17 @@ pre code {
   border-top: 1px solid #e9ecef;
 }
 
+
+.table thead{
+  background-color: #2b616d;
+  color: #fff;
+}
+
 .table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #e9ecef;
 }
+
 
 .table tbody + tbody {
   border-top: 2px solid #e9ecef;
@@ -1216,11 +1223,13 @@ pre code {
 
 .table-bordered {
   border: 1px solid #e9ecef;
+  color:#222;
 }
 
 .table-bordered th,
 .table-bordered td {
   border: 1px solid #e9ecef;
+  border-color: #2b616d;
 }
 
 .table-bordered thead th,

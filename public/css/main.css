@@ -8,12 +8,12 @@
 /* =================================== */
 ::-moz-selection {
   /* Code for Firefox */
-  background-color: #f7427f;
+  background-color: #fa8d62;
   color: #fff;
 }
 
 ::selection {
-  background-color: #f7427f;
+  background-color: #fa8d62;
   color: #fff;
 }
 
@@ -2208,7 +2208,7 @@ nav a:hover {
 }
 
 .banner-content .head-btn {
-  margin-top: 30px;
+  margin-top: 10%;
   background-color: #222;
   border: 1px solid #777;
   color: #222;

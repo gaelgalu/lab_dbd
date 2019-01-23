@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Activity;
+use App\ActivityProvider;
 use Validator;
 use Log;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,8 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        return view('activities.create');
+        $providers = ActivityProvider::all();
+        return view('activities.create',compact('providers'));
     }
 
     /**

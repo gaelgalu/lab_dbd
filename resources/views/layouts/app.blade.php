@@ -86,6 +86,14 @@
                                 @if (Route::has('login'))
                                     @auth
                                         <a href="{{ url('/home') }}">Home</a>
+                                        <a href="/cart/purchases">
+                                            {{ __('Carro de Compras') }}
+                                        </a>
+                                        <a href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
                                     @else
                                         <a href="{{ route('login') }}">Login</a>
                                             @if (Route::has('register'))
@@ -139,7 +147,7 @@
                                         <input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
 
 
-                                            <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+                                            <button class="click-btn btn btn-default"><div class='prev-trigger'><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div></button>
                                             <div style="position: absolute; left: -5000px;">
                                                 <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
                                             </div>

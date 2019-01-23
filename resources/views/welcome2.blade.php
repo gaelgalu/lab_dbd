@@ -43,6 +43,9 @@
 									@if (Route::has('login'))
 					                    @auth
 					                        <a href="{{ url('/home') }}">Home</a>
+					                        <a href="/cart/purchases">
+                                            	{{ __('Carro de compras') }}
+                                        	</a>
 					                        <a href="{{ url('/logout')}}"> Logout </a>
 					               	    @else
 					           	            <a href="{{ route('login') }}">Login</a>
