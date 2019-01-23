@@ -40,7 +40,7 @@ class Reserve extends Model
 
     public function paymentMethod()
     {
-        return $this->belongsTo(PaymentMethod::class);
+        return $this->hasOne(PaymentMethod::class);
     }
 
     public function user()

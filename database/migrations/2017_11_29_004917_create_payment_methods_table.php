@@ -15,13 +15,7 @@ class CreatePaymentMethodsTable extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('bankAccountNumber')->unique();
-            $table->string('typeOfAccount');
-            $table->string('bank');
-
-            //Foreign keys
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('token');
             
             $table->timestamps();
         });
