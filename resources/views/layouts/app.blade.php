@@ -22,11 +22,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-
-
-
-
-
    <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
@@ -110,14 +105,7 @@
 
         </header>
 
-
-
-
-
-        
-        
-
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
 

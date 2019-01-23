@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->string('documentOriginCountry');
             $table->string('typeOfDocument');
-            $table->integer('numberOfDocument');
-            $table->integer('points')->nulable();
+            $table->unsignedInteger('numberOfDocument');
+            $table->integer('points')->nullable();
             $table->decimal('money', 20, 2)->nullable();
             $table->rememberToken();
             $table->timestamps();
