@@ -48,11 +48,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'user_role')->withTimestamps();
     }
 
-    public function paymentMethods()
-    {
-        return $this->hasMany(PaymentMethod::class);
-    }
-
     public function isAdmin(){
         $role = $this->roles()->filter(function ($role) {
             return $role->id == 1;

@@ -24,9 +24,11 @@ $factory->define(Flight::class, function (Faker $faker) {
     	'arrivalTime' => $faker->time($format = 'H:i', $max = 'now'),
     	'departureDate' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+1 weeks', $timezone = null)->format('d-m-Y'),
     	'departureTime' => $faker->time($format = 'H:i', $max = 'now'),
+        'seatAmount' => 100,
     	'availability' => (bool)random_int(0, 1),
     	'origin' => $originAirport->id,
+        'multiplier' => $faker->randomFloat($nbMaxDecimals = 3, $min = 1, $max = 2),
     	'destiny' => $destinyAirport->id,
-    	'plane' => str_random(10)
+    	'code' => str_random(10)
     ];
 });

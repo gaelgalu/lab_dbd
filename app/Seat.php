@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seat extends Model
 {
-    protected $fillable = ['seatNumber', 'availability', 'checkIn', 'type', 'flight_id'];
+    protected $fillable = ['code', 'availability', 'checkIn', 'type', 'flight_id'];
 
     public function reserves()
     {

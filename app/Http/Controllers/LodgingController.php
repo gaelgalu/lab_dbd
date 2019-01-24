@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Lodging;
+use App\Adress;
 use Validator;
 
 class LodgingController extends Controller
@@ -122,5 +123,59 @@ class LodgingController extends Controller
         $old->delete();
 
         return Lodging::all();
+    }
+
+    public function search(){
+        return view('searchhotel', ['adresses' => Adress::all()]);
+    }
+
+    public function results(Request $request){
+        $lodgings = Lodging::all();
+
+        $possibleLodgings = [];
+
+        foreach ($lodgings as $lodging) {
+            $adress = $lodging->adress;
+            if ($lodging->adress->city == $request->destino_id){
+                array_push($possibleLodgings, $lodging);
+            }
+        }
+
+        $possibleRooms = [];
+
+        foreach ($possibleLodgings as $possibleLodging){
+            $rooms = $possibleLodging->rooms;
+
+            foreach ($rooms as $room){
+                $reserves = $room->reserves;
+                $bool = 0;
+
+                if ($reserves){
+                    foreach ($reserves as $reserve) {
+                        if ( (strtotime($reserve->roomStartDate) <= strtotime($request->fecha_entrada) &&
+                            strtotime($request->fecha_entrada) <= strtotime($reserve->roomEndDate) )  ||
+                            (strtotime($reserve->roomStartDate) <= strtotime($request->fecha_salida) && 
+                            strtotime($request->fecha_salida) <= strtotime($reserve->roomEndDate)) ) {
+                                $bool = 1;
+                        }
+                    }
+                    if ($bool != 1){
+                        array_push($possibleRooms, $room);
+                    }
+                }
+                
+            }
+        }
+
+        $availableRooms = [];
+
+        foreach ($possibleRooms as $possibleRoom){
+            if ($possibleRoom->available && $possibleRoom->adultsCapacity >= $request->capacidad_adultos){
+                array_push($availableRooms, $possibleRoom);
+            }
+        }
+
+        return $availableRooms;
+
     }
 }

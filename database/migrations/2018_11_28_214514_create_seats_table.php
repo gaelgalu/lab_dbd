@@ -15,7 +15,7 @@ class CreateSeatsTable extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('seatNumber');
+            $table->string('code');
             $table->boolean('availability');
             $table->boolean('checkIn');
             $table->decimal('price', 20, 2);

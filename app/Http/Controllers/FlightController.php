@@ -7,6 +7,7 @@ use App\Flight;
 use Validator;
 use DB;
 use App\Adress;
+use App\Airport;
 
 class FlightController extends Controller
 {
@@ -139,10 +140,32 @@ class FlightController extends Controller
 
     public function search()
     {
-        return view('searchtravel')->with('adress_list', Adress::All());
+        return view('searchflight')->with('adresses', Adress::All());
     }
 
-    public function testing(Request $request){
-        return $request;
+    public function results(Request $request){
+        $flights = Flight::All();
+
+        $result = [];
+
+        foreach ($flights as $flight) {
+            $origin = Airport::where('id', $flight->origin)->get()->first()->adress->city;
+            $destiny = Airport::where('id', $flight->destiny)->get()->first()->adress->city;
+
+            // return $origin;
+
+            if ($origin == $request->origen_id && $destiny == $request->destino_id
+                && strtotime($request->departureDate) <= strtotime($flight->departureDate)){
+                array_push($result, $flight);
+            }
+        }
+
+        return view('searchflightresults', [
+            'results' => $result,
+            'origin' => $request->origen_id,
+            'destination' => $request->destino_id
+        ]);
     }
+
+
 }

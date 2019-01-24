@@ -7,7 +7,7 @@ use App\Events\NewFlight;
 
 class Flight extends Model
 {
-    protected $fillable = ['price', 'startDate', 'endDate', 'availability'];
+    protected $fillable = ['multiplier', 'startDate', 'endDate', 'availability', 'seatAmount', 'code'];
 
     public static function boot()
     {

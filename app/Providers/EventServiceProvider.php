@@ -25,6 +25,7 @@ class EventServiceProvider extends ServiceProvider
 
         'App\Events\NewFlight' => [
             'App\Listener\SetInsurance',
+            'App\Listener\SetSeat'
         ],
     ];
 

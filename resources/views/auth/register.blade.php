@@ -393,7 +393,7 @@ function handleOnChangeTypeOfDocument() {
                                 <label for="bornDate" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de nacimiento') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="bornDate" type="date" class="form-control{{ $errors->has('bornDate') ? ' is-invalid' : '' }}" name="bornDate" value="{{ old('bornDate') }}" required>
+                                    <input id="bornDate" type="date" onkeydown="return false" class="form-control{{ $errors->has('bornDate') ? ' is-invalid' : '' }}" name="bornDate" value="{{ old('bornDate') }}" required>
 
                                     @if ($errors->has('bornDate'))
                                         <span class="invalid-feedback" role="alert">

@@ -6,7 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserve extends Model
 {
-    protected $fillable = ['date', /*'product'*/ 'completed', 'amount', 'price', 'user_id', 'payment_method_id'];
+    protected $fillable = 
+    ['date',
+     /*'product'*/ 
+    'completed',
+    'amount',
+    'price',
+    'user_id', 
+    'payment_method_id',
+    'roomStartDate',
+    'roomEnddate',
+    'vehicleStartdDate',
+    'vehicleEndDate',
+    'activityStartDate',
+    'activityEndDate',
+    'transferStartDate',
+    'transferEndDate',
+];
 
     public function activities()
     {
@@ -40,7 +56,7 @@ class Reserve extends Model
 
     public function paymentMethod()
     {
-        return $this->belongsTo(PaymentMethod::class);
+        return $this->hasOne(PaymentMethod::class);
     }
 
     public function user()
