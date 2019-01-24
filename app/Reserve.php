@@ -6,7 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserve extends Model
 {
-    protected $fillable = ['date', /*'product'*/ 'completed', 'amount', 'price', 'user_id', 'payment_method_id'];
+    protected $fillable = 
+    ['date',
+     /*'product'*/ 
+    'completed',
+    'amount',
+    'price',
+    'user_id', 
+    'payment_method_id',
+    'roomStartDate',
+    'roomEnddate',
+    'vehicleStartdDate',
+    'vehicleEndDate',
+    'activityStartDate',
+    'activityEndDate',
+    'transferStartDate',
+    'transferEndDate',
+];
 
     public function activities()
     {

@@ -15,7 +15,15 @@ class CreateReservesTable extends Migration
     {
         Schema::create('reserves', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('date');
+            $table->string('date')->nullable();
+            $table->string('roomStartDate')->nullable();
+            $table->string('roomEnddate')->nullable();
+            $table->string('vehicleStartdDate')->nullable();
+            $table->string('vehicleEndDate')->nullable();
+            $table->string('activityStartDate')->nullable();
+            $table->string('activityEndDate')->nullable();
+            $table->string('transferStartDate')->nullable();
+            $table->string('transferEndDate')->nullable();
             // $table->string('product', 50);
             $table->boolean('completed');
             $table->integer('amount');

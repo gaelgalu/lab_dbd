@@ -82,7 +82,7 @@
 								Disfruta tu viaje <br>
 								en los mejores hoteles
 							</h1>
-							<a href="#" class="head-btn btn text-uppercase">Buscar hoteles</a>
+							<a href="searchhotel" class="head-btn btn text-uppercase">Buscar hoteles</a>
 						</div>
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>

@@ -22,6 +22,8 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 // Route::post('/DynamicDependent/fetch', 'FlightController@fetch')->name('dynamicdependent.fetch');
 // Route::post('DynamicDependent/testing', 'FlightController@testing')->name('testing');
 Route::get('/searchflight', 'FlightController@search')->name('searchflight');
+Route::get('/searchhotel', 'LodgingController@search')->name('searchhotel');
+Route::post('/searchhotel/results', 'LodgingController@results');
 Route::post('/searchflight/results', 'FlightController@results');
 //Route::post('/DependenciaDinamica/')
 
