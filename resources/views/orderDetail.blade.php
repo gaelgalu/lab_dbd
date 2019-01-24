@@ -65,9 +65,9 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="bankAccountNumber" class="col-md-4 col-form-label text-md-right">{{ __('Número de cuenta') }}</label>
+                        <label for="bankAccountNumber" class="col-md-4 col-form-label text-md-right">{{ __('Capacidad de niñes') }}</label>
                         <div class="col-md-6">
-                            <input id="bankAccountNumber" type="text" class="form-control{{ $errors->has('bankAccountNumber') ? ' is-invalid' : '' }}" name="bankAccountNumber" value="{{ old('bankAccountNumber') }}" required>
+                            <input id="bankAccountNumber" type="number" min="0" class="form-control{{ $errors->has('bankAccountNumber') ? ' is-invalid' : '' }}" name="bankAccountNumber" value="{{ old('bankAccountNumber') }}" required>
                         </div>
                         @if ($errors->has('bankAccountNumber'))
                             <span class="invalid-feedback" role="alert">
@@ -77,12 +77,12 @@
                     </div>
 
                     <div class="form-group row mb-0">
-                                <div class="banner-content col-lg-12 col-md-12">
-                                    <button type="submit" class="head-btn btn text-uppercase">
-                                        {{ __('Pagar') }}
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="banner-content col-lg-12 col-md-12">
+                            <button type="submit" class="head-btn btn text-uppercase">
+                                {{ __('Pagar') }}
+                            </button>
+                        </div>
+                    </div>
 
 
                 </div>

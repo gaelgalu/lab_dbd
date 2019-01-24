@@ -10,7 +10,7 @@ class Reserve extends Model
 
     public function activities()
     {
-        return $this->belongsToMany(Activity::class);
+        return $this->belongsToMany(Activity::class, 'reserve_activity');
     }
 
     public function seats()
@@ -30,7 +30,7 @@ class Reserve extends Model
 
     public function packages()
     {
-        return $this->belongsToMany(Package::class)->withTimestamps();
+        return $this->belongsToMany(Package::class, 'reserve_package')->withTimestamps();
     }
 
     public function transfers()

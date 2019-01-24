@@ -48,6 +48,9 @@
                                         	</a>
 					                        <a href="{{ url('/logout')}}"> Logout </a>
 					               	    @else
+					               	    	<a href="/cart/purchases">
+                                            	{{ __('Carro de compras') }}
+                                        	</a>
 					           	            <a href="{{ route('login') }}">Login</a>
 					           	            	@if (Route::has('register'))
 					       	                    	<a href="{{ route('register') }}">	Register</a>

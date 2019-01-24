@@ -10,6 +10,10 @@ use App\Transfer;
 use App\Flight;
 use App\Package;
 use App\Insurance;
+use App\Reserve;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Log;
 
 class CartController extends Controller
 {
@@ -36,6 +40,7 @@ class CartController extends Controller
     	$cart = \Session::get('cart');
     	$product = Activity::find($id);
     	$newProduct = new Activity();
+        $newProduct->id = $product->id;
     	$newProduct->adultPrice = $product->adultPrice;
     	$newProduct->kidPrice = $product->kidPrice; 
     	$newProduct->startDate = $product->startDate;
@@ -56,6 +61,7 @@ class CartController extends Controller
     	$cart = \Session::get('cart');
     	$product = Vehicle::find($id);
     	$newProduct = new Vehicle();
+        $newProduct->id = $product->id;
     	$newProduct->name = $product->name;
     	$newProduct->price = $product->price; 
     	$newProduct->date = $product->date;
@@ -76,6 +82,7 @@ class CartController extends Controller
     	$cart = \Session::get('cart');
     	$product = Room::find($id);
     	$newProduct = new Room();
+        $newProduct->id = $product->id;
     	$newProduct->doorNumber = $product->doorNumber;
     	$newProduct->price = $product->price; 
     	$newProduct->kidsCapacity = $product->kidsCapacity;
@@ -94,6 +101,7 @@ class CartController extends Controller
     	$cart = \Session::get('cart');
     	$product = Transfer::find($id);
     	$newProduct = new Transfer();
+        $newProduct->id = $product->id;
     	$newProduct->price = $product->price;
     	$newProduct->capacity = $product->capacity; 
     	$newProduct->description = $product->description;
@@ -112,6 +120,7 @@ class CartController extends Controller
     	$cart = \Session::get('cart');
     	$product = Flight::find($id);
     	$newProduct = new Flight();
+        $newProduct->id = $product->id;
     	$newProduct->price = $product->price;
     	$newProduct->startDate = $product->startDate; 
     	$newProduct->endDate = $product->endDate;
@@ -126,6 +135,7 @@ class CartController extends Controller
     	$cart = \Session::get('cart');
     	$product = Package::find($id);
     	$newProduct = new Package();
+        $newProduct->id = $product->id;
     	$newProduct->name = $product->name;
     	$newProduct->price = $product->price; 
     	$newProduct->discount = $product->discount; 
@@ -140,6 +150,7 @@ class CartController extends Controller
     	$cart = \Session::get('cart');
     	$product = Insurance::find($id);
     	$newProduct = new Insurance();
+        $newProduct->id = $product->id;
     	$newProduct->price = $product->price;
     	$newProduct->description = $product->description;
     	$newProduct->availability = $product->availability;
@@ -167,16 +178,114 @@ class CartController extends Controller
         \Session::forget('cart');
         return redirect()->route('cart-purchases');
     }
+
     public function orderDetail()
     {
+        $this->pay();
+        $idUser = NULL;
+        if (Auth::user()){
+            $idUser = Auth::user()->id;
+        }
         $cart = \Session::get('cart');
+
+
         $subtotal = $this->total();
         $total = 0;
         foreach ($subtotal as $subtotalProduct) {
             $total += array_sum($subtotalProduct);
         }
         \Session::put('subtotal', $subtotal);
-        return view('orderDetail', compact('cart', 'total', 'subtotal'));
+        return view('orderDetail', compact('cart', 'total', 'subtotal', 'idUser', 'reserve'));
+    }
+
+    public function pay(){
+        $idUser = NULL;
+        if (Auth::user()){
+            $idUser = Auth::user()->id;
+        }
+        $cart = \Session::get('cart');
+        foreach ($cart as $key => $products) {
+            if($key == 'activity'){
+                foreach ($products as $activity) {
+                    $reserve = new Reserve();
+                    $reserve->date=Carbon::now();
+                    $reserve->completed="true";
+                    $reserve->amount=$activity->kidsCapacity + $activity->adultsCapacity;
+                    $reserve->user_id=$idUser;
+                    $reserve->payment_method_id=1;
+                    $reserve->price=$activity->kidsCapacity * $activity->kidPrice + $activity->adultsCapacity * $activity->adultPrice;
+                    $reserve->save();
+                    $reserve->activities()->attach($activity->id);
+                }
+            }
+            if($key == 'vehicle'){
+                foreach ($products as $vehicle) {
+                    $reserve = new Reserve();
+                    $reserve->date=Carbon::now();
+                    $reserve->completed="true";
+                    $reserve->amount=1;
+                    $reserve->user_id=$idUser;
+                    $reserve->payment_method_id=1;
+                    $reserve->activities()->attach($activity->id);
+                    $reserve->price=$vehicle->price;
+                    $reserve->save();
+                }
+            }
+            if($key == 'room'){
+                foreach ($products as $room) {
+                    $reserve = new Reserve();
+                    $reserve->date=Carbon::now();
+                    $reserve->completed="true";
+                    $reserve->amount=1;
+                    $reserve->user_id=$idUser;
+                    $reserve->payment_method_id=1;
+                    $reserve->rooms()->attach($room->id);
+                    $reserve->price=$room->price;
+                    $reserve->save();
+                }
+            }
+            if($key == 'transfer'){
+                foreach ($products as $transfer) {
+                    $reserve = new Reserve();
+                    $reserve->date=Carbon::now();
+                    $reserve->completed="true";
+                    $reserve->amount=1;
+                    $reserve->user_id=$idUser;
+                    $reserve->payment_method_id=1;
+                    $reserve->transfers()->attach($transfer->id);
+                    $reserve->price=$transfer->price;
+                    $reserve->save();
+                }
+            }
+            if($key == 'flight'){
+                foreach ($products as $flight) {
+                    $reserve = new Reserve();
+                    $reserve->date=Carbon::now();
+                    $reserve->completed="true";
+                    $reserve->amount=1;
+                    $reserve->user_id=$idUser;
+                    $reserve->payment_method_id=1;
+                    $reserve->flights()->attach($flight->id);
+                    $reserve->price=$flight->price;
+                    $reserve->save();
+                }
+            }
+            if($key == 'package'){
+                foreach ($products as $package) {
+                    $reserve = new Reserve();
+                    $reserve->date=Carbon::now();
+                    $reserve->completed="true";
+                    $reserve->amount=1;
+                    $reserve->user_id=$idUser;
+                    $reserve->payment_method_id=1;
+                    $reserve->packages()->attach($package->id);
+                    $reserve->price=$package->price;
+                    $reserve->save();
+                }
+            }
+        }
+        \Session::forget('cart');
+
     }
 
 

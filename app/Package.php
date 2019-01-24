@@ -10,7 +10,7 @@ class Package extends Model
 
     public function reserves()
     {
-        return $this->belongsToMany(Reserve::class);
+        return $this->belongsToMany(Reserve::class, 'reserve_package');
     }
 
     public function vehicles()

@@ -16,7 +16,7 @@ class Activity extends Model
 
     public function reserves()
     {
-        return $this->belongsToMany(Reserve::class);
+        return $this->belongsToMany(Reserve::class, 'reserve_activity');
     }
 
     public function packages()
