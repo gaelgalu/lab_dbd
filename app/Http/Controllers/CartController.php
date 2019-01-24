@@ -181,7 +181,7 @@ class CartController extends Controller
 
     public function orderDetail()
     {
-        $this->pay();
+        
         $idUser = NULL;
         if (Auth::user()){
             $idUser = Auth::user()->id;
@@ -195,6 +195,7 @@ class CartController extends Controller
             $total += array_sum($subtotalProduct);
         }
         \Session::put('subtotal', $subtotal);
+        $this->pay();
         return view('orderDetail', compact('cart', 'total', 'subtotal', 'idUser', 'reserve'));
     }
 
@@ -295,7 +296,6 @@ class CartController extends Controller
     {
     	$cart = \Session::get('cart');
     	$subtotal = array("room" => array(), "activity" => array(), "flight" => array(), "vehicle" => array(), "transfer" => array(), "insurance" => array(),"package" => array());
-    	//$total = 0;
     	foreach ($cart as $key => $products) {
     		if($key == 'room'){
     			$i = 0;
