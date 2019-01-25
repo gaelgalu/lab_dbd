@@ -130,6 +130,7 @@ class LodgingController extends Controller
     }
 
     public function results(Request $request){
+
         $lodgings = Lodging::all();
 
         $possibleLodgings = [];
@@ -152,30 +153,51 @@ class LodgingController extends Controller
 
                 if ($reserves){
                     foreach ($reserves as $reserve) {
-                        if ( (strtotime($reserve->roomStartDate) <= strtotime($request->fecha_entrada) &&
-                            strtotime($request->fecha_entrada) <= strtotime($reserve->roomEndDate) )  ||
-                            (strtotime($reserve->roomStartDate) <= strtotime($request->fecha_salida) && 
-                            strtotime($request->fecha_salida) <= strtotime($reserve->roomEndDate)) ) {
+                        if ( (strtotime($reserve->roomStartDate) <= strtotime(date('d-m-Y', strtotime($request->fecha_entrada))) &&
+                            strtotime(date('d-m-Y', strtotime($request->fecha_salida))) <= strtotime($reserve->roomEnddate) ) ){
                                 $bool = 1;
+                            }
+                        else if (
+                            (strtotime($reserve->roomStartDate) <= strtotime(date('d-m-Y', strtotime($request->fecha_salida))) && 
+                            strtotime(date('d-m-Y', strtotime($request->fecha_salida))) <= strtotime($reserve->roomEnddate) ) ) {
+                            $bool = 1;
+                        }
+                        else if (
+                            (strtotime(date('d-m-Y', strtotime($request->fecha_entrada))) <= strtotime($reserve->roomStartDate) && 
+                            strtotime($reserve->roomEnddate) <= strtotime(date('d-m-Y', strtotime($request->fecha_salida))) )){
+                            $bool = 1;
+                        }
+                        else if (
+                            (strtotime(date('d-m-Y', strtotime($request->fecha_entrada))) >= strtotime($reserve->roomStartDate) && 
+                            strtotime($reserve->roomEnddate) >= strtotime(date('d-m-Y', strtotime($request->fecha_entrada))) )){
+                            $bool = 1;
                         }
                     }
                     if ($bool != 1){
                         array_push($possibleRooms, $room);
                     }
                 }
-                
             }
         }
 
         $availableRooms = [];
+        $availableLodgings = [];
 
         foreach ($possibleRooms as $possibleRoom){
             if ($possibleRoom->availability && $possibleRoom->adultsCapacity >= $request->capacidad_adultos){
                 array_push($availableRooms, $possibleRoom);
+                array_push($availableLodgings, $possibleRoom->lodging);
             }
         }
 
-        return $availableRooms;
+        return view('searchlodgingsresult', [
+            'results' => $availableRooms, 
+            'city' => $request->destino_id,
+            'capacityRequired' => $request->capacidad_adultos,
+            'startDate' => $request->fecha_entrada,
+            'endDate' => $request->fecha_salida,
+            'lodgings' => $availableLodgings
+        ]);
 
     }
 }
