@@ -16,6 +16,8 @@ class CreateReservesTable extends Migration
         Schema::create('reserves', function (Blueprint $table) {
             $table->increments('id');
             $table->string('date')->nullable();
+            $table->string('startDate')->nullable();
+            $table->string('endDate')->nullable();
             $table->string('roomStartDate')->nullable();
             $table->string('roomEnddate')->nullable();
             $table->string('vehicleStartdDate')->nullable();

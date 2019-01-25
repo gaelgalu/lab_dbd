@@ -23,6 +23,7 @@ class CreateVehiclesTable extends Migration
             $table->string('brand', 25);
             $table->string('model', 25);
             $table->text('description');
+            $table->integer('type')->nullable();
 
             //Foreing key from vehicle_suppliers
 

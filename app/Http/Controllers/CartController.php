@@ -14,9 +14,11 @@ use App\Reserve;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Log;
+use DateTime;
 
 class CartController extends Controller
 {
+
     public function __construct(){
 		if(!\Session::has('cart')) \Session::put('cart', array("activity" => array(), "vehicle" => array(), "room" => array(), "transfer" => array(), "insurance" => array(), "flight" => array(), "package" => array()));
 	}
@@ -57,7 +59,7 @@ class CartController extends Controller
     }
 
     	//Vehicle
-    public function addVehicle($id){
+    public function addVehicle($id, $startDate, $endDate){
     	$cart = \Session::get('cart');
     	$product = Vehicle::find($id);
     	$newProduct = new Vehicle();
@@ -71,6 +73,11 @@ class CartController extends Controller
     	$newProduct->brand = $product->brand;
     	$newProduct->model = $product->model;
     	$newProduct->description = $product->description;
+        $dtime1 = DateTime::createFromFormat("Y-m-d H:i:s", $startDate);
+        $timestamp1 = $dtime1->getTimestamp();
+        $dtime2 = DateTime::createFromFormat("Y-m-d H:i:s", $endDate);
+        $timestamp2 = $dtime2->getTimestamp();
+        $newProduct->type = abs($timestamp1 - $timestamp2)/60/60/24;
     	$newProduct->vehicle_supplier_id = $product->vehicle_supplier_id;
     	array_push($cart['vehicle'], $newProduct);
     	\Session::put('cart', $cart);
@@ -78,7 +85,7 @@ class CartController extends Controller
     }
 
     	//Room
-    public function addRoom($id){
+    public function addRoom($id, $startDate, $endDate){
     	$cart = \Session::get('cart');
     	$product = Room::find($id);
     	$newProduct = new Room();
@@ -87,7 +94,11 @@ class CartController extends Controller
     	$newProduct->price = $product->price; 
     	$newProduct->kidsCapacity = $product->kidsCapacity;
     	$newProduct->adultsCapacity = $product->adultsCapacity;
-    	$newProduct->type = $product->type;
+        $dtime1 = DateTime::createFromFormat("Y-m-d H:i:s", $startDate);
+        $timestamp1 = $dtime1->getTimestamp();
+        $dtime2 = DateTime::createFromFormat("Y-m-d H:i:s", $endDate);
+        $timestamp2 = $dtime2->getTimestamp();
+    	$newProduct->type = abs($timestamp1 - $timestamp2)/60/60/24;
     	$newProduct->description = $product->description;
     	$newProduct->availability = $product->availability;
     	$newProduct->lodging_id = $product->lodging_id;
@@ -155,7 +166,7 @@ class CartController extends Controller
     	$newProduct->description = $product->description;
     	$newProduct->availability = $product->availability;
     	$newProduct->flight_id = $product->flight_id;
-    	array_push($cart['package'], $newProduct);
+    	array_push($cart['insurance'], $newProduct);
     	\Session::put('cart', $cart);
     	return redirect()->route('cart-purchases');
     }
@@ -222,27 +233,29 @@ class CartController extends Controller
             if($key == 'vehicle'){
                 foreach ($products as $vehicle) {
                     $reserve = new Reserve();
+                    Log::info("CONSOLA: reserve id: ".$reserve->id);
                     $reserve->date=Carbon::now();
                     $reserve->completed="true";
                     $reserve->amount=1;
                     $reserve->user_id=$idUser;
                     $reserve->payment_method_id=1;
-                    $reserve->activities()->attach($activity->id);
-                    $reserve->price=$vehicle->price;
+                    $reserve->price=$vehicle->price * $vehicle->type;
                     $reserve->save();
+                    $reserve->vehicles()->attach($vehicle->id);
                 }
             }
             if($key == 'room'){
                 foreach ($products as $room) {
                     $reserve = new Reserve();
+                    Log::info("CONSOLA: reserve id: ".$reserve->id);
                     $reserve->date=Carbon::now();
                     $reserve->completed="true";
                     $reserve->amount=1;
                     $reserve->user_id=$idUser;
                     $reserve->payment_method_id=1;
-                    $reserve->rooms()->attach($room->id);
-                    $reserve->price=$room->price;
+                    $reserve->price=$room->price * $room->type;
                     $reserve->save();
+                    $reserve->rooms()->attach($room->id);
                 }
             }
             if($key == 'transfer'){
@@ -253,9 +266,9 @@ class CartController extends Controller
                     $reserve->amount=1;
                     $reserve->user_id=$idUser;
                     $reserve->payment_method_id=1;
-                    $reserve->transfers()->attach($transfer->id);
                     $reserve->price=$transfer->price;
                     $reserve->save();
+                    $reserve->transfers()->attach($transfer->id);
                 }
             }
             if($key == 'flight'){
@@ -266,9 +279,9 @@ class CartController extends Controller
                     $reserve->amount=1;
                     $reserve->user_id=$idUser;
                     $reserve->payment_method_id=1;
-                    $reserve->flights()->attach($flight->id);
                     $reserve->price=$flight->price;
                     $reserve->save();
+                    $reserve->flights()->attach($flight->id);
                 }
             }
             if($key == 'package'){
@@ -279,9 +292,9 @@ class CartController extends Controller
                     $reserve->amount=1;
                     $reserve->user_id=$idUser;
                     $reserve->payment_method_id=1;
-                    $reserve->packages()->attach($package->id);
                     $reserve->price=$package->price;
                     $reserve->save();
+                    $reserve->packages()->attach($package->id);
                 }
             }
         }
@@ -300,29 +313,23 @@ class CartController extends Controller
     		if($key == 'room'){
     			$i = 0;
     			foreach ($products as $room) {
-
-
-    				/*$fecha_entrada = new DateTime($room->fecha_entrada);
-        			$fecha_salida = new DateTime($room->fecha_salida);
-        			$noches_alojamiento = $fecha_entrada->diff($fecha_salida);
-        			$noches = data_get($noches_alojamiento, 'days');
-        			$sub = $noches * $room->price;
-        			array_push($subtotal[$key], $sub);*/
-        			$sub = $room->price;//
-        			array_push($subtotal[$key], $sub);//
+    				$startDate = new DateTime($room->startDate);
+        			$endDate = new DateTime($room->endDate);
+        			$nights = $startDate->diff($endDate);
+        			$amount = data_get($nights, 'days');
+        			$sub = $room->type * $room->price;
+        			array_push($subtotal[$key], $sub);
         			$i++;
     			}
     		}
     		else if ($key == 'vehicle') {
     			$i = 0;
     			foreach ($products as $vehicle) {
-    				/*$fecha_entrada = new DateTime($vehicle->fecha_inicio_arriendo);
-    				$fecha_salida = new DateTime($vehicle->fecha_fin_arriendo);
-    				$dias_arriendo = $fecha_entrada->diff($fecha_salida);
-    				$dias = data_get($dias_arriendo, 'days');
-    				$sub = $dias * $vehicle->price;
-    				array_push($subtotal[$key], $sub);*/
-    				$sub = $vehicle->price;
+    				$startDate = new DateTime($vehicle->startDate);
+    				$endDate = new DateTime($vehicle->endDate);
+    				$days = $startDate->diff($endDate);
+    				$amount = data_get($days, 'days');
+    				$sub = $vehicle->type * $vehicle->price;
     				array_push($subtotal[$key], $sub);
     				$i++;
     			}

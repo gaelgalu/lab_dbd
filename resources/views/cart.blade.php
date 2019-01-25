@@ -53,13 +53,14 @@
                             @for($i = 0; $i < count($products); $i++)
                                     <tr>
                                         <td>habitación</td>
-                                        <td>{{$products[$i]->name}}</td>
+                                        <td>Alojamiento: {{$products[$i]->lodging->name}}
+                                            Habitación: {{$products[$i]->doorNumber}}</td>
                                         <td>${{ $products[$i]->price }} por noche</td>
                                         <td>Por {{ $subtotal[$password][$i] / $products[$i]->price }} noches</td>
                                         <td> ${{ $subtotal[$password][$i] }}</td>
                                         <td align="center">
                                             <div class="banner-content col-lg-12 col-md-12">
-                                                <a href="/cart/delete/room/{{$i}}">class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
+                                                <a href="/cart/deleteItem/{{$password}}/{{$i}}" class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                         </td>
@@ -76,7 +77,8 @@
                                         <td>${{ $subtotal[$password][$i] }}</td>
                                         <td align="center">
                                             <div class="banner-content col-lg-12 col-md-12">
-                                                <a href="/cart/delete/activity/{{$i}}" class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i></a>
+                                                <a href="/cart/deleteItem/{{$password}}/{{$i}}" class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -86,14 +88,14 @@
                             @for($i = 0; $i < count($products); $i++)
                                 <tr>
                                     <td>vehículo</td>
-                                    <td>{{$products[$i]->name}}</td>
+                                    <td>{{$products[$i]->model}}</td>
                                     <td>${{ $products[$i]->price }} por dia</td>
-                                    <td>Modelo {{$products[$i]->model}} con capacidad de {{ $products[$i]->capacity}} personas</td>
+                                    <td>Capacidad para {{ $products[$i]->capacity}} personas</td>
                                     <td>${{ $subtotal[$password][$i] }}</td>
                                     <td align="center">
                                         <div class="banner-content col-lg-12 col-md-12">
-                                            <a href="/cart/delete/vehicle/{{$i}}"> class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
-                                        </a>
+                                            <a href="/cart/deleteItem/{{$password}}/{{$i}}" class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -105,10 +107,11 @@
                                         <td>vuelo</td>
                                         <td>{{$products[$i]->name}}</td>
                                         <td>${{ $products[$i]->price }} por persona</td>
+                                        <td></td>
                                         <td> ${{ $subtotal[$password][$i] }}</td>
                                         <td align="center">
                                             <div class="banner-content col-lg-12 col-md-12">
-                                                <a href="/cart/delete/flight/{{$i}} class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
+                                                <a href="/cart/deleteItem/{{$password}}/{{$i}}" class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                         </td>
@@ -118,14 +121,15 @@
                          @elseif($password === "transfer")
                             @for($i = 0; $i < count($products); $i++)
                                 <tr>
-                                    <td>traslado/td>
-                                    <td>{{$products[$i]->name}}</td>
-                                    <td>${{ $products[$i]->price }} por persona</td>
-                                    <td>Para {{ $products[$i]->capacity}} personas</td>
+                                    <td>traslado</td>
+                                    <td>{{$products[$i]->brand}} de modelo {{ $products[$i]->model }} con capacidad para {{ $products[$i]->capacity}} personas</td>
+                                    <td> ${{ $products[$i]->price }} por persona</td>
+                                    <td>1</td>
                                     <td> ${{ $subtotal[$password][$i] }}</td>
                                     <td align="center">
                                         <div class="banner-content col-lg-12 col-md-12">
-                                            <a href="/cart/delete/transfer/{{$i}} class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i></a>
+                                            <a href="/cart/deleteItem/{{$password}}/{{$i}}" class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -134,12 +138,13 @@
                             @for($i = 0; $i < count($products); $i++)
                                 <tr>
                                     <td>seguro</td>
-                                    <td>{{$products[$i]->name}}</td>
+                                    <td>{{$products[$i]->description}}</td>
                                     <td>${{ $products[$i]->price }} por persona</td>
+                                    <td>1</td>
                                     <td> ${{ $subtotal[$password][$i] }}</td>
                                     <td align="center">
                                         <div class="banner-content col-lg-12 col-md-12">
-                                            <a href="/cart/delete/insurance/{{$i}} class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
+                                            <a href="/cart/deleteItem/{{$password}}/{{$i}}" class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </td>
@@ -151,10 +156,11 @@
                                     <td>paquete</td>
                                     <td>{{$products[$i]->name}}</td>
                                     <td>${{ $products[$i]->price }} por persona</td>
+                                    <td>1</td>
                                     <td> ${{ $subtotal[$password][$i] }}</td>
                                     <td align="center">
                                         <div class="banner-content col-lg-12 col-md-12">
-                                            <a href="/cart/delete/package/{{$i}} class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
+                                            <a href="/cart/deleteItem/{{$password}}/{{$i}}" class="head-btn btn text-uppercase"><i class="lnr lnr-trash" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </td>

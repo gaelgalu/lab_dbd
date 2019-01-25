@@ -76,12 +76,13 @@ Route::get('cart/purchases', [
     'as' => 'cart-purchases',
     'uses' => 'CartController@show'
 ]);
-Route::get('cart/add/habitacion/{id}', 'CartController@addRoom');
-Route::get('cart/add/vehicle/{id}', 'CartController@addVehicle');
+Route::get('cart/add/room/{id}/{startDate}/{endDate}', 'CartController@addRoom');
+Route::get('cart/add/vehicle/{id}/{startDate}/{endDate}', 'CartController@addVehicle');
 Route::get('cart/add/activity/{id}/{amountOfKids}/{amountOfAdults}', 'CartController@addActivity');
 Route::get('cart/add/flight/{id}', 'CartController@addFlight');
 Route::get('cart/add/transfer/{id}', 'CartController@addTransfer');
 Route::get('cart/add/insurance/{id}', 'CartController@addInsurance');
+Route::get('cart/add/package/{id}', 'CartController@addPackage');
 Route::get('cart/thrashCart', 'CartController@thrashCart');
 Route::get('cart/deleteItem/{key}/{index}', 'CartController@deleteItem');
 Route::get('detail/order', [
