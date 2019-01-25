@@ -26,6 +26,7 @@ Route::get('/searchhotel', 'LodgingController@search')->name('searchhotel');
 Route::post('/searchhotel/results', 'LodgingController@results');
 Route::post('/searchflight/results', 'FlightController@results');
 //Route::post('/DependenciaDinamica/')
+Route::get('/userReserves', 'ReserveController@indexByUser');
 
 
 

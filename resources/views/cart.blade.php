@@ -105,9 +105,9 @@
                                 
                                     <tr>
                                         <td>vuelo</td>
-                                        <td>{{$products[$i]->name}}</td>
+                                        <td>Vuelo {{$products[$i]->flight->code}} de clase {{$products[$i]->type}} en el asiento {{$products[$i]->code}} de {{$products[$i]->flight->airports->get(0)->adress->city}}, {{$products[$i]->flight->airports->get(0)->adress->country}} a {{$products[$i]->flight->airports->get(1)->adress->city}}, {{$products[$i]->flight->airports->get(1)->adress->country}}</td>
                                         <td>${{ $products[$i]->price }} por persona</td>
-                                        <td></td>
+                                        <td>1</td>
                                         <td> ${{ $subtotal[$password][$i] }}</td>
                                         <td align="center">
                                             <div class="banner-content col-lg-12 col-md-12">

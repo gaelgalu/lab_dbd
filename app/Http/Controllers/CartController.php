@@ -8,6 +8,7 @@ use App\Vehicle;
 use App\Room;
 use App\Transfer;
 use App\Flight;
+use App\Seat;
 use App\Package;
 use App\Insurance;
 use App\Reserve;
@@ -129,13 +130,14 @@ class CartController extends Controller
     	//Flight
     public function addFlight($id){
     	$cart = \Session::get('cart');
-    	$product = Flight::find($id);
-    	$newProduct = new Flight();
+    	$product = Seat::find($id);
+    	$newProduct = new Seat();
         $newProduct->id = $product->id;
-    	$newProduct->price = $product->price;
-    	$newProduct->startDate = $product->startDate; 
-    	$newProduct->endDate = $product->endDate;
-    	$newProduct->availability = $product->availability;
+    	$newProduct->code = $product->code;
+    	$newProduct->availability = $product->availability; 
+    	$newProduct->checkIn = $product->checkIn;
+    	$newProduct->type = $product->type;
+        $newProduct->flight_id = $product->flight_id;
     	array_push($cart['flight'], $newProduct);
     	\Session::put('cart', $cart);
     	return redirect()->route('cart-purchases');

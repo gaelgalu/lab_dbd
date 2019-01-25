@@ -60,6 +60,15 @@ class ReserveController extends Controller
         return Reserve::all();
     }
 
+    public function indexByUser()
+    {
+        if (Auth::user()){
+            $idUser = Auth::user()->id;
+        }
+        $reserveUser = Reserve::orderBy('id','DESC')->userId($idUser)->get();
+        return view('reserves.userReserves', compact('reserveUser'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -80,7 +80,8 @@
                             <nav>
                                 @if (Route::has('login'))
                                     @auth
-                                        <a href="{{ url('/home') }}">Home</a>
+                                        <a href="{{ url('/') }}">Home</a>
+                                        <a href="{{ url('/userReserves') }}">Reservas</a>
                                         <a href="/cart/purchases">
                                             {{ __('Carro de Compras') }}
                                         </a>
@@ -90,6 +91,7 @@
                                             {{ __('Logout') }}
                                         </a>
                                     @else
+                                        <a href="{{ url('/') }}">Home</a>
                                         <a href="/cart/purchases">
                                             {{ __('Carro de compras') }}
                                         </a>
