@@ -13,10 +13,14 @@
 		            <img class="card-img-top img-fluid " src="{{URL::asset('/img/lodging.png')}}" alt="Card image cap">
 
 		            <div class="card-body">
-		                <h4 class="card-title">Nombre del hotel: {{$lodgings[$i]->name}} (Ciudad: {{$city}})</h4>
+		                <h4 class="card-title">Nombre del hotel: {{$lodgings[$i]->name}} Ciudad: {{$city}} Precio: ${{$results[$i]->price}}</h4>
+		                <p class="card-text">Número de habitación: {{$results[$i]->doorNumber}}</p>
 		                <p class="card-text">Fecha de llegada al hotel: {{$startDate}}</p>
 		                <p class="card-text">Fecha de salida del hotel: {{$endDate}}</p>
 		                <p class="card-text">Capacidad: {{$results[$i]->adultsCapacity}}</p>
+						<a href="{{url('/reserve/flight/')}}">
+			               	 <button type="submit" class="btn btn-primary btn-md">Agregar al carrito</button>
+			            </a>
 		            </div>
 		        </div>
 		    </div>
