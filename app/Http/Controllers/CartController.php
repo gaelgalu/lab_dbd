@@ -235,12 +235,13 @@ class CartController extends Controller
                     $reserve->endDate=$activity->endDate;
                     $reserve->save();
                     $reserve->activities()->attach($activity->id);
+                    Log::info("Reserve: ".$reserve."
+                        Activity: ".$activity);
                 }
             }
             if($key == 'vehicle'){
                 foreach ($products as $vehicle) {
                     $reserve = new Reserve();
-                    Log::info("CONSOLA: reserve id: ".$reserve->id);
                     $reserve->date=Carbon::now();
                     $reserve->completed="true";
                     $reserve->amount=1;
@@ -251,12 +252,13 @@ class CartController extends Controller
                     $reserve->endDate = $vehicle->endDate;
                     $reserve->save();
                     $reserve->vehicles()->attach($vehicle->id);
+                    Log::info("Reserve: ".$reserve."
+                        Activity: ".$vehicle);
                 }
             }
             if($key == 'room'){
                 foreach ($products as $room) {
                     $reserve = new Reserve();
-                    Log::info("CONSOLA: reserve id: ".$reserve->id);
                     $reserve->date=Carbon::now();
                     $reserve->completed="true";
                     $reserve->amount=1;
@@ -267,6 +269,8 @@ class CartController extends Controller
                     $reserve->endDate = $room->endDate;
                     $reserve->save();
                     $reserve->rooms()->attach($room->id);
+                    Log::info("Reserve: ".$reserve."
+                        Activity: ".$room);
                 }
             }
             if($key == 'transfer'){
@@ -280,6 +284,8 @@ class CartController extends Controller
                     $reserve->price=$transfer->price;
                     $reserve->save();
                     $reserve->transfers()->attach($transfer->id);
+                    Log::info("Reserve: ".$reserve."
+                        Activity: ".$transfer);
                 }
             }
             if($key == 'flight'){
@@ -293,6 +299,8 @@ class CartController extends Controller
                     $reserve->price=$flight->price;
                     $reserve->save();
                     $reserve->flights()->attach($flight->id);
+                    Log::info("Reserve: ".$reserve."
+                        Activity: ".$flight);
                 }
             }
             if($key == 'package'){
@@ -306,6 +314,8 @@ class CartController extends Controller
                     $reserve->price=$package->price;
                     $reserve->save();
                     $reserve->packages()->attach($package->id);
+                    Log::info("Reserve: ".$reserve."
+                        Activity: ".$package);
                 }
             }
         }
