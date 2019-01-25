@@ -2,22 +2,22 @@
 
 @section('content')
 
-@if (count($results) > 0)
+@if (count($activities) > 0)
 
-	@for($i = 0; $i<count($results); $i++)
+	@foreach($activities as $activity)
 	<form action="#" method="post">
         {{ csrf_field() }}
 		<div class="container">
 		    <div class="card-deck">
 		        <div class="card mb-4">
-		            <img class="card-img-top img-fluid " src="{{URL::asset('/img/lodging.png')}}" alt="Card image cap">
+		            <img class="card-img-top img-fluid " src="{{URL::asset('/img/activity.png')}}" alt="Card image cap">
 
 		            <div class="card-body">
-		                <h4 class="card-title">Nombre del hotel: {{$lodgings[$i]->name}} Ciudad: {{$city}} Precio: ${{$results[$i]->price}}</h4>
-		                <p class="card-text">Número de habitación: {{$results[$i]->doorNumber}}</p>
-		                <p class="card-text">Fecha de llegada al hotel: {{$startDate}}</p>
-		                <p class="card-text">Fecha de salida del hotel: {{$endDate}}</p>
-		                <p class="card-text">Capacidad: {{$results[$i]->adultsCapacity}}</p>
+		                <h4 class="card-title">Nombre de la actividad: "{{$activity->name}}"" Ciudad: {{$activity->activityProvider->adress->city}} </h4>
+		                <p class="card-text">Precio adultos: ${{$activity->adultPrice}}</p>
+		                <p class="card-text">Precio niños: ${{$activity->kidPrice}}</p>
+		                <p class="card-text">Fecha de inicio de la actividad: {{$activity->startDate}}</p>
+		                <p class="card-text">Fecha de término de la actividad: {{$activity->endDate}}</p>
 						{{-- <a href="{{url('/reserve/flight/')}}"> --}}
 			               	 <button type="submit" class="btn btn-primary btn-md">Agregar al carrito</button>
 			            {{-- </a> --}}
@@ -27,7 +27,7 @@
 		</div>
 	</form>
 
-	@endfor
+	@endforeach
 
 @else
 		<div class="container">
@@ -36,7 +36,7 @@
 
 		            <div class="card-body">
 		                <h4 class="card-title">No se han encontrado resultados en base a los criterios dados :(.</h4>
-		                <a href="{{route('searchhotel')}}">
+		                <a href="{{route('searchactivities')}}">
 		                <button type="button" class="btn btn-primary btn-md">Realizar otra búsqueda</button>
 		            </a>
 
@@ -49,4 +49,3 @@
 @endif
 
 @endsection
-

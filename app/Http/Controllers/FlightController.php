@@ -152,8 +152,6 @@ class FlightController extends Controller
             $origin = Airport::where('id', $flight->origin)->get()->first()->adress->city;
             $destiny = Airport::where('id', $flight->destiny)->get()->first()->adress->city;
 
-            // return $origin;
-
             if ($origin == $request->origen_id && $destiny == $request->destino_id
                 && strtotime($request->departureDate) <= strtotime($flight->departureDate)){
                 array_push($result, $flight);

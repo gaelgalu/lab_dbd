@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Activity;
 use App\ActivityProvider;
+use App\Adress;
 use Validator;
 use Log;
 use Illuminate\Support\Facades\Auth;
@@ -138,5 +139,63 @@ class ActivityController extends Controller
         $old->delete();
 
         return Activity::all();
+    }
+
+    public function search(){
+        return view('searchactivity', [
+            'adresses' => Adress::all(),
+        ]);
+    }
+
+    public function results(Request $request){
+        // return $request;
+
+        $activityProviders = ActivityProvider::All();
+
+        $possibleProviders = [];
+
+        foreach ($activityProviders as $provider) {
+            if ($provider->adress->city == $request->ciudad){
+                array_push($possibleProviders, $provider);
+            }
+        }
+
+        $possibleActivities = [];
+
+        foreach ($possibleProviders as $possibleProvider){
+            $activities = $possibleProvider->activities;
+
+            foreach ($activities as $activity){
+                $reserves = $activity->reserves;
+                $bool = 0;
+
+                if ($reserves){
+                    foreach ($reserves as $reserve) {
+                        if (strtotime($reserve->activityStartDate) < strtotime(date('d-m-Y', strtotime($request->inicioActividad)))) {
+                            $bool = 1;
+                        }
+                        else if (
+                            (strtotime(date('d-m-Y', strtotime($request->inicioActividad))) >= strtotime($reserve->activityEndDate))){
+                            $bool = 1;
+                        }
+                    }
+                    if ($bool != 1){
+                        array_push($possibleActivities, $activity);
+                    }
+                }
+            }
+        }
+
+        $availableActivities = [];
+
+        foreach ($possibleActivities as $possibleActivity){
+            if ($possibleActivity->availability && $possibleActivity->adultsCapacity >= $request->capacidad_adultos &&$possibleActivity->kidsCapacity >= $request->capacidad_niños){
+                array_push($availableActivities, $possibleActivity);
+            }
+        }
+
+        return view('searchactivitiesresult', [
+            'activities' => $availableActivities
+        ]);
     }
 }

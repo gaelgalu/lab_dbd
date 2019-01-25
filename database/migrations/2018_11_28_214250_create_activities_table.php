@@ -18,8 +18,8 @@ class CreateActivitiesTable extends Migration
 
             $table->decimal('adultPrice', 20, 2);//
             $table->decimal('kidPrice', 20, 2);//
-            $table->timestamp('startDate');//
-            $table->timestamp('endDate');//
+            $table->string('startDate');//
+            $table->string('endDate');//
             $table->string('name', 30);//
             $table->text('description');//
             $table->integer('adultsCapacity');//
