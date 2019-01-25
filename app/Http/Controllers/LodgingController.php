@@ -170,7 +170,7 @@ class LodgingController extends Controller
         $availableRooms = [];
 
         foreach ($possibleRooms as $possibleRoom){
-            if ($possibleRoom->available && $possibleRoom->adultsCapacity >= $request->capacidad_adultos){
+            if ($possibleRoom->availability && $possibleRoom->adultsCapacity >= $request->capacidad_adultos){
                 array_push($availableRooms, $possibleRoom);
             }
         }
