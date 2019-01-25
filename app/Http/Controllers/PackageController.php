@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Package;
+use App\Adress;
 use Validator;
 
 class PackageController extends Controller
@@ -32,7 +33,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        return Package::all();
+        return view('packages.index', ['packages' => Package::all()]);
     }
 
     /**
@@ -70,7 +71,34 @@ class PackageController extends Controller
      */
     public function show($id)
     {
-        return Package::findOrFail($id);
+        $package = Package::findOrFail($id);
+        $vehicles = $package->vehicles;
+        $rooms = $package->rooms;
+        $activities = $package->activities;
+        $flights = $package->flights;
+        $transfers = $package->transfers;
+        $transferOriginCities = [];
+        $transferDestinationCities = [];
+
+        foreach ($transfers as $transfer) {
+            $originCity = Adress::find($transfer->origin)->city;
+            $destinyCity = Adress::find($transfer->destiny)->city;
+
+            array_push($transferOriginCities, $originCity);
+            array_push($transferDestinationCities, $destinyCity);
+        }
+
+        return view('packages.show', [
+            "package" => $package,
+            "vehicles" => $vehicles,
+            "rooms" => $rooms,
+            "activities" => $activities,
+            "flights" => $flights,
+            "transfers" => $transfers,
+            "originCities" => $transferOriginCities,
+            "destinationCities" => $transferDestinationCities,
+        ]);
+
     }
 
     /**
