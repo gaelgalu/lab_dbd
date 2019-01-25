@@ -5,8 +5,6 @@
 @if (count($results) > 0)
 
 	@for($i = 0; $i<count($results); $i++)
-	<form action="#" method="post">
-        {{ csrf_field() }}
 		<div class="container">
 		    <div class="card-deck">
 		        <div class="card mb-4">
@@ -18,15 +16,13 @@
 		                <p class="card-text">Fecha de llegada al hotel: {{$startDate}}</p>
 		                <p class="card-text">Fecha de salida del hotel: {{$endDate}}</p>
 		                <p class="card-text">Capacidad: {{$results[$i]->adultsCapacity}}</p>
-						{{-- <a href="{{url('/reserve/flight/')}}"> --}}
+						<a href="/cart/add/room/{{$results[$i]->id}}/{{$startDate}}/{{$endDate}}">
 			               	 <button type="submit" class="btn btn-primary btn-md">Agregar al carrito</button>
-			            {{-- </a> --}}
+			            </a>
 		            </div>
 		        </div>
 		    </div>
 		</div>
-	</form>
-
 	@endfor
 
 @else
