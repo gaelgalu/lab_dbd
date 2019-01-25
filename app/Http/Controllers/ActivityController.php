@@ -148,8 +148,6 @@ class ActivityController extends Controller
     }
 
     public function results(Request $request){
-        // return $request;
-
         $activityProviders = ActivityProvider::All();
 
         $possibleProviders = [];
@@ -195,7 +193,9 @@ class ActivityController extends Controller
         }
 
         return view('searchactivitiesresult', [
-            'activities' => $availableActivities
+            'activities' => $availableActivities,
+            'numberOfKids' => $request->capacidad_niños,
+            'numberOfAdults' => $request->capacidad_adultos
         ]);
     }
 }
