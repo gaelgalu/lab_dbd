@@ -23,6 +23,8 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 // Route::post('DynamicDependent/testing', 'FlightController@testing')->name('testing');
 Route::get('/searchflight', 'FlightController@search')->name('searchflight');
 Route::get('/searchhotel', 'LodgingController@search')->name('searchhotel');
+Route::get('/searchactivity', 'ActivityController@search')->name('searchactivities');
+Route::post('/searchactivity/results', 'ActivityController@results');
 Route::post('/searchhotel/results', 'LodgingController@results');
 Route::post('/searchflight/results', 'FlightController@results');
 //Route::post('/DependenciaDinamica/')

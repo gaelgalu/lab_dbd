@@ -112,8 +112,8 @@
 						</div>
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>
-								Lorem <br>
-								ipsum
+								Disfruta de las <br>
+								mejores actividades
 							</h1>
 							<a href="{{ route('activities.create') }}" class="head-btn btn text-uppercase">Buscar actividades</a>
 						</div>
