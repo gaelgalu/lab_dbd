@@ -131,15 +131,27 @@ class CartController extends Controller
     }
 
     	//Flight
-    public function addFlight($id){
+    public function addFlight(Request $request){
     	$cart = \Session::get('cart');
-    	$product = Seat::find($id);
+
+    	$flight = Flight::find($request->id_vuelo);
+        $seats = $flight->seats;
+        $product = 0;
+
+        foreach ($seats as $seat) {
+            if ($seat->type == $request->typeOfSeat && $seat->availability){
+                $product = $seat;
+                break;
+            }
+        }
+
     	$newProduct = new Seat();
         $newProduct->id = $product->id;
     	$newProduct->code = $product->code;
     	$newProduct->availability = $product->availability; 
     	$newProduct->checkIn = $product->checkIn;
     	$newProduct->type = $product->type;
+        $newProduct->price = $product->price * $flight->multiplier;
         $newProduct->flight_id = $product->flight_id;
     	array_push($cart['flight'], $newProduct);
     	\Session::put('cart', $cart);

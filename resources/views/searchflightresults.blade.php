@@ -36,8 +36,8 @@
 					@if (count($results) > 0)
 
 						@foreach($results as $result)
-						<form action="/reserva/vuelo" method="post">
-					        {{ csrf_field() }}
+							<form action="/cart/add/flight/" method="post">
+								{{ csrf_field() }}
 							<div class="container">
 							    <div class="card-deck">
 							        <div class="card mb-4">
@@ -49,34 +49,16 @@
 							                <p class="card-text">Fecha y hora de llegada: {{$result->arrivalDate . " " . $result->arrivalTime}}</p>
 							                <p class="card-text">Asientos disponibles: {{$result->seatAmount}}</p>
 					                            <div class="form-group form-row align-items-end">
-									                <div class="col">
-									                    <label>Pasajeros</label>
-									                    <div class="row">
-									                        <div class="col input-group">
-									                            <input type="number" name="pasajeros_adultos" class="form-control text-right" value="1" min="1" max="5" onkeydown="return false">
-									                            <div class="input-group-append">
-									                                <span class="input-group-text">Adultos</span>
-									                            </div>
-									                        </div>
-									                    </div>
-									                </div>
-									                <div class="col-1"></div>
-									                <div class="col">
-									                    <label for="">Tipo Pasaje</label>
-									                    <select name="tipo_pasaje" class="form-control">
-
-									                    	<option>Economy</option>
-									                    	<option>Premium Economy</option>
-									                    	<option>Premium Business</option>
-
-									                    </select>
-									                </div>
-									                <input id="fligth_id" name="flight_id" type="hidden" value="{{$result->id}}">
-								                <a href="{{url('/reserve/flight/')}}">
+											<div>
+											<input class="form-control" type="text" name="id_vuelo" placeholder="carId" id="id_vuelo" value="{{$result->id}}" style="display: none">
+											</div>
+											<div>
+											<input class="form-control" type="text" name="typeOfSeat" placeholder="carId" id="typeOfSeat" value="{{$typeOfSeat}}" style="display: none">
+											</div>
+								                <a href="/cart/add/flight/">
 								               	 <button type="submit" class="btn btn-primary btn-md">Iniciar proceso reserva</button>
 								            	</a>
 									        </div>
-
 							            </div>
 							        </div>
 							    </div>

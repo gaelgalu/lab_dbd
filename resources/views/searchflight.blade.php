@@ -75,6 +75,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col">
+                                <label for="tipoAsiento">Tipo de asiento</label>
+                                <div class="form-group">
+                                    <select id="tipoAsiento" name="tipoAsiento" class="form-control selectpicker" title="Destino" data-live-search="true">
+
+                                            <option>Economy</option>
+                                            <option>Premium Economy</option>
+                                            <option>Premium Business</option>
+
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group row mb-0">
                                 <div class="banner-content col-lg-12 col-md-12">
                                     <button type="submit" class="head-btn btn text-uppercase">Busca tu vuelo</button>
