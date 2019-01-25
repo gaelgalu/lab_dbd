@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 // Route::post('/DynamicDependent/fetch', 'FlightController@fetch')->name('dynamicdependent.fetch');
 // Route::post('DynamicDependent/testing', 'FlightController@testing')->name('testing');
 Route::get('/searchflight', 'FlightController@search')->name('searchflight');
