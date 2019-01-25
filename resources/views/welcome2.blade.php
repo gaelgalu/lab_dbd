@@ -89,10 +89,10 @@
 						</div>
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>
-								Lorem <br>
-								ipsum
+								Disfruta de nuestros <br>
+								mejores paquetes
 							</h1>
-							<a href="#" class="head-btn btn text-uppercase">Buscar paquetes</a>
+							<a href="/packages" class="head-btn btn text-uppercase">Buscar paquetes</a>
 						</div>
 						<div class="banner-content col-lg-12 col-md-12">
 							<h1>

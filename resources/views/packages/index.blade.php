@@ -33,5 +33,24 @@
 
 <div class="background">
 	<div><p><br/><br/><br/><br/></p></div>
-</div>
+    @foreach($packages as $package)
+        <form action="/packages/{{$package->id}}" method="get">
+            {{ csrf_field() }}
+            <div class="container">
+                <div class="card-deck">
+                    <div class="card mb-4">
+                        <img class="card-img-top img-fluid " src="{{URL::asset('/img/package.png')}}" alt="Card image cap">
+
+                        <div class="card-body">
+                            <h4 class="card-title">Nombre del paquete: "{{$package->name}}" Precio: ${{$package->price}}</h4>
+                            <a href="{{url('/reserve/flight/')}}">
+                                 <button type="submit" class="btn btn-primary btn-md">Ver contenido del paquete</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    @endforeach
 @endsection

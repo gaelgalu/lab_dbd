@@ -37,4 +37,8 @@ class Adress extends Model
     {
         return $this->belongsToMany(TransferSchedule::class);
     }
+
+    public function transfers(){
+        return $this->belongsToMany(Transfer::class);
+    }
 }

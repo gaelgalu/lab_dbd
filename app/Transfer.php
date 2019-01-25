@@ -27,4 +27,8 @@ class Transfer extends Model
     {
         return $this->hasMany(TransferSchedule::class);
     }
+
+    public function adresses(){
+        return $this->belongsToMany(Adress::class);
+    }
 }

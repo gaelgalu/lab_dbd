@@ -15,26 +15,26 @@ class Package extends Model
 
     public function vehicles()
     {
-        return $this->belongsToMany(Vehicle::class);
+        return $this->belongsToMany(Vehicle::class, 'package_vehicle');
     }
 
     public function rooms()
     {
-        return $this->belongsToMany(Room::class);
+        return $this->belongsToMany(Room::class, 'package_room');
     }
 
     public function activities()
     {
-        return $this->belongsToMany(Activity::class);
+        return $this->belongsToMany(Activity::class, 'package_activity');
     }
 
     public function flights()
     {
-        return $this->belongsToMany(Flight::class);
+        return $this->belongsToMany(Flight::class, 'package_flight');
     }
 
     public function transfers()
     {
-        return $this->belongsToMany(Transfer::class);
+        return $this->belongsToMany(Transfer::class, 'package_transfer');
     }
 }
