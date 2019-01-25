@@ -67,7 +67,8 @@ class CartController extends Controller
         $newProduct->id = $product->id;
     	$newProduct->name = $product->name;
     	$newProduct->price = $product->price; 
-    	$newProduct->date = $product->date;
+        $newProduct->date = $product->startDate;
+    	$newProduct->endDate = $product->endDate;
     	$newProduct->availability = $product->availability;
     	$newProduct->capacity = $product->capacity;
     	$newProduct->patent = $product->patent;
@@ -103,6 +104,8 @@ class CartController extends Controller
     	$newProduct->description = $product->description;
     	$newProduct->availability = $product->availability;
     	$newProduct->lodging_id = $product->lodging_id;
+        $newProduct->startDate=$startDate;
+        $newProduct->endDate=$endDate;
     	array_push($cart['room'], $newProduct);
     	\Session::put('cart', $cart);
     	return redirect()->route('cart-purchases');
@@ -228,6 +231,8 @@ class CartController extends Controller
                     $reserve->user_id=$idUser;
                     $reserve->payment_method_id=1;
                     $reserve->price=$activity->kidsCapacity * $activity->kidPrice + $activity->adultsCapacity * $activity->adultPrice;
+                    $reserve->startDate=$activity->startDate;
+                    $reserve->endDate=$activity->endDate;
                     $reserve->save();
                     $reserve->activities()->attach($activity->id);
                 }
@@ -242,6 +247,8 @@ class CartController extends Controller
                     $reserve->user_id=$idUser;
                     $reserve->payment_method_id=1;
                     $reserve->price=$vehicle->price * $vehicle->type;
+                    $reserve->startDate = $vehicle->date;
+                    $reserve->endDate = $vehicle->endDate;
                     $reserve->save();
                     $reserve->vehicles()->attach($vehicle->id);
                 }
@@ -256,6 +263,8 @@ class CartController extends Controller
                     $reserve->user_id=$idUser;
                     $reserve->payment_method_id=1;
                     $reserve->price=$room->price * $room->type;
+                    $reserve->startDate = $room->startDate;
+                    $reserve->endDate = $room->endDate;
                     $reserve->save();
                     $reserve->rooms()->attach($room->id);
                 }

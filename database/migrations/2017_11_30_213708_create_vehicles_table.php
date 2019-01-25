@@ -17,6 +17,7 @@ class CreateVehiclesTable extends Migration
             $table->increments('id');
             $table->decimal('price', 20, 2);
             $table->timestamp('date');
+            $table->timestamp('endDate')->nullable();
             $table->boolean('availability');
             $table->smallInteger('capacity');
             $table->string('patent', 10);
