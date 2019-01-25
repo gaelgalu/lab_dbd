@@ -161,7 +161,8 @@ class FlightController extends Controller
         return view('searchflightresults', [
             'results' => $result,
             'origin' => $request->origen_id,
-            'destination' => $request->destino_id
+            'destination' => $request->destino_id,
+            'typeOfSeat' => $request->tipoAsiento
         ]);
     }
 

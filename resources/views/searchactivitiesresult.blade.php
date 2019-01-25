@@ -5,8 +5,6 @@
 @if (count($activities) > 0)
 
 	@foreach($activities as $activity)
-	<form action="#" method="post">
-        {{ csrf_field() }}
 		<div class="container">
 		    <div class="card-deck">
 		        <div class="card mb-4">
@@ -18,14 +16,13 @@
 		                <p class="card-text">Precio niños: ${{$activity->kidPrice}}</p>
 		                <p class="card-text">Fecha de inicio de la actividad: {{$activity->startDate}}</p>
 		                <p class="card-text">Fecha de término de la actividad: {{$activity->endDate}}</p>
-						{{-- <a href="{{url('/reserve/flight/')}}"> --}}
+						<a href="/cart/add/activity/{{$activity->id}}/{{$numberOfKids}}/{{$numberOfAdults}}">
 			               	 <button type="submit" class="btn btn-primary btn-md">Agregar al carrito</button>
-			            {{-- </a> --}}
+			            </a>
 		            </div>
 		        </div>
 		    </div>
 		</div>
-	</form>
 
 	@endforeach
 
