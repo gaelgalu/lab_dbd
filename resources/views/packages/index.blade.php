@@ -43,9 +43,13 @@
 
                         <div class="card-body">
                             <h4 class="card-title">Nombre del paquete: "{{$package->name}}" Precio: ${{$package->price}}</h4>
-                            <a href="{{url('/reserve/flight/')}}">
-                                 <button type="submit" class="btn btn-primary btn-md">Ver contenido del paquete</button>
-                            </a>
+                            <div class="form-group row mb-0">
+                                <div class="banner-content col-lg-12 col-md-12">
+                                    <a href="{{url('/reserve/flight/')}}">
+                                         <button type="submit" class="head-btn btn text-uppercase">Ver contenido del paquete</button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -100,15 +100,13 @@
     </div>
     @endfor
     <div class="container">
-        <div class="card-deck">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h4 class="card-title">Precio del paquete: ${{$package->price}}</h4>
-                    <p class="card-text">Descripción: {{$package->description}}</p>
-                    <a href="/cart/add/package/{{$package->id}}">
-                     <button {{-- type="submit" --}} class="btn btn-primary btn-md">Agregar paquete al carrito</button>
-                    </a>
-                </div>
+        <h4 class="card-title">Precio del paquete: ${{$package->price}}</h4>
+        <p class="card-text">Descripción: {{$package->description}}</p>
+        <div class="form-group row mb-0">
+            <div class="banner-content">
+                <a href="/cart/add/package/{{$package->id}}">
+                 <button {{-- type="submit" --}} class="head-btn btn text-uppercase">Agregar paquete al carrito</button>
+                </a>
             </div>
         </div>
     </div>
