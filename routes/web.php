@@ -92,13 +92,11 @@ Route::get('cart/add/package/{id}', 'CartController@addPackage');
 Route::get('cart/thrashCart', 'CartController@thrashCart');
 Route::get('cart/deleteItem/{key}/{index}', 'CartController@deleteItem');
 Route::get('cart/pay',[
-    'middleware' => 'auth',
     'as' => 'pay',
     'uses' => 'CartController@pay'
 ]);
 
 Route::get('detail/order', [
-    'middleware' => 'auth',
     'as' => 'orderDetail',
     'uses' => 'CartController@orderDetail'
 ]);
