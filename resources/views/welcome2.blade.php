@@ -115,7 +115,7 @@
 								Disfruta de las <br>
 								mejores actividades
 							</h1>
-							<a href="{{ route('activities.create') }}" class="head-btn btn text-uppercase">Buscar actividades</a>
+							<a href="{{ route('searchactivities') }}" class="head-btn btn text-uppercase">Buscar actividades</a>
 						</div>
 					</div>
 					<div class= "left-arrow">

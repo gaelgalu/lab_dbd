@@ -105,7 +105,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Precio del paquete: ${{$package->price}}</h4>
                     <p class="card-text">Descripción: {{$package->description}}</p>
-                    <a href="{{url('/reserve/flight/')}}">
+                    <a href="/cart/add/package/{{$package->id}}">
                      <button {{-- type="submit" --}} class="btn btn-primary btn-md">Agregar paquete al carrito</button>
                     </a>
                 </div>

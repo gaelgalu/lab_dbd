@@ -96,9 +96,9 @@ class CartController extends Controller
     	$newProduct->price = $product->price; 
     	$newProduct->kidsCapacity = $product->kidsCapacity;
     	$newProduct->adultsCapacity = $product->adultsCapacity;
-        $dtime1 = DateTime::createFromFormat("Y-m-d H:i:s", $startDate);
+        $dtime1 = DateTime::createFromFormat("Y-m-d", $startDate);
         $timestamp1 = $dtime1->getTimestamp();
-        $dtime2 = DateTime::createFromFormat("Y-m-d H:i:s", $endDate);
+        $dtime2 = DateTime::createFromFormat("Y-m-d", $endDate);
         $timestamp2 = $dtime2->getTimestamp();
     	$newProduct->type = abs($timestamp1 - $timestamp2)/60/60/24;
     	$newProduct->description = $product->description;
