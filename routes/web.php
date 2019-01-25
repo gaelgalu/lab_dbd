@@ -28,7 +28,11 @@ Route::post('/searchactivity/results', 'ActivityController@results');
 Route::post('/searchhotel/results', 'LodgingController@results');
 Route::post('/searchflight/results', 'FlightController@results');
 //Route::post('/DependenciaDinamica/')
-Route::get('/userReserves', 'ReserveController@indexByUser');
+Route::get('/userReserves', [
+    'middleware' => 'auth',
+    'as' => 'userReserves',
+    'uses' => 'ReserveController@indexByUser'
+]);
 
 
 
@@ -86,6 +90,12 @@ Route::get('cart/add/insurance/{id}', 'CartController@addInsurance');
 Route::get('cart/add/package/{id}', 'CartController@addPackage');
 Route::get('cart/thrashCart', 'CartController@thrashCart');
 Route::get('cart/deleteItem/{key}/{index}', 'CartController@deleteItem');
+Route::get('cart/pay',[
+    'middleware' => 'auth',
+    'as' => 'pay',
+    'uses' => 'CartController@pay'
+]);
+
 Route::get('detail/order', [
     'middleware' => 'auth',
     'as' => 'orderDetail',

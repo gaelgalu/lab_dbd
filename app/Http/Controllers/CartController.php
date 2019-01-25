@@ -211,7 +211,7 @@ class CartController extends Controller
             $total += array_sum($subtotalProduct);
         }
         \Session::put('subtotal', $subtotal);
-        $this->pay();
+        //$this->pay();
         return view('orderDetail', compact('cart', 'total', 'subtotal', 'idUser', 'reserve'));
     }
 
@@ -310,6 +310,7 @@ class CartController extends Controller
             }
         }
         \Session::forget('cart');
+        return redirect()->route('userReserves');
 
     }
 

@@ -37,8 +37,7 @@
 			<div class="card">
 				<div class="card-header">{{ __('Comprar productos!') }}</div>
                 <div class="card-body">
-                	<form method="POST" action="{{ route('paymentMethods.store') }}">
-                	@csrf
+
 
                 	<div class="form-group row">
                         <label for="bank" class="col-md-4 col-form-label text-md-right">{{ __('Banco') }}</label>
@@ -65,7 +64,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="bankAccountNumber" class="col-md-4 col-form-label text-md-right">{{ __('Capacidad de niñes') }}</label>
+                        <label for="bankAccountNumber" class="col-md-4 col-form-label text-md-right">{{ __('Número de cuenta') }}</label>
                         <div class="col-md-6">
                             <input id="bankAccountNumber" type="number" min="0" class="form-control{{ $errors->has('bankAccountNumber') ? ' is-invalid' : '' }}" name="bankAccountNumber" value="{{ old('bankAccountNumber') }}" required>
                         </div>
@@ -75,12 +74,9 @@
                             </span>
                         @endif
                     </div>
-
                     <div class="form-group row mb-0">
                         <div class="banner-content col-lg-12 col-md-12">
-                            <button type="submit" class="head-btn btn text-uppercase">
-                                {{ __('Pagar') }}
-                            </button>
+                            <a href="{{ route('pay') }}" class="head-btn btn text-uppercase">Ir a pagar</a>
                         </div>
                     </div>
 
